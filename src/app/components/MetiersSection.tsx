@@ -23,10 +23,10 @@ const metiers = [
   {
     icon: PartyPopper,
     title: 'Traiteur',
-    description: 'Vos événements',
-    detail: 'Des prestations sur mesure pour sublimer vos moments de convivialité, du repas familial au grand événement d\'entreprise.',
+    description: 'Prestations sur mesure',
+    detail: 'Des sélections préparées sur mesure pour sublimer vos moments de convivialité : conseils d\'expert, préparations spéciales, et saveurs du terroir pour chaque occasion.',
     image: 'https://images.unsplash.com/photo-1751651054990-a458fda33224?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    stats: { value: '500+', label: 'Événements réalisés' }
+    stats: { value: '100%', label: 'Satisfaction' }
   }
 ];
 
@@ -34,7 +34,7 @@ export function MetiersSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="métiers" className="py-32 px-4 md:px-8 bg-background relative overflow-hidden">
+    <section id="metiers" className="py-16 px-4 md:px-8 bg-background relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-96 h-96 bg-primary rounded-full blur-3xl" />
@@ -43,7 +43,7 @@ export function MetiersSection() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -56,18 +56,16 @@ export function MetiersSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Notre expertise
+            Notre entreprise
           </motion.span>
           <h2 
             className="text-5xl md:text-6xl lg:text-7xl mb-6"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
-            Nos Métiers
+            Viandes, charcuterie, traiteur
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-            Trois expertises au service de la qualité et de l'authenticité,
-            <br />
-            pour vous offrir le meilleur de l'artisanat suisse
+            Une sélection fraîche et savoureuse, préparée chaque jour avec exigence pour que tout vous « tombe dessus » sans effort : qualité, conseil et goût.
           </p>
         </motion.div>
 
@@ -94,11 +92,12 @@ export function MetiersSection() {
                     src={metier.image}
                     alt={metier.title}
                     className="w-full h-full object-cover"
+                    sizes="(min-width: 1024px) 33vw, 90vw"
                   />
                 </motion.div>
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
                 
                 {/* Icon Badge */}
                 <motion.div 

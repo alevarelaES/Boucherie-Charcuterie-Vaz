@@ -1,15 +1,69 @@
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Refonte Boucherie Vaz v2</title>
-    </head>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
+    <title>Boucherie-Charcuterie Vaz | Vallorbe</title>
+    <meta name="description" content="Boucherie-charcuterie artisanale à Vallorbe. Viandes de qualité, spécialités maison et service attentionné. Contactez-nous pour vos commandes." />
+    <link rel="canonical" href="https://boucherie-charcuterie-vaz.ch/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Boucherie-Charcuterie Vaz | Vallorbe" />
+    <meta property="og:description" content="Viandes de qualité et spécialités artisanales à Vallorbe." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://boucherie-charcuterie-vaz.ch/" />
+    <meta property="og:image" content="/images/Boucherie vaz Viandes.jpeg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Boucherie-Charcuterie Vaz | Vallorbe" />
+    <meta name="twitter:description" content="Viandes de qualité et spécialités artisanales à Vallorbe." />
+    <meta name="twitter:image" content="/images/Boucherie vaz Viandes.jpeg" />
+
+    <!-- Icons & Manifest -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/logo/Boucherie Charcuterie Vaz sans fond.png" sizes="any" />
+    <link rel="apple-touch-icon" href="/images/logo/Boucherie Charcuterie Vaz sans fond.png" />
+    <meta name="theme-color" content="#8B1538" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Robots & Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Butcher",
+        "name": "Boucherie-Charcuterie Vaz",
+        "url": "https://boucherie-charcuterie-vaz.ch/",
+        "telephone": "+41 21 843 11 09",
+        "email": "boucherievaz@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rue du faubourg 5",
+          "postalCode": "1337",
+          "addressLocality": "Vallorbe",
+          "addressCountry": "CH"
+        },
+        "openingHours": [
+          "Mo 07:00-12:00,13:30-18:00",
+          "Tu 07:00-12:00,13:30-18:00",
+          "We 07:00-12:00,13:30-18:00",
+          "Th 07:00-12:00,13:30-18:00",
+          "Fr 07:00-12:00,13:30-18:00",
+          "Sa 07:00-13:00"
+        ],
+        "image": "/og-image.jpg"
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
   

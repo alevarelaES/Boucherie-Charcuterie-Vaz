@@ -1,0 +1,11 @@
+{
+  "name": "Boucherie-Charcuterie Vaz",
+  "short_name": "Vaz",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9b2c2c",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }
+  ]
+}

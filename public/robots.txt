@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://boucherie-charcuterie-vaz.ch/sitemap.xml
