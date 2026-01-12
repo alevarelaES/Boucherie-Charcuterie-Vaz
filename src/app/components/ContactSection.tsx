@@ -1,19 +1,21 @@
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-
-const horaires = [
-  { jour: 'Lundi', heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
-  { jour: 'Mardi', heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
-  { jour: 'Mercredi', heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
-  { jour: 'Jeudi', heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
-  { jour: 'Vendredi', heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
-  { jour: 'Samedi', heures: '07:00 - 13:00', isClosed: false },
-  { jour: 'Dimanche', heures: 'Fermé', isClosed: true }
-];
+import { useTranslation } from 'react-i18next';
 
 export function ContactSection() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const horaires = [
+    { jour: t('contact.days.monday', 'Lundi'), heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
+    { jour: t('contact.days.tuesday', 'Mardi'), heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
+    { jour: t('contact.days.wednesday', 'Mercredi'), heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
+    { jour: t('contact.days.thursday', 'Jeudi'), heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
+    { jour: t('contact.days.friday', 'Vendredi'), heures: '07:00 - 12:00 | 13:30 - 18:00', isClosed: false },
+    { jour: t('contact.days.saturday', 'Samedi'), heures: '07:00 - 13:00', isClosed: false },
+    { jour: t('contact.days.sunday', 'Dimanche'), heures: t('closed', 'Fermé'), isClosed: true }
+  ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,12 +24,12 @@ export function ContactSection() {
     const message = formData.message.trim();
 
     if (!name || !email || !message) {
-      alert('Merci de remplir tous les champs.');
+      alert(t('contact.alertFill', 'Merci de remplir tous les champs.'));
       return;
     }
 
-    const subject = encodeURIComponent(`Message depuis le site - ${name}`);
-    const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    const subject = encodeURIComponent(`${t('contact.emailSubject', 'Message depuis le site')} - ${name}`);
+    const body = encodeURIComponent(`${t('contact.emailBody.name', 'Nom')}: ${name}\nEmail: ${email}\n\n${t('contact.emailBody.message', 'Message')}:\n${message}`);
     window.location.href = `mailto:boucherievaz@gmail.com?subject=${subject}&body=${body}`;
   };
 
@@ -44,7 +46,7 @@ export function ContactSection() {
           <h2
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif"
           >
-            Contactez-nous
+            {t('contact.title', 'Contactez-nous')}
           </h2>
         </motion.div>
 
@@ -60,13 +62,13 @@ export function ContactSection() {
             {/* Contact Info */}
             <div className="bg-card rounded-lg p-5 border border-border/50">
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
-                Informations
+                {t('contact.infoTitle', 'Informations')}
               </h3>
               <div className="space-y-3">
                 {[
-                  { icon: Phone, label: 'Téléphone', value: '+41 (0)21 843 11 09', href: 'tel:+41218431109' },
-                  { icon: Mail, label: 'Email', value: 'boucherievaz@gmail.com', href: 'mailto:boucherievaz@gmail.com' },
-                  { icon: MapPin, label: 'Adresse', value: 'Rue du faubourg 5, 1337 Vallorbe', href: 'https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe' },
+                  { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: '+41 (0)21 843 11 09', href: 'tel:+41218431109' },
+                  { icon: Mail, label: t('contact.labels.email', 'Email'), value: 'boucherievaz@gmail.com', href: 'mailto:boucherievaz@gmail.com' },
+                  { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: 'Rue du faubourg 5, 1337 Vallorbe', href: 'https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe' },
                 ].map((contact, index) => (
                   <motion.a
                     key={index}
@@ -94,7 +96,7 @@ export function ContactSection() {
 
               <div className="mt-8 pt-6 border-t border-border/50">
                 <p className="text-sm md:text-base text-foreground/60 uppercase tracking-widest font-bold font-sans mb-4">
-                  Suivez-nous
+                  {t('contact.followUs', 'Suivez-nous')}
                 </p>
                 <div className="flex gap-4">
                   <motion.a
@@ -124,7 +126,7 @@ export function ContactSection() {
             {/* Form */}
             <div className="bg-card rounded-lg p-5 border border-border/50">
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
-                Envoyez-nous un message
+                {t('contact.formTitle', 'Envoyez-nous un message')}
               </h3>
               <motion.form
                 className="space-y-3"
@@ -137,7 +139,8 @@ export function ContactSection() {
               >
                 <input
                   type="text"
-                  placeholder="Votre nom"
+                  placeholder={t('contact.placeholders.name', 'Votre nom')}
+                  aria-label={t('contact.placeholders.name', 'Votre nom')}
                   className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium font-sans"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -145,14 +148,16 @@ export function ContactSection() {
                 />
                 <input
                   type="email"
-                  placeholder="Votre email"
+                  placeholder={t('contact.placeholders.email', 'Votre email')}
+                  aria-label={t('contact.placeholders.email', 'Votre email')}
                   className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium font-sans"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                 />
                 <textarea
-                  placeholder="Votre message"
+                  placeholder={t('contact.placeholders.message', 'Votre message')}
+                  aria-label={t('contact.placeholders.message', 'Votre message')}
                   rows={4}
                   className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium resize-none font-sans"
                   value={formData.message}
@@ -165,7 +170,7 @@ export function ContactSection() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Envoyer
+                  {t('contact.submit', 'Envoyer')}
                 </motion.button>
               </motion.form>
             </div>
@@ -186,7 +191,7 @@ export function ContactSection() {
                   <Clock className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-bold text-2xl font-serif">
-                  Horaires d'ouverture
+                  {t('contact.hoursTitle', "Horaires d'ouverture")}
                 </h3>
               </div>
               <div className="space-y-3 text-sm font-sans">
@@ -226,7 +231,7 @@ export function ContactSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Boucherie Vaz - Rue du Faubourg 5, Vallorbe"
+                title={`${t('contact.labels.address', 'Adresse')} - Rue du Faubourg 5, Vallorbe`}
                 className="grayscale hover:grayscale-0 transition-all"
               />
             </motion.div>

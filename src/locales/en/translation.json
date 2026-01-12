@@ -1,4 +1,31 @@
 {
+  "about": {
+    "badge": "Our History",
+    "engagement": "More than just a butcher shop, we are a place of trust, where people come as much for the exceptional quality of our products as to share our passion for meat.",
+    "intro": "Boucherie Vaz was born in 2025 with a clear idea: quality above all. Every meat we offer is the result of artisanal know-how and selected with high standards.",
+    "listTitle": "In our shop you'll find",
+    "promiseText": "Located in the heart of the butchery tradition, our shop is your new gourmet address in Vallorbe. We select our meats with the greatest care to guarantee freshness, taste, and tenderness.",
+    "promiseTitle": "Our Promise",
+    "title": "Values & Terroir",
+    "valeurs": {
+      "animal": {
+        "desc": "Raised with respect for animal welfare and local traditions.",
+        "title": "Respect for animals"
+      },
+      "knowhow": {
+        "desc": "Artisanship passed down from generation to generation.",
+        "title": "Craftsmanship"
+      },
+      "quality": {
+        "desc": "Rigorous selection guaranteeing traceability and excellence.",
+        "title": "Premium Quality"
+      },
+      "terroir": {
+        "desc": "Short circuits and producers from our region.",
+        "title": "Local Terroir"
+      }
+    }
+  },
   "closed": "Closed",
   "days": {
     "friday": "Friday",
@@ -11,8 +38,20 @@
     "description": "An artisanal butcher shop in the heart of Vallorbe, where tradition and excellence meet to offer you the best of local gastronomy.",
     "hours": "Hours",
     "legal": "Legal Mentions",
+    "legalContent": {
+      "hosting": "Hosting",
+      "hostingText": "Infomaniak Network SA\nRue Eugène-Marziano 25\n1227 Les Acacias, Switzerland",
+      "owner": "Owner & Responsible",
+      "ownerText": "Boucherie-Charcuterie Vaz\nRue du Faubourg 5\n1337 Vallorbe, Switzerland\nCHE-XXX.XXX.XXX (pending)",
+      "title": "Legal Mentions"
+    },
     "navigation": "Navigation",
     "privacy": "Privacy Policy",
+    "privacyContent": {
+      "dataTitle": "Data Collection",
+      "dataText": "We do not collect any personal data via third-party cookies. The only data transmitted is what you voluntarily send us via the email contact form.",
+      "title": "Privacy"
+    },
     "rights": "All rights reserved.",
     "tagline": "The art of meat since 2025",
     "terms": "Terms"
@@ -32,6 +71,39 @@
   "menu": {
     "title": "Menu"
   },
+  "contact": {
+    "alertFill": "Please fill in all fields.",
+    "days": {
+      "friday": "Friday",
+      "monday": "Monday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "thursday": "Thursday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday"
+    },
+    "emailBody": {
+      "message": "Message",
+      "name": "Name"
+    },
+    "emailSubject": "Message from the website",
+    "followUs": "Follow Us",
+    "formTitle": "Send us a message",
+    "hoursTitle": "Opening Hours",
+    "infoTitle": "Information",
+    "labels": {
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "placeholders": {
+      "email": "Your email",
+      "message": "Your message",
+      "name": "Your name"
+    },
+    "submit": "Send",
+    "title": "Contact Us"
+  },
   "metiers": {
     "badge": "Our Company",
     "boucherie": {
@@ -39,14 +111,16 @@
       "detail": "A rigorous selection of fresh and tasty meats, prepared with care every day to guarantee taste and exceptional quality.",
       "stats": {
         "label": "Swiss Origin"
-      }
+      },
+      "title": "Butchery"
     },
     "charcuterie": {
       "desc": "Homemade Savoir-faire",
       "detail": "Traditional recipes transmitted from generation to generation, developed with respect for local craftsmanship and terroir.",
       "stats": {
         "label": "House Specialties"
-      }
+      },
+      "title": "Charcuterie"
     },
     "more": "Learn more",
     "subtitle": "A fresh and tasty selection, prepared every day with high standards so that everything \"falls to you\" effortlessly: quality, advice and taste.",
@@ -56,7 +130,8 @@
       "detail": "Selections prepared to measure to sublimate your moments of conviviality: expert advice, special preparations, and flavors of the region for every occasion.",
       "stats": {
         "label": "Satisfaction"
-      }
+      },
+      "title": "Catering"
     }
   },
   "nav": {
@@ -64,7 +139,9 @@
     "contact": "Contact",
     "home": "Home",
     "products": "Products",
-    "reserve": "Book"
+    "reserve": "Book",
+    "scrollTop": "Back to top",
+    "toggleMenu": "Open Menu"
   },
   "products": {
     "badge": "Our Selection",

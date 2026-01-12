@@ -1,4 +1,31 @@
 {
+  "about": {
+    "badge": "Notre histoire",
+    "engagement": "Plus qu'une simple boucherie, nous sommes un lieu de confiance, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.",
+    "intro": "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.",
+    "listTitle": "Vous trouverez chez nous",
+    "promiseText": "Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir fraîcheur, goût et tendreté.",
+    "promiseTitle": "Notre Promesse",
+    "title": "Valeurs & Terroir",
+    "valeurs": {
+      "animal": {
+        "desc": "Élevées dans le respect du bien-être animal et des traditions locales.",
+        "title": "Respect de l'animal"
+      },
+      "knowhow": {
+        "desc": "Artisanat transmis de génération en génération.",
+        "title": "Savoir-faire"
+      },
+      "quality": {
+        "desc": "Sélection rigoureuse garantissant traçabilité et excellence.",
+        "title": "Qualité Premium"
+      },
+      "terroir": {
+        "desc": "Circuits courts et producteurs de notre région.",
+        "title": "Terroir Local"
+      }
+    }
+  },
   "closed": "Fermé",
   "days": {
     "friday": "Vendredi",
@@ -11,8 +38,20 @@
     "description": "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.",
     "hours": "Horaires",
     "legal": "Mentions légales",
+    "legalContent": {
+      "hosting": "Hébergement",
+      "hostingText": "Infomaniak Network SA\nRue Eugène-Marziano 25\n1227 Les Acacias, Suisse",
+      "owner": "Propriétaire & Responsable",
+      "ownerText": "Boucherie-Charcuterie Vaz\nRue du Faubourg 5\n1337 Vallorbe, Suisse\nCHE-XXX.XXX.XXX (en cours)",
+      "title": "Mentions Légales"
+    },
     "navigation": "Navigation",
     "privacy": "Politique de confidentialité",
+    "privacyContent": {
+      "dataTitle": "Collecte des données",
+      "dataText": "Nous ne collectons aucune donnée personnelle via des cookies tiers. Les seules données transmises sont celles que vous nous envoyez volontairement via le formulaire de contact par email.",
+      "title": "Confidentialité"
+    },
     "rights": "Tous droits réservés.",
     "tagline": "L'art de la viande depuis 2025",
     "terms": "CGV"
@@ -31,6 +70,39 @@
   },
   "menu": {
     "title": "Menu"
+  },
+  "contact": {
+    "alertFill": "Merci de remplir tous les champs.",
+    "days": {
+      "friday": "Vendredi",
+      "monday": "Lundi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "thursday": "Jeudi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi"
+    },
+    "emailBody": {
+      "message": "Message",
+      "name": "Nom"
+    },
+    "emailSubject": "Message depuis le site",
+    "followUs": "Suivez-nous",
+    "formTitle": "Envoyez-nous un message",
+    "hoursTitle": "Horaires d'ouverture",
+    "infoTitle": "Informations",
+    "labels": {
+      "address": "Adresse",
+      "email": "Email",
+      "phone": "Téléphone"
+    },
+    "placeholders": {
+      "email": "Votre email",
+      "message": "Votre message",
+      "name": "Votre nom"
+    },
+    "submit": "Envoyer",
+    "title": "Contactez-nous"
   },
   "metiers": {
     "badge": "Notre entreprise",
@@ -67,7 +139,9 @@
     "contact": "Contact",
     "home": "Accueil",
     "products": "Produits",
-    "reserve": "Réserver"
+    "reserve": "Réserver",
+    "scrollTop": "Retour en haut",
+    "toggleMenu": "Ouvrir le menu"
   },
   "products": {
     "badge": "Notre sélection",

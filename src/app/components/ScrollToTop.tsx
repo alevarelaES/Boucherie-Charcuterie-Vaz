@@ -1,8 +1,10 @@
 import { ArrowUp } from 'lucide-react';
 import { motion, useScroll } from 'motion/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ScrollToTop() {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
 
@@ -41,7 +43,7 @@ export function ScrollToTop() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.3 }}
-        aria-label="Retour en haut"
+        aria-label={t('nav.scrollTop', 'Retour en haut')}
       >
         <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
       </motion.button>

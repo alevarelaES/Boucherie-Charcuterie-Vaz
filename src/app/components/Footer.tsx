@@ -1,10 +1,12 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Clock, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+  const [modalContent, setModalContent] = useState<{ title: string; content: React.ReactNode } | null>(null);
 
   const socialLinks = [
     { icon: Facebook, href: 'https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/', label: 'Facebook' },
@@ -25,6 +27,38 @@ export function Footer() {
     { jour: t('days.saturday', 'Samedi'), heures: '07:00-13:00' },
     { jour: t('days.sunday', 'Dimanche'), heures: t('closed', 'Fermé'), closed: true },
   ];
+
+  const openLegal = () => {
+    setModalContent({
+      title: t('footer.legalContent.title'),
+      content: (
+        <div className="space-y-6">
+          <section>
+            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.legalContent.owner')}</h4>
+            <p className="whitespace-pre-line leading-relaxed">{t('footer.legalContent.ownerText')}</p>
+          </section>
+          <section>
+            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.legalContent.hosting')}</h4>
+            <p className="whitespace-pre-line leading-relaxed">{t('footer.legalContent.hostingText')}</p>
+          </section>
+        </div>
+      )
+    });
+  };
+
+  const openPrivacy = () => {
+    setModalContent({
+      title: t('footer.privacyContent.title'),
+      content: (
+        <div className="space-y-6">
+          <section>
+            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.privacyContent.dataTitle')}</h4>
+            <p className="leading-relaxed">{t('footer.privacyContent.dataText')}</p>
+          </section>
+        </div>
+      )
+    });
+  };
 
   return (
     <footer className="bg-foreground text-background relative overflow-hidden font-sans">
@@ -187,27 +221,18 @@ export function Footer() {
                 © {currentYear} Boucherie Vaz. {t('footer.rights', 'Tous droits réservés.')}
               </p>
               <div className="flex gap-6">
-                <motion.a
-                  href="#"
-                  className="hover:text-primary transition-colors"
-                  whileHover={{ y: -2 }}
+                <button
+                  onClick={openLegal}
+                  className="hover:text-primary transition-colors cursor-pointer"
                 >
                   {t('footer.legal', 'Mentions légales')}
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="hover:text-primary transition-colors"
-                  whileHover={{ y: -2 }}
+                </button>
+                <button
+                  onClick={openPrivacy}
+                  className="hover:text-primary transition-colors cursor-pointer"
                 >
                   {t('footer.privacy', 'Politique de confidentialité')}
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="hover:text-primary transition-colors"
-                  whileHover={{ y: -2 }}
-                >
-                  {t('footer.terms', 'CGV')}
-                </motion.a>
+                </button>
               </div>
             </div>
           </motion.div>
@@ -217,6 +242,40 @@ export function Footer() {
       {/* Decorative Background Elements */}
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-0" />
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0" />
+
+      {/* Legal Modal */}
+      <AnimatePresence>
+        {modalContent && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setModalContent(null)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl bg-background border border-border rounded-2xl shadow-2xl z-[101] overflow-hidden"
+            >
+              <div className="p-6 border-b border-border flex justify-between items-center bg-muted/30">
+                <h3 className="text-2xl font-bold font-serif text-foreground">{modalContent.title}</h3>
+                <button
+                  onClick={() => setModalContent(null)}
+                  className="p-2 hover:bg-muted rounded-full transition-colors text-foreground"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="p-8 max-h-[70vh] overflow-y-auto text-foreground/80 font-sans text-lg leading-relaxed">
+                {modalContent.content}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </footer>
   );
 }

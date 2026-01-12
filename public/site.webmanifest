@@ -1,11 +1,20 @@
 {
   "name": "Boucherie-Charcuterie Vaz",
-  "short_name": "Vaz",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#9b2c2c",
+  "short_name": "Boucherie Vaz",
   "icons": [
-    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }
-  ]
+    {
+      "src": "/images/logo/Boucherie Charcuterie Vaz sans fond.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo/Boucherie Charcuterie Vaz sans fond.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#8B1538",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
 }

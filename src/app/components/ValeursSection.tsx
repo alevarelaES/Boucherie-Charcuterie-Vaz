@@ -1,31 +1,34 @@
 import { Heart, Award, Leaf, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-const valeurs = [
-  {
-    icon: Heart,
-    title: 'Respect de l\'animal',
-    description: 'Élevées dans le respect du bien-être animal et des traditions locales.'
-  },
-  {
-    icon: Award,
-    title: 'Qualité Premium',
-    description: 'Sélection rigoureuse garantissant traçabilité et excellence.'
-  },
-  {
-    icon: Leaf,
-    title: 'Terroir Local',
-    description: 'Circuits courts et producteurs de notre région.'
-  },
-  {
-    icon: Users,
-    title: 'Savoir-faire',
-    description: 'Artisanat transmis de génération en génération.'
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 export function ValeursSection() {
+  const { t } = useTranslation();
+
+  const valeurs = [
+    {
+      icon: Heart,
+      title: t('about.valeurs.animal.title', 'Respect de l\'animal'),
+      description: t('about.valeurs.animal.desc', 'Élevées dans le respect du bien-être animal et des traditions locales.')
+    },
+    {
+      icon: Award,
+      title: t('about.valeurs.quality.title', 'Qualité Premium'),
+      description: t('about.valeurs.quality.desc', 'Sélection rigoureuse garantissant traçabilité et excellence.')
+    },
+    {
+      icon: Leaf,
+      title: t('about.valeurs.terroir.title', 'Terroir Local'),
+      description: t('about.valeurs.terroir.desc', 'Circuits courts et producteurs de notre région.')
+    },
+    {
+      icon: Users,
+      title: t('about.valeurs.knowhow.title', 'Savoir-faire'),
+      description: t('about.valeurs.knowhow.desc', 'Artisanat transmis de génération en génération.')
+    }
+  ];
+
   return (
     <section id="a-propos" className="py-12 md:py-16 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
@@ -39,13 +42,13 @@ export function ValeursSection() {
           <motion.span
             className="inline-block px-3 py-1.5 bg-gold/10 text-gold rounded-full text-base md:text-lg font-bold tracking-wider uppercase mb-3 font-sans"
           >
-            Notre histoire
+            {t('about.badge', 'Notre histoire')}
           </motion.span>
 
           <h2
             className="text-4xl md:text-5xl lg:text-6xl mb-3 font-bold font-serif"
           >
-            Valeurs & Terroir
+            {t('about.title', 'Valeurs & Terroir')}
           </h2>
         </motion.div>
 
@@ -58,7 +61,7 @@ export function ValeursSection() {
           transition={{ delay: 0.1 }}
         >
           <p className="text-lg md:text-xl text-foreground/90 leading-relaxed text-center font-sans">
-            La <span className="font-semibold text-primary">Boucherie Vaz</span> est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.
+            {t('about.intro', "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.")}
           </p>
         </motion.div>
 
@@ -78,7 +81,7 @@ export function ValeursSection() {
             >
               <ImageWithFallback
                 src="/images/image_viande_1.jpg"
-                alt="Boucherie Vaz - Notre histoire"
+                alt={t('about.imageAlt', 'Boucherie Vaz - Notre histoire')}
                 className="w-full h-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
@@ -96,10 +99,10 @@ export function ValeursSection() {
               transition={{ delay: 0.2 }}
             >
               <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gold font-serif">
-                Notre Promesse
+                {t('about.promiseTitle', 'Notre Promesse')}
               </h3>
               <p className="text-base md:text-lg text-foreground/90 leading-relaxed font-sans">
-                Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir <span className="font-semibold">fraîcheur, goût et tendreté</span>.
+                {t('about.promiseText', 'Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir fraîcheur, goût et tendreté.')}
               </p>
             </motion.div>
 
@@ -112,16 +115,16 @@ export function ValeursSection() {
               transition={{ delay: 0.3 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-3 text-primary font-serif">
-                Vous trouverez chez nous
+                {t('about.listTitle', 'Vous trouverez chez nous')}
               </h3>
               <div className="space-y-2">
                 {[
-                  'Poulet tendre et savoureux',
-                  'Génisse maturée raffinée',
-                  'Agneau aux saveurs délicates',
-                  'Porc de qualité supérieure',
-                  'Viande de cheval riche en goût',
-                  'Viandes sur commande'
+                  t('products.items.chicken.name', 'Poulet tendre et savoureux'),
+                  t('products.items.heifer.name', 'Génisse maturée raffinée'),
+                  t('products.items.lamb.name', 'Agneau aux saveurs délicates'),
+                  t('products.items.pork.name', 'Porc de qualité supérieure'),
+                  t('products.items.horse.name', 'Viande de cheval riche en goût'),
+                  t('products.items.order.name', 'Viandes sur commande')
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-base md:text-lg text-foreground/90 font-sans">
                     <span className="w-2 h-2 bg-gold rounded-full flex-shrink-0 mt-2"></span>
@@ -175,7 +178,7 @@ export function ValeursSection() {
           transition={{ delay: 0.5 }}
         >
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed text-center italic font-sans">
-            Plus qu'une simple boucherie, nous sommes un <span className="font-semibold text-primary not-italic">lieu de confiance</span>, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.
+            {t('about.engagement', "Plus qu'une simple boucherie, nous sommes un lieu de confiance, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.")}
           </p>
         </motion.div>
       </div>

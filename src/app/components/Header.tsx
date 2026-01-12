@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function Header() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -34,7 +34,7 @@ export function Header() {
             >
                 <div className="max-w-7xl mx-auto w-full px-8 py-2 flex justify-between text-xs font-sans font-medium text-white/90">
                     <div className="flex gap-6 items-center">
-                        <a href="https://maps.google.com" target="_blank" rel="noopener" className="flex items-center gap-2 hover:text-gold transition-colors">
+                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
                             <MapPin className="w-3 h-3 text-gold" />
                             Rue du faubourg 5, 1337 Vallorbe
                         </a>
@@ -50,12 +50,28 @@ export function Header() {
                         </a>
                         <div className="h-4 w-[1px] bg-white/20 mx-1"></div>
                         <div className="flex gap-4">
-                            <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener" className="hover:text-gold transition-colors">
+                            <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                                 <Facebook className="w-3.5 h-3.5" />
                             </a>
-                            <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener" className="hover:text-gold transition-colors">
+                            <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                                 <Instagram className="w-3.5 h-3.5" />
                             </a>
+                        </div>
+                        <div className="h-4 w-[1px] bg-white/20 mx-1"></div>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => i18n.changeLanguage('fr')}
+                                className={`hover:text-gold transition-colors ${i18n.language === 'fr' ? 'text-gold font-bold' : ''}`}
+                            >
+                                FR
+                            </button>
+                            <span>|</span>
+                            <button
+                                onClick={() => i18n.changeLanguage('en')}
+                                className={`hover:text-gold transition-colors ${i18n.language === 'en' ? 'text-gold font-bold' : ''}`}
+                            >
+                                EN
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -109,6 +125,7 @@ export function Header() {
                     {/* Mobile Toggle */}
                     <button
                         onClick={() => setMobileMenuOpen(true)}
+                        aria-label={t('nav.toggleMenu', 'Ouvrir le menu')}
                         className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? 'hover:bg-muted text-foreground' : 'hover:bg-white/10 text-white'
                             }`}
                     >
@@ -161,12 +178,27 @@ export function Header() {
                                 <p>Rue du faubourg 5, 1337 Vallorbe</p>
                                 <a href="tel:+41218431109" className="text-primary font-bold text-lg">+41 21 843 11 09</a>
                                 <div className="flex justify-center gap-6 mt-2">
-                                    <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
                                         <Facebook className="w-5 h-5" />
                                     </a>
-                                    <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
                                         <Instagram className="w-5 h-5" />
                                     </a>
+                                </div>
+                                <div className="flex justify-center gap-4 mt-6 pt-6 border-t border-border/50 text-base font-bold">
+                                    <button
+                                        onClick={() => { i18n.changeLanguage('fr'); setMobileMenuOpen(false); }}
+                                        className={`${i18n.language === 'fr' ? 'text-primary' : 'text-muted-foreground'}`}
+                                    >
+                                        FRANÇAIS
+                                    </button>
+                                    <span className="text-border">|</span>
+                                    <button
+                                        onClick={() => { i18n.changeLanguage('en'); setMobileMenuOpen(false); }}
+                                        className={`${i18n.language === 'en' ? 'text-primary' : 'text-muted-foreground'}`}
+                                    >
+                                        ENGLISH
+                                    </button>
                                 </div>
                             </div>
                         </div>
