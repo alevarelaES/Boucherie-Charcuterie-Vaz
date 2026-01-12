@@ -32,7 +32,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 px-4 md:px-8 bg-background relative overflow-hidden">
+    <section id="contact" className="py-16 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           className="text-center mb-10 md:mb-12"

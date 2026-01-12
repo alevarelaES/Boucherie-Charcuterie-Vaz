@@ -40,7 +40,7 @@ export function ProduitsSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="produits" className="py-14 md:py-20 px-4 md:px-8 bg-muted/30 relative overflow-hidden">
+    <section id="produits" className="py-14 md:py-20 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20">
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
       

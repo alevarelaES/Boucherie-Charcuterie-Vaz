@@ -1,17 +1,39 @@
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const scrolled = true; // navbar always visible
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToContent = () => {
     window.scrollTo({
       top: window.innerHeight,
       behavior: 'smooth'
     });
+  };
+
+  const handleNavClick = (href: string) => {
+    // Fermer le menu immédiatement
+    setMobileMenuOpen(false);
+    
+    // Attendre que le menu soit fermé avant de scroller (animation de 250ms)
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 300);
   };
 
   const navItems = [
@@ -22,7 +44,44 @@ export function Hero() {
   ];
 
   return (
-    <section id="accueil" className="relative min-h-screen w-full overflow-hidden">
+    <section id="accueil" className="relative min-h-screen w-full overflow-hidden scroll-mt-20">
+      {/* Contact Info Bar - Fixed at the very top */}
+      <motion.div 
+        className="hidden md:block fixed top-0 left-0 right-0 bg-secondary/80 backdrop-blur-md text-secondary-foreground py-3 px-8 z-[60] border-b border-primary/20"
+        initial={{ y: -100 }}
+        animate={{ y: scrolled ? -100 : 0 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+      >
+        <div className="max-w-7xl mx-auto flex justify-between items-center gap-4 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
+          <motion.a 
+            href="https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-primary">📍</span>
+            <span>Rue du faubourg 5, 1337 Vallorbe</span>
+          </motion.a>
+          <motion.a 
+            href="tel:+41218431109"
+            className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-primary">📞</span>
+            <span>+41 21 843 11 09</span>
+          </motion.a>
+          <motion.a 
+            href="mailto:boucherievaz@gmail.com"
+            className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-primary">✉️</span>
+            <span>boucherievaz@gmail.com</span>
+          </motion.a>
+        </div>
+      </motion.div>
+
       {/* Background Image with Parallax Effect */}
       <motion.div 
         className="absolute inset-0"
@@ -41,34 +100,11 @@ export function Hero() {
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/70" />
       </motion.div>
 
-      {/* Animated Top Bar */}
-      <motion.div 
-        className="hidden md:block absolute top-0 left-0 right-0 bg-secondary/95 backdrop-blur-md text-secondary-foreground py-3 px-8 z-20 border-b border-primary/20"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center gap-4 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-          <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }}>
-            <span className="text-primary">📍</span>
-            <span>Rue du faubourg 5, 1337 Vallorbe</span>
-          </motion.div>
-          <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }}>
-            <span className="text-primary">📞</span>
-            <span>+41 21 843 11 09</span>
-          </motion.div>
-          <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }}>
-            <span className="text-primary">✉️</span>
-            <span>boucherievaz@gmail.com</span>
-          </motion.div>
-        </div>
-      </motion.div>
-
       {/* Animated Logo with Glass Morphism */}
       <motion.div 
-        className="hidden md:block absolute top-24 left-8 z-20"
+        className="hidden md:block absolute top-20 left-8 z-20"
         initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        animate={{ x: 0, opacity: scrolled ? 0 : 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         <motion.div 
@@ -84,13 +120,84 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Sticky Navbar - appears on scroll */}
+      {/* Sticky Navbar - always visible on mobile, appears on scroll on desktop */}
+      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-lg shadow-lg border-b border-gray-200/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <a 
+              href="#accueil"
+              className="flex items-center gap-3"
+            >
+              <img 
+                src="/images/logo/Boucherie Charcuterie Vaz sans fond.png" 
+                alt="Boucherie Vaz" 
+                className="h-10 w-10 object-contain"
+              />
+              <span className="text-lg font-bold text-foreground" style={{ fontFamily: 'var(--font-serif)' }}>
+                Boucherie Vaz
+              </span>
+            </a>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="text-foreground p-2 rounded-lg hover:bg-muted"
+              aria-label="Ouvrir le menu"
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="bg-white/95 backdrop-blur-lg border-t border-gray-200/60 shadow-lg"
+            >
+              <div className="max-w-7xl mx-auto px-4 pb-4">
+                <ul className="flex flex-col divide-y divide-gray-200/70" style={{ fontFamily: 'var(--font-sans)' }}>
+                  {navItems.map((item) => (
+                    <motion.li
+                      key={item.label}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <a
+                        href={item.href}
+                        className="flex items-center justify-between py-3 text-foreground/90 hover:text-primary"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item.href);
+                        }}
+                      >
+                        <span className="font-semibold">{item.label}</span>
+                        <ChevronDown className="w-4 h-4 text-primary" />
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      {/* Desktop Navbar - appears on scroll */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        initial={{ y: 0 }}
-        animate={{ y: 0 }}
+        className="hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        initial={{ y: -100 }}
+        animate={{ y: scrolled ? 0 : -100 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
       >
-        <div className="bg-white/90 backdrop-blur-lg shadow-lg border-b border-gray-200/50">
+        <div className="bg-white/85 backdrop-blur-lg shadow-lg border-b border-gray-200/50">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
@@ -132,7 +239,7 @@ export function Hero() {
               {/* Contact Button */}
               <motion.a
                 href="#contact"
-                className="hidden md:block bg-primary text-primary-foreground px-6 py-2 rounded-full font-semibold hover:bg-primary/90 transition-all shadow-md"
+                className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-semibold hover:bg-primary/90 transition-all shadow-md"
                 style={{ fontFamily: 'var(--font-sans)' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -141,75 +248,14 @@ export function Hero() {
               >
                 Contact
               </motion.a>
-
-              {/* Mobile Menu Button */}
-              <button
-                className="md:hidden text-foreground p-2 rounded-lg hover:bg-muted"
-                aria-label="Ouvrir le menu"
-                aria-expanded={mobileMenuOpen}
-                onClick={() => setMobileMenuOpen((prev) => !prev)}
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
             </div>
           </div>
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                key="mobile-menu"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className="md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200/60 shadow-lg"
-              >
-                <div className="max-w-7xl mx-auto px-4 pb-4">
-                  <ul className="flex flex-col divide-y divide-gray-200/70" style={{ fontFamily: 'var(--font-sans)' }}>
-                    {navItems.map((item) => (
-                      <motion.li
-                        key={item.label}
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        transition={{ duration: 0.15 }}
-                      >
-                        <a
-                          href={item.href}
-                          className="flex items-center justify-between py-3 text-foreground/90 hover:text-primary"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <span className="font-semibold">{item.label}</span>
-                          <ChevronDown className="w-4 h-4 text-primary" />
-                        </a>
-                      </motion.li>
-                    ))}
-                    <motion.li
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.15 }}
-                      className="pt-2"
-                    >
-                      <motion.a
-                        href="#contact"
-                        className="block w-full text-center bg-primary text-primary-foreground py-3 rounded-xl font-semibold shadow-md hover:bg-primary/90"
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Contact
-                      </motion.a>
-                    </motion.li>
-                  </ul>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </motion.nav>
 
       {/* Animated Navigation (initial - kept for Hero) */}
       <motion.nav 
-        className="absolute top-24 right-4 md:right-8 z-20 hidden md:block"
+        className="absolute top-20 right-4 md:right-8 z-20 hidden md:block"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: scrolled ? 0 : 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -235,13 +281,13 @@ export function Hero() {
         </ul>
       </motion.nav>
 
-      {/* Hero Content with Staggered Animation */}
-      <div className="relative h-full flex flex-col items-center justify-center text-white px-4 pt-32 pb-20 md:pt-40 md:pb-24">
+      {/* Hero Content with Staggered Animation - Centered Vertically */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-white px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="text-center"
+          className="text-center max-w-5xl"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -268,36 +314,17 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="text-base sm:text-lg md:text-xl text-white/80 mb-8 md:mb-10 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-white/80 mb-12 md:mb-16 max-w-3xl mx-auto"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
             Née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande est choisie avec exigence et préparée avec un savoir-faire artisanal, pour offrir un accueil chaleureux et des produits d’exception à Vallorbe.
           </motion.p>
-
-          <motion.button 
-            className="px-9 sm:px-12 py-4 sm:py-5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full transition-all shadow-2xl relative overflow-hidden group"
-            style={{ fontFamily: 'var(--font-sans)' }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4 }}
-            onClick={() => document.getElementById('produits')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <span className="relative z-10 font-semibold tracking-wide">Découvrir nos viandes</span>
-            <motion.div
-              className="absolute inset-0 bg-white/20"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: '100%' }}
-              transition={{ duration: 0.5 }}
-            />
-          </motion.button>
         </motion.div>
 
         {/* Animated Scroll Indicator */}
         <motion.button 
           onClick={scrollToContent}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer group"
+          className="mt-8 cursor-pointer group"
           aria-label="Scroll down"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
