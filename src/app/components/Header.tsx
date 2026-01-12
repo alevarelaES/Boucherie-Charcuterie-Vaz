@@ -53,18 +53,18 @@ export function Header() {
             {/* Main Navigation */}
             <header
                 className={`fixed left-0 right-0 z-50 transition-all duration-500 border-b ${scrolled
-                        ? 'top-0 py-3 bg-white/95 backdrop-blur-md border-gray-200/50 shadow-sm text-foreground'
-                        : 'top-0 lg:top-10 py-6 bg-transparent border-transparent text-white'
+                    ? 'top-0 py-3 bg-white/80 backdrop-blur-md border-gray-200/50 shadow-sm text-foreground'
+                    : 'top-0 lg:top-10 py-6 bg-transparent border-transparent text-white'
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
                     {/* Logo Area */}
                     <a href="#accueil" className="flex items-center gap-3 group">
-                        <div className={`p-2 rounded-xl transition-all duration-500 ${scrolled ? 'bg-primary/5' : 'bg-white/10 backdrop-blur-sm shadow-lg'}`}>
+                        <div className={`p-2 rounded-xl transition-all duration-500 ${scrolled ? 'bg-primary/5' : 'bg-white/70 backdrop-blur-sm shadow-lg'}`}>
                             <img
                                 src="/images/logo/Boucherie Charcuterie Vaz sans fond.png"
                                 alt="Logo Boucherie Vaz"
-                                className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300"
+                                className="w-14 h-14 object-contain group-hover:scale-110 transition-transform duration-300"
                             />
                         </div>
                         <div className="flex flex-col">
@@ -93,15 +93,6 @@ export function Header() {
                                 </li>
                             ))}
                         </ul>
-                        <a
-                            href="#contact"
-                            className={`px-6 py-2.5 rounded-md font-sans text-sm font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg ${scrolled
-                                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                    : 'bg-white text-primary hover:bg-white/90'
-                                }`}
-                        >
-                            {t('nav.reserve', 'Réserver')}
-                        </a>
                     </nav>
 
                     {/* Mobile Toggle */}

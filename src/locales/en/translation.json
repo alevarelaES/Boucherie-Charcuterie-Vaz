@@ -1,1 +1,100 @@
-{}
+{
+  "closed": "Closed",
+  "days": {
+    "friday": "Friday",
+    "monThu": "Mon-Thu",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "footer": {
+    "contact": "Contact",
+    "description": "An artisanal butcher shop in the heart of Vallorbe, where tradition and excellence meet to offer you the best of local gastronomy.",
+    "hours": "Hours",
+    "legal": "Legal Mentions",
+    "navigation": "Navigation",
+    "privacy": "Privacy Policy",
+    "rights": "All rights reserved.",
+    "tagline": "The art of meat since 2025",
+    "terms": "Terms"
+  },
+  "hero": {
+    "badge": "Open today",
+    "cta": {
+      "contact": "Contact us",
+      "products": "Discover our products"
+    },
+    "description": "Artisanal excellence and exceptional meats in",
+    "imageAlt": "Boucherie Vaz - The art of meat",
+    "scroll": "Scroll",
+    "titleHighlight": "close to you",
+    "titleInitial": "The butcher shop"
+  },
+  "menu": {
+    "title": "Menu"
+  },
+  "metiers": {
+    "badge": "Our Company",
+    "boucherie": {
+      "desc": "Selected meats",
+      "detail": "A rigorous selection of fresh and tasty meats, prepared with care every day to guarantee taste and exceptional quality.",
+      "stats": {
+        "label": "Swiss Origin"
+      }
+    },
+    "charcuterie": {
+      "desc": "Homemade Savoir-faire",
+      "detail": "Traditional recipes transmitted from generation to generation, developed with respect for local craftsmanship and terroir.",
+      "stats": {
+        "label": "House Specialties"
+      }
+    },
+    "more": "Learn more",
+    "subtitle": "A fresh and tasty selection, prepared every day with high standards so that everything \"falls to you\" effortlessly: quality, advice and taste.",
+    "title": "Meat, Charcuterie, Catering",
+    "traiteur": {
+      "desc": "Custom Services",
+      "detail": "Selections prepared to measure to sublimate your moments of conviviality: expert advice, special preparations, and flavors of the region for every occasion.",
+      "stats": {
+        "label": "Satisfaction"
+      }
+    }
+  },
+  "nav": {
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home",
+    "products": "Products",
+    "reserve": "Book"
+  },
+  "products": {
+    "badge": "Our Selection",
+    "description": "Discover fresh and tasty meats, prepared every day to guarantee taste and quality.",
+    "itemDesc": "Discover our fresh and tasty selections, prepared with care.",
+    "items": {
+      "chicken": {
+        "name": "Tender and tasty chicken"
+      },
+      "heifer": {
+        "name": "Matured heifer for amateurs"
+      },
+      "horse": {
+        "name": "Horse meat rich in taste"
+      },
+      "lamb": {
+        "name": "Lamb with delicate flavors"
+      },
+      "order": {
+        "name": "Meats on order"
+      },
+      "pork": {
+        "name": "Superior quality pork"
+      }
+    },
+    "tags": {
+      "homemade": "Homemade",
+      "premium": "Premium",
+      "specialty": "Specialty"
+    },
+    "title": "Featured Products"
+  }
+}

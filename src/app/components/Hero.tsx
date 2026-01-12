@@ -7,11 +7,11 @@ export function Hero() {
   const { scrollY } = useScroll();
 
   // Parallax effect for background
-  const yBackend = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacityHero = useTransform(scrollY, [0, 400], [1, 0]);
+  const yBackend = useTransform(scrollY, [0, 800], [0, 400]);
+  const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
 
   const scrollToContent = () => {
-    const productsSection = document.querySelector('#produits');
+    const productsSection = document.querySelector('#a-propos');
     if (productsSection) {
       productsSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -28,7 +28,7 @@ export function Hero() {
           src="/images/Boucherie vaz Viandes.jpeg"
           alt={t('hero.imageAlt', "Boucherie Vaz - L'art de la viande")}
           className="w-full h-full object-cover scale-105"
-          priority
+          loading="eager"
         />
         {/* Gradients pour lisibilité optimale */}
         <div className="absolute inset-0 bg-black/40" />
@@ -41,26 +41,15 @@ export function Hero() {
         style={{ opacity: opacityHero }}
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-8 mt-16 md:mt-0">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg"
-          >
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs md:text-sm font-sans font-bold tracking-widest uppercase">{t('hero.badge', "Ouvert aujourd'hui")}</span>
-          </motion.div>
-
           {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
-            className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-[0.9] tracking-tight drop-shadow-2xl"
+            className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-tight tracking-tight drop-shadow-2xl"
           >
             {t('hero.titleInitial', 'La boucherie')} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 italic">
+            <span className="inline-block py-2 text-white italic drop-shadow-lg">
               {t('hero.titleHighlight', 'proche de vous')}
             </span>
           </motion.h1>
@@ -97,17 +86,33 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Redesigned Scroll Indicator - Premium Minimalist */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 flex flex-col items-center gap-2 cursor-pointer"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 cursor-pointer"
           onClick={scrollToContent}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          whileHover={{ y: 5 }}
         >
-          <span className="text-[10px] uppercase tracking-widest font-sans font-bold">{t('hero.scroll', 'Scroll')}</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent" />
+          <motion.div
+            className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-sm"
+            whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.6)" }}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+            </svg>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

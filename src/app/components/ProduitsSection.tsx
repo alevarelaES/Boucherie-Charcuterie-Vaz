@@ -1,46 +1,59 @@
 import { Badge } from './ui/badge';
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-const produits = [
-  {
-    name: 'Poulet tendre et savoureux',
-    tag: 'Premium',
-    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80'
-  },
-  {
-    name: 'Génisse maturée pour les amateurs',
-    tag: 'Spécialité',
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80'
-  },
-  {
-    name: 'Agneau aux saveurs délicates',
-    tag: 'Premium',
-    image: 'https://images.unsplash.com/photo-1603894537516-b56f5e85e6f0?w=800&q=80'
-  },
-  {
-    name: 'Porc de qualité supérieure',
-    tag: 'Spécialité',
-    image: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd67fba?w=800&q=80'
-  },
-  {
-    name: 'Viande de cheval riche en goût',
-    tag: 'Premium',
-    image: 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800&q=80'
-  },
-  {
-    name: 'Viandes sur commande',
-    tag: 'Fait Maison',
-    image: 'https://images.unsplash.com/photo-1618164436241-92473be9b1d7?w=800&q=80'
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 export function ProduitsSection() {
+  const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const yTitle = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  const produits = [
+    {
+      name: t('products.items.chicken.name', 'Poulet tendre et savoureux'),
+      tag: t('products.tags.premium', 'Premium'),
+      image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80'
+    },
+    {
+      name: t('products.items.heifer.name', 'Génisse maturée pour les amateurs'),
+      tag: t('products.tags.specialty', 'Spécialité'),
+      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80'
+    },
+    {
+      name: t('products.items.lamb.name', 'Agneau aux saveurs délicates'),
+      tag: t('products.tags.premium', 'Premium'),
+      image: 'https://images.unsplash.com/photo-1603894537516-b56f5e85e6f0?w=800&q=80'
+    },
+    {
+      name: t('products.items.pork.name', 'Porc de qualité supérieure'),
+      tag: t('products.tags.specialty', 'Spécialité'),
+      image: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd67fba?w=800&q=80'
+    },
+    {
+      name: t('products.items.horse.name', 'Viande de cheval riche en goût'),
+      tag: t('products.tags.premium', 'Premium'),
+      image: 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800&q=80'
+    },
+    {
+      name: t('products.items.order.name', 'Viandes sur commande'),
+      tag: t('products.tags.homemade', 'Fait Maison'),
+      image: 'https://images.unsplash.com/photo-1618164436241-92473be9b1d7?w=800&q=80'
+    }
+  ];
 
   return (
-    <section id="produits" className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20">
+    <section
+      id="produits"
+      ref={containerRef}
+      className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20"
+    >
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
 
@@ -51,19 +64,20 @@ export function ProduitsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          style={{ y: yTitle }}
         >
           <motion.span
             className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans"
           >
-            Notre sélection
+            {t('products.badge', 'Notre sélection')}
           </motion.span>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 font-bold font-serif"
           >
-            Produits phares
+            {t('products.title', 'Produits phares')}
           </h2>
           <p className="text-lg sm:text-xl md:text-2xl text-foreground/90 max-w-3xl mx-auto font-medium font-sans">
-            Découvrez des viandes fraîches et savoureuses, préparées chaque jour pour garantir goût et qualité.
+            {t('products.description', 'Découvrez des viandes fraîches et savoureuses, préparées chaque jour pour garantir goût et qualité.')}
           </p>
         </motion.div>
 
@@ -123,7 +137,7 @@ export function ProduitsSection() {
                   </h3>
 
                   <p className="text-base md:text-lg text-muted-foreground font-medium font-sans">
-                    Découvrez nos sélections fraîches et savoureuses, préparées avec soin.
+                    {t('products.itemDesc', 'Découvrez nos sélections fraîches et savoureuses, préparées avec soin.')}
                   </p>
                 </div>
               </motion.div>

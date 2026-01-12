@@ -1,1 +1,103 @@
-{}
+{
+  "closed": "Fermé",
+  "days": {
+    "friday": "Vendredi",
+    "monThu": "Lun-Jeu",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "footer": {
+    "contact": "Contact",
+    "description": "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.",
+    "hours": "Horaires",
+    "legal": "Mentions légales",
+    "navigation": "Navigation",
+    "privacy": "Politique de confidentialité",
+    "rights": "Tous droits réservés.",
+    "tagline": "L'art de la viande depuis 2025",
+    "terms": "CGV"
+  },
+  "hero": {
+    "badge": "Ouvert aujourd'hui",
+    "cta": {
+      "contact": "Nous contacter",
+      "products": "Découvrir nos produits"
+    },
+    "description": "Excellence artisanale et viandes d'exception à",
+    "imageAlt": "Boucherie Vaz - L'art de la viande",
+    "scroll": "Scroll",
+    "titleHighlight": "proche de vous",
+    "titleInitial": "La boucherie"
+  },
+  "menu": {
+    "title": "Menu"
+  },
+  "metiers": {
+    "badge": "Notre entreprise",
+    "boucherie": {
+      "desc": "Viandes sélectionnées",
+      "detail": "Une sélection rigoureuse de viandes fraîches et savoureuses, préparées avec soin chaque jour pour garantir goût et qualité exceptionnelle.",
+      "stats": {
+        "label": "Origine Suisse"
+      },
+      "title": "Boucherie"
+    },
+    "charcuterie": {
+      "desc": "Savoir-faire maison",
+      "detail": "Des recettes traditionnelles transmises de génération en génération, élaborées dans le respect de l'artisanat local et du terroir.",
+      "stats": {
+        "label": "Spécialités maison"
+      },
+      "title": "Charcuterie"
+    },
+    "more": "En savoir plus",
+    "subtitle": "Une sélection fraîche et savoureuse, préparée chaque jour avec exigence pour que tout vous « tombe dessus » sans effort : qualité, conseil et goût.",
+    "title": "Viandes, charcuterie, traiteur",
+    "traiteur": {
+      "desc": "Prestations sur mesure",
+      "detail": "Des sélections préparées sur mesure pour sublimer vos moments de convivialité : conseils d'expert, préparations spéciales, et saveurs du terroir pour chaque occasion.",
+      "stats": {
+        "label": "Satisfaction"
+      },
+      "title": "Traiteur"
+    }
+  },
+  "nav": {
+    "about": "À propos",
+    "contact": "Contact",
+    "home": "Accueil",
+    "products": "Produits",
+    "reserve": "Réserver"
+  },
+  "products": {
+    "badge": "Notre sélection",
+    "description": "Découvrez des viandes fraîches et savoureuses, préparées chaque jour pour garantir goût et qualité.",
+    "itemDesc": "Découvrez nos sélections fraîches et savoureuses, préparées avec soin.",
+    "items": {
+      "chicken": {
+        "name": "Poulet tendre et savoureux"
+      },
+      "heifer": {
+        "name": "Génisse maturée pour les amateurs"
+      },
+      "horse": {
+        "name": "Viande de cheval riche en goût"
+      },
+      "lamb": {
+        "name": "Agneau aux saveurs délicates"
+      },
+      "order": {
+        "name": "Viandes sur commande"
+      },
+      "pork": {
+        "name": "Porc de qualité supérieure"
+      }
+    },
+    "tags": {
+      "homemade": "Fait Maison",
+      "premium": "Premium",
+      "specialty": "Spécialité"
+    },
+    "title": "Produits phares"
+  }
+}

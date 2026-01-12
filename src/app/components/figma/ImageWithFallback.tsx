@@ -14,6 +14,7 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
   const computedLoading = loading ?? 'lazy'
   const computedDecoding = decoding ?? 'async'
 
+
   return didError ? (
     <div
       className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
@@ -27,6 +28,7 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
           decoding={computedDecoding}
           {...rest}
           data-original-url={src}
+
         />
       </div>
     </div>

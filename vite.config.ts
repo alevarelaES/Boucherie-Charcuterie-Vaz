@@ -5,15 +5,32 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
   ],
   resolve: {
     alias: {
-      // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    css: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      thresholds: {
+        global: {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80,
+        },
+      },
+      include: ['src/app/components/**/*.{ts,tsx}', 'src/app/App.tsx'],
+      exclude: ['src/app/components/ui/**', 'src/app/components/figma/**'], // Exclude UI lib and helpers
     },
   },
 })
