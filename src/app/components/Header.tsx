@@ -1,4 +1,4 @@
-import { Menu, X, MapPin, Phone, Mail } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,8 +18,8 @@ export function Header() {
 
     const navItems = [
         { label: t('nav.home', 'Accueil'), href: '#accueil' },
-        { label: t('nav.products', 'Produits'), href: '#produits' },
         { label: t('nav.about', 'À propos'), href: '#a-propos' },
+        { label: t('nav.products', 'Produits'), href: '#produits' },
         { label: t('nav.contact', 'Contact'), href: '#contact' }
     ];
 
@@ -33,20 +33,31 @@ export function Header() {
                 style={{ backgroundColor: scrolled ? 'transparent' : 'rgba(0,0,0,0.2)' }}
             >
                 <div className="max-w-7xl mx-auto w-full px-8 py-2 flex justify-between text-xs font-sans font-medium text-white/90">
-                    <div className="flex gap-6">
-                        <a href="https://maps.google.com" target="_blank" rel="noopener" className="flex items-center gap-2 hover:text-primary transition-colors">
-                            <MapPin className="w-3 h-3 text-primary" />
+                    <div className="flex gap-6 items-center">
+                        <a href="https://maps.google.com" target="_blank" rel="noopener" className="flex items-center gap-2 hover:text-gold transition-colors">
+                            <MapPin className="w-3 h-3 text-gold" />
                             Rue du faubourg 5, 1337 Vallorbe
                         </a>
-                        <a href="mailto:boucherievaz@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                            <Mail className="w-3 h-3 text-primary" />
+                        <a href="mailto:boucherievaz@gmail.com" className="flex items-center gap-2 hover:text-gold transition-colors">
+                            <Mail className="w-3 h-3 text-gold" />
                             boucherievaz@gmail.com
                         </a>
                     </div>
-                    <a href="tel:+41218431109" className="flex items-center gap-2 hover:text-primary transition-colors">
-                        <Phone className="w-3 h-3 text-primary" />
-                        +41 21 843 11 09
-                    </a>
+                    <div className="flex gap-6 items-center">
+                        <a href="tel:+41218431109" className="flex items-center gap-2 hover:text-gold transition-colors">
+                            <Phone className="w-3 h-3 text-gold" />
+                            +41 21 843 11 09
+                        </a>
+                        <div className="h-4 w-[1px] bg-white/20 mx-1"></div>
+                        <div className="flex gap-4">
+                            <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener" className="hover:text-gold transition-colors">
+                                <Facebook className="w-3.5 h-3.5" />
+                            </a>
+                            <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener" className="hover:text-gold transition-colors">
+                                <Instagram className="w-3.5 h-3.5" />
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </motion.div>
 
@@ -60,11 +71,11 @@ export function Header() {
                 <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
                     {/* Logo Area */}
                     <a href="#accueil" className="flex items-center gap-3 group">
-                        <div className={`p-2 rounded-xl transition-all duration-500 ${scrolled ? 'bg-primary/5' : 'bg-white/70 backdrop-blur-sm shadow-lg'}`}>
+                        <div className={`p-0.5 rounded-xl transition-all duration-500 ${scrolled ? 'bg-primary/5' : 'bg-white/70 backdrop-blur-sm shadow-lg'}`}>
                             <img
                                 src="/images/logo/Boucherie Charcuterie Vaz sans fond.png"
                                 alt="Logo Boucherie Vaz"
-                                className="w-14 h-14 object-contain group-hover:scale-110 transition-transform duration-300"
+                                className="w-20 h-20 object-contain group-hover:scale-110 transition-transform duration-300"
                             />
                         </div>
                         <div className="flex flex-col">
@@ -149,6 +160,14 @@ export function Header() {
                             <div className="flex flex-col gap-4 text-center font-sans text-sm text-muted-foreground">
                                 <p>Rue du faubourg 5, 1337 Vallorbe</p>
                                 <a href="tel:+41218431109" className="text-primary font-bold text-lg">+41 21 843 11 09</a>
+                                <div className="flex justify-center gap-6 mt-2">
+                                    <a href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/" target="_blank" rel="noopener" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                        <Facebook className="w-5 h-5" />
+                                    </a>
+                                    <a href="https://www.instagram.com/boucherievaz/" target="_blank" rel="noopener" className="p-2 bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                        <Instagram className="w-5 h-5" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

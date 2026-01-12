@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
@@ -73,13 +73,13 @@ export function ContactSection() {
                     href={contact.href}
                     target={contact.icon === MapPin ? '_blank' : undefined}
                     rel={contact.icon === MapPin ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
+                    className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg hover:bg-gold/10 transition-colors group"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <contact.icon className="w-6 h-6 text-primary flex-shrink-0" />
+                    <contact.icon className="w-6 h-6 text-gold flex-shrink-0 group-hover:scale-110 transition-transform" />
                     <div className="min-w-0">
                       <p className="text-sm md:text-base text-foreground/80 uppercase tracking-wide font-semibold font-sans">
                         {contact.label}
@@ -90,6 +90,34 @@ export function ContactSection() {
                     </div>
                   </motion.a>
                 ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-border/50">
+                <p className="text-sm md:text-base text-foreground/60 uppercase tracking-widest font-bold font-sans mb-4">
+                  Suivez-nous
+                </p>
+                <div className="flex gap-4">
+                  <motion.a
+                    href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
+                    whileHover={{ y: -5, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Facebook className="w-6 h-6" />
+                  </motion.a>
+                  <motion.a
+                    href="https://www.instagram.com/boucherievaz/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
+                    whileHover={{ y: -5, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Instagram className="w-6 h-6" />
+                  </motion.a>
+                </div>
               </div>
             </div>
 

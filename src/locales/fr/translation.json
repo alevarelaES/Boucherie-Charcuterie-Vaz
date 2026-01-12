@@ -75,22 +75,28 @@
     "itemDesc": "Découvrez nos sélections fraîches et savoureuses, préparées avec soin.",
     "items": {
       "chicken": {
-        "name": "Poulet tendre et savoureux"
+        "name": "Poulet tendre et savoureux",
+        "desc": "Une chair tendre et juteuse, idéale pour vos grillades ou plats mijotés."
       },
       "heifer": {
-        "name": "Génisse maturée pour les amateurs"
+        "name": "Génisse maturée pour les amateurs",
+        "desc": "Sélectionnée avec soin pour sa tendreté et son persillé exceptionnel."
       },
       "horse": {
-        "name": "Viande de cheval riche en goût"
+        "name": "Viande de cheval riche en goût",
+        "desc": "Une viande maigre et savoureuse, appréciée pour ses qualités nutritives."
       },
       "lamb": {
-        "name": "Agneau aux saveurs délicates"
+        "name": "Agneau aux saveurs délicates",
+        "desc": "Des morceaux choisis pour leur finesse et leur goût subtil et parfumé."
       },
       "order": {
-        "name": "Viandes sur commande"
+        "name": "Viandes sur commande",
+        "desc": "Plateaux de charcuterie et découpes spécifiques pour tous vos événements."
       },
       "pork": {
-        "name": "Porc de qualité supérieure"
+        "name": "Porc de qualité supérieure",
+        "desc": "Une qualité suisse irréprochable, parfaite pour toutes vos préparations."
       }
     },
     "tags": {

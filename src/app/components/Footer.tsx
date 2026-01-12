@@ -7,13 +7,15 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
+    { icon: Facebook, href: 'https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/', label: 'Facebook' },
+    { icon: Instagram, href: 'https://www.instagram.com/boucherievaz/', label: 'Instagram' },
     { icon: Mail, href: 'mailto:boucherievaz@gmail.com', label: 'Email' }
   ];
 
   const quickLinks = [
     { label: t('nav.home', 'Accueil'), href: '#accueil' },
-    { label: t('nav.products', 'Produits'), href: '#produits' },
     { label: t('nav.about', 'À propos'), href: '#a-propos' },
+    { label: t('nav.products', 'Produits'), href: '#produits' },
     { label: t('nav.contact', 'Contact'), href: '#contact' }
   ];
 
@@ -71,7 +73,7 @@ export function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-all text-background"
+                    className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all text-background"
                     whileHover={{ scale: 1.1, y: -3 }}
                     whileTap={{ scale: 0.9 }}
                   >

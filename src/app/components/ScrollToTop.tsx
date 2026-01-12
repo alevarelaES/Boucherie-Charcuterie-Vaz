@@ -25,7 +25,7 @@ export function ScrollToTop() {
     <>
       {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gold origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -34,7 +34,7 @@ export function ScrollToTop() {
         onClick={scrollToTop}
         className="fixed bottom-8 right-8 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-2xl flex items-center justify-center z-50 group"
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ 
+        animate={{
           opacity: isVisible ? 1 : 0,
           scale: isVisible ? 1 : 0,
         }}

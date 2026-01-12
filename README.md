@@ -110,8 +110,8 @@ Les images sont stockées dans `public/images/` :
 Les textes et informations se trouvent dans `src/app/components/`:
 - `Hero.tsx` - Page d'accueil
 - `MetiersSection.tsx` - Métiers
-- `ProduitsSection.tsx` - Produits (modifier le tableau `produits`)
 - `ValeursSection.tsx` - À propos
+- `ProduitsSection.tsx` - Produits (modifier le tableau `produits`)
 - `ContactSection.tsx` - Formulaire et horaires
 - `Footer.tsx` - Pied de page
 

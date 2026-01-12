@@ -18,33 +18,39 @@ export function ProduitsSection() {
   const produits = [
     {
       name: t('products.items.chicken.name', 'Poulet tendre et savoureux'),
+      description: t('products.items.chicken.desc', 'Une chair tendre et juteuse, idéale pour vos grillades ou plats mijotés.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80'
+      image: '/images/products/chicken.png?v=2'
     },
     {
       name: t('products.items.heifer.name', 'Génisse maturée pour les amateurs'),
+      description: t('products.items.heifer.desc', 'Sélectionnée avec soin pour sa tendreté et son persillé exceptionnel.'),
       tag: t('products.tags.specialty', 'Spécialité'),
-      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80'
+      image: '/images/products/beef.png?v=2'
     },
     {
       name: t('products.items.lamb.name', 'Agneau aux saveurs délicates'),
+      description: t('products.items.lamb.desc', 'Des morceaux choisis pour leur finesse et leur goût subtil et parfumé.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: 'https://images.unsplash.com/photo-1603894537516-b56f5e85e6f0?w=800&q=80'
+      image: '/images/products/lamb.png?v=2'
     },
     {
       name: t('products.items.pork.name', 'Porc de qualité supérieure'),
+      description: t('products.items.pork.desc', 'Une qualité suisse irréprochable, parfaite pour toutes vos préparations.'),
       tag: t('products.tags.specialty', 'Spécialité'),
-      image: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd67fba?w=800&q=80'
+      image: '/images/products/pork.png?v=2'
     },
     {
       name: t('products.items.horse.name', 'Viande de cheval riche en goût'),
+      description: t('products.items.horse.desc', 'Une viande maigre et savoureuse, appréciée pour ses qualités nutritives.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800&q=80'
+      image: '/images/products/horse.png?v=2'
     },
     {
       name: t('products.items.order.name', 'Viandes sur commande'),
+      description: t('products.items.order.desc', 'Plateaux de charcuterie et découpes spécifiques pour tous vos événements.'),
       tag: t('products.tags.homemade', 'Fait Maison'),
-      image: 'https://images.unsplash.com/photo-1618164436241-92473be9b1d7?w=800&q=80'
+      image: '/images/products/order.png?v=3'
     }
   ];
 
@@ -67,7 +73,7 @@ export function ProduitsSection() {
           style={{ y: yTitle }}
         >
           <motion.span
-            className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans"
+            className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans"
           >
             {t('products.badge', 'Notre sélection')}
           </motion.span>
@@ -122,7 +128,7 @@ export function ProduitsSection() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 + 0.2 }}
                   >
-                    <Badge className="bg-primary text-primary-foreground border-0 shadow-xl text-sm md:text-base font-bold px-3 py-1">
+                    <Badge className={`${produit.tag === t('products.tags.premium', 'Premium') ? 'bg-gold hover:bg-gold/90' : 'bg-primary hover:bg-primary/90'} text-white border-0 shadow-xl text-sm md:text-base font-bold px-3 py-1`}>
                       {produit.tag}
                     </Badge>
                   </motion.div>
@@ -137,7 +143,7 @@ export function ProduitsSection() {
                   </h3>
 
                   <p className="text-base md:text-lg text-muted-foreground font-medium font-sans">
-                    {t('products.itemDesc', 'Découvrez nos sélections fraîches et savoureuses, préparées avec soin.')}
+                    {produit.description}
                   </p>
                 </div>
               </motion.div>

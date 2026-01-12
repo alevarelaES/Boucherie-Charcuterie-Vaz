@@ -37,7 +37,7 @@ export function ValeursSection() {
           viewport={{ once: true }}
         >
           <motion.span
-            className="inline-block px-3 py-1.5 bg-primary/10 text-primary rounded-full text-base md:text-lg font-bold tracking-wider uppercase mb-3 font-sans"
+            className="inline-block px-3 py-1.5 bg-gold/10 text-gold rounded-full text-base md:text-lg font-bold tracking-wider uppercase mb-3 font-sans"
           >
             Notre histoire
           </motion.span>
@@ -51,7 +51,7 @@ export function ValeursSection() {
 
         {/* Bloc 1 : Introduction - Plus compact */}
         <motion.div
-          className="bg-primary/5 border-l-4 border-primary rounded-r-lg p-5 mb-8 max-w-5xl mx-auto"
+          className="bg-primary/5 border-l-4 border-gold rounded-r-lg p-5 mb-8 max-w-5xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -95,7 +95,7 @@ export function ValeursSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-primary font-serif">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gold font-serif">
                 Notre Promesse
               </h3>
               <p className="text-base md:text-lg text-foreground/90 leading-relaxed font-sans">
@@ -124,7 +124,7 @@ export function ValeursSection() {
                   'Viandes sur commande'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-base md:text-lg text-foreground/90 font-sans">
-                    <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2"></span>
+                    <span className="w-2 h-2 bg-gold rounded-full flex-shrink-0 mt-2"></span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -138,7 +138,7 @@ export function ValeursSection() {
           {valeurs.map((valeur, index) => (
             <motion.div
               key={index}
-              className="bg-muted/50 rounded-lg p-4 border border-border/50"
+              className="bg-muted/50 rounded-lg p-4 border border-border/50 group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -146,12 +146,12 @@ export function ValeursSection() {
               whileHover={{ scale: 1.03 }}
             >
               <div className="flex flex-col items-center text-center gap-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <valeur.icon className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center group-hover:bg-gold transition-colors">
+                  <valeur.icon className="w-6 h-6 text-gold group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h3
-                    className="font-bold text-base md:text-lg mb-1 font-serif"
+                    className="font-bold text-base md:text-lg mb-1 font-serif group-hover:text-gold transition-colors"
                   >
                     {valeur.title}
                   </h3>

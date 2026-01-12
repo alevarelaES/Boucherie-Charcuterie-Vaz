@@ -61,7 +61,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-white/90 text-lg md:text-2xl font-sans font-medium max-w-2xl leading-relaxed drop-shadow-lg"
           >
-            {t('hero.description', "Excellence artisanale et viandes d'exception à")} <span className="text-white font-bold underline decoration-primary decoration-4 underline-offset-4">Vallorbe</span>.
+            {t('hero.description', "Excellence artisanale et viandes d'exception à")} <span className="text-white font-bold underline decoration-gold decoration-4 underline-offset-4">Vallorbe</span>.
           </motion.p>
 
           {/* CTA Buttons - Fixed Rounding */}
@@ -95,8 +95,8 @@ export function Hero() {
           transition={{ delay: 1.5, duration: 1 }}
         >
           <motion.div
-            className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-sm"
-            whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.6)" }}
+            className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center backdrop-blur-sm"
+            whileHover={{ scale: 1.1, borderColor: "rgba(197, 160, 89, 0.8)" }}
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -105,7 +105,7 @@ export function Hero() {
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="white"
+              stroke="#C5A059"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"

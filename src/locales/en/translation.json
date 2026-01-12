@@ -72,22 +72,28 @@
     "itemDesc": "Discover our fresh and tasty selections, prepared with care.",
     "items": {
       "chicken": {
-        "name": "Tender and tasty chicken"
+        "name": "Tender and tasty chicken",
+        "desc": "Tender and juicy meat, ideal for your grills or slow-cooked dishes."
       },
       "heifer": {
-        "name": "Matured heifer for amateurs"
+        "name": "Matured heifer for amateurs",
+        "desc": "Carefully selected for its tenderness and exceptional marbling."
       },
       "horse": {
-        "name": "Horse meat rich in taste"
+        "name": "Horse meat rich in taste",
+        "desc": "A lean and tasty meat, appreciated for its nutritional qualities."
       },
       "lamb": {
-        "name": "Lamb with delicate flavors"
+        "name": "Lamb with delicate flavors",
+        "desc": "Selected cuts for their finesse and subtle, fragrant taste."
       },
       "order": {
-        "name": "Meats on order"
+        "name": "Meats on order",
+        "desc": "Charcuterie platters and specific cuts for all your events."
       },
       "pork": {
-        "name": "Superior quality pork"
+        "name": "Superior quality pork",
+        "desc": "Irreproachable Swiss quality, perfect for all your preparations."
       }
     },
     "tags": {
