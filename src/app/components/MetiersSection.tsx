@@ -50,7 +50,7 @@ export function MetiersSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.span 
-            className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold tracking-wider uppercase mb-4"
+            className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-base md:text-lg font-bold tracking-wider uppercase mb-4"
             style={{ fontFamily: 'var(--font-sans)' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -122,7 +122,7 @@ export function MetiersSection() {
                   <div className="text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-serif)' }}>
                     {metier.stats.value}
                   </div>
-                  <div className="text-xs text-secondary uppercase tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
+                  <div className="text-sm md:text-base text-secondary uppercase tracking-wide font-semibold" style={{ fontFamily: 'var(--font-sans)' }}>
                     {metier.stats.label}
                   </div>
                 </motion.div>
@@ -136,11 +136,11 @@ export function MetiersSection() {
                 >
                   {metier.title}
                 </h3>
-                <p className="text-primary text-sm uppercase tracking-widest mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
+                <p className="text-primary text-base md:text-lg uppercase tracking-widest mb-4 font-semibold" style={{ fontFamily: 'var(--font-sans)' }}>
                   {metier.description}
                 </p>
                 <p 
-                  className="text-foreground/70 leading-relaxed"
+                  className="text-base md:text-lg text-foreground/70 leading-relaxed"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {metier.detail}
@@ -153,7 +153,7 @@ export function MetiersSection() {
                   animate={{ x: hoveredIndex === index ? 0 : -10, opacity: hoveredIndex === index ? 1 : 0 }}
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  <span className="text-sm font-semibold">En savoir plus</span>
+                  <span className="text-base md:text-lg font-bold">En savoir plus</span>
                   <motion.span
                     animate={{ x: hoveredIndex === index ? [0, 5, 0] : 0 }}
                     transition={{ repeat: Infinity, duration: 1 }}

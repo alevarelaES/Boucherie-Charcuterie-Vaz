@@ -40,9 +40,9 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   
-  /* Custom font families */
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  /* Custom font families - Raw definition */
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-sans: 'Montserrat', sans-serif;
 }
 
 .dark {
@@ -83,6 +83,9 @@
 }
 
 @theme inline {
+  --font-serif: var(--font-family-serif);
+  --font-sans: var(--font-family-sans);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -129,14 +132,15 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-sans);
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-family-sans);
+    line-height: 1.6;
     overflow-x: hidden;
   }
 
   /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  * Default typography styles for HTML elements.
+  * We use @apply to leverage Tailwind tokens.
   */
 
   html {
@@ -144,45 +148,37 @@
     scroll-behavior: smooth;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-serif);
+    @apply font-bold text-foreground;
+    line-height: 1.2;
+  }
+
   h1 {
-    font-size: var(--text-2xl);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply text-4xl md:text-5xl lg:text-6xl;
   }
 
   h2 {
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply text-3xl md:text-4xl;
   }
 
   h3 {
-    font-size: var(--text-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply text-2xl md:text-3xl;
   }
 
   h4 {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply text-xl md:text-2xl;
   }
 
   label {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
   }
 
   button {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    @apply font-medium;
   }
 
   input {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5;
+    @apply font-normal;
   }
 }

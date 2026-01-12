@@ -27,23 +27,56 @@ const valeurs = [
 
 export function ValeursSection() {
   return (
-    <section id="a-propos" className="py-14 md:py-20 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
+    <section id="a-propos" className="py-12 md:py-16 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-          {/* Left: Image */}
-          <motion.div 
-            className="order-2 lg:order-1"
+        {/* Header */}
+        <motion.div
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <motion.span
+            className="inline-block px-3 py-1.5 bg-primary/10 text-primary rounded-full text-base md:text-lg font-bold tracking-wider uppercase mb-3 font-sans"
+          >
+            Notre histoire
+          </motion.span>
+
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl mb-3 font-bold font-serif"
+          >
+            Valeurs & Terroir
+          </h2>
+        </motion.div>
+
+        {/* Bloc 1 : Introduction - Plus compact */}
+        <motion.div
+          className="bg-primary/5 border-l-4 border-primary rounded-r-lg p-5 mb-8 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          <p className="text-lg md:text-xl text-foreground/90 leading-relaxed text-center font-sans">
+            La <span className="font-semibold text-primary">Boucherie Vaz</span> est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.
+          </p>
+        </motion.div>
+
+        {/* Grid: Image + Notre Promesse - Plus compact */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start mb-8">
+          {/* Image */}
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div 
-              className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]"
+            <motion.div
+              className="relative rounded-xl overflow-hidden shadow-lg aspect-[4/3]"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
-              <ImageWithFallback 
+              <ImageWithFallback
                 src="/images/image_viande_1.jpg"
                 alt="Boucherie Vaz - Notre histoire"
                 className="w-full h-full object-cover"
@@ -53,89 +86,98 @@ export function ValeursSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Content */}
-          <div className="order-1 lg:order-2">
+          {/* Notre Promesse + Nos produits combinés */}
+          <div className="space-y-5">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="bg-muted/30 rounded-lg p-5"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ delay: 0.2 }}
             >
-              <motion.span 
-                className="inline-block px-3 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-semibold tracking-wider uppercase mb-4"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Notre histoire
-              </motion.span>
-              
-              <h2 
-                className="text-4xl md:text-5xl mb-4"
-                style={{ fontFamily: 'var(--font-serif)' }}
-              >
-                Valeurs & Terroir
-              </h2>
-              
-              <p className="text-base text-foreground/80 leading-relaxed mb-6" style={{ fontFamily: 'var(--font-sans)' }}>
-                La <span className="font-semibold text-primary">Boucherie Vaz</span> est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence, pour offrir à nos clients des produits d'exception, dans une ambiance chaleureuse et familiale.
-              </p>
-
-              <p className="text-sm text-foreground/95 leading-relaxed mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
-                Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. La qualité est notre promesse : nous sélectionnons nos viandes avec le plus grand soin afin de garantir fraîcheur, goût et tendreté, du premier au dernier morceau.
-              </p>
-
-              <p className="text-sm text-foreground/95 leading-relaxed mb-3 font-semibold" style={{ fontFamily: 'var(--font-sans)' }}>
-                Vous trouverez chez nous :
-              </p>
-              <ul className="text-sm text-foreground/95 leading-relaxed mb-4 space-y-1" style={{ fontFamily: 'var(--font-sans)' }}>
-                <li>• Poulet tendre et savoureux</li>
-                <li>• Génisse maturée pour les amateurs de viande raffinée</li>
-                <li>• Agneau aux saveurs délicates</li>
-                <li>• Porc de qualité supérieure</li>
-                <li>• Viande de cheval riche en goût</li>
-                <li>• Et bien d'autres viandes sur commande</li>
-              </ul>
-
-              <p className="text-sm text-foreground/95 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                Notre équipe est à votre écoute pour vous conseiller et vous accompagner, que ce soit pour un repas en famille, un barbecue entre amis ou une occasion spéciale. Plus qu'une simple boucherie, nous sommes un lieu de confiance, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour le plaisir d'échanger et de partager notre passion de la viande.
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-primary font-serif">
+                Notre Promesse
+              </h3>
+              <p className="text-base md:text-lg text-foreground/90 leading-relaxed font-sans">
+                Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir <span className="font-semibold">fraîcheur, goût et tendreté</span>.
               </p>
             </motion.div>
 
-            {/* 4 Values Grid - compact */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-6">
-              {valeurs.map((valeur, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-muted/50 rounded-lg p-3 border border-border/50"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08, duration: 0.4 }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="flex gap-2 items-start">
-                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <valeur.icon className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="min-w-0">
-                      <h3 
-                        className="font-semibold text-sm mb-0.5"
-                        style={{ fontFamily: 'var(--font-serif)' }}
-                      >
-                        {valeur.title}
-                      </h3>
-                      <p 
-                        className="text-xs text-foreground/90 leading-tight"
-                        style={{ fontFamily: 'var(--font-sans)' }}
-                      >
-                        {valeur.description}
-                      </p>
-                    </div>
+            {/* Nos produits */}
+            <motion.div
+              className="bg-background border border-border/50 rounded-lg p-5"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-primary font-serif">
+                Vous trouverez chez nous
+              </h3>
+              <div className="space-y-2">
+                {[
+                  'Poulet tendre et savoureux',
+                  'Génisse maturée raffinée',
+                  'Agneau aux saveurs délicates',
+                  'Porc de qualité supérieure',
+                  'Viande de cheval riche en goût',
+                  'Viandes sur commande'
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-base md:text-lg text-foreground/90 font-sans">
+                    <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2"></span>
+                    <span>{item}</span>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* 4 Values Grid - Plus compact */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {valeurs.map((valeur, index) => (
+            <motion.div
+              key={index}
+              className="bg-muted/50 rounded-lg p-4 border border-border/50"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div className="flex flex-col items-center text-center gap-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <valeur.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3
+                    className="font-bold text-base md:text-lg mb-1 font-serif"
+                  >
+                    {valeur.title}
+                  </h3>
+                  <p
+                    className="text-base md:text-lg text-foreground/90 leading-relaxed font-normal font-sans"
+                  >
+                    {valeur.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bloc 4 : Notre engagement - Plus compact */}
+        <motion.div
+          className="bg-primary/5 rounded-lg p-5 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          <p className="text-base md:text-lg text-foreground/90 leading-relaxed text-center italic font-sans">
+            Plus qu'une simple boucherie, nous sommes un <span className="font-semibold text-primary not-italic">lieu de confiance</span>, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

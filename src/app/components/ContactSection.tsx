@@ -32,58 +32,59 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
+    <section id="contact" className="py-12 md:py-16 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
-          className="text-center mb-10 md:mb-12"
+        <motion.div
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold"
-            style={{ fontFamily: 'var(--font-serif)' }}
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif"
           >
             Contactez-nous
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Form + Contact Info */}
           <motion.div
-            className="space-y-6"
+            className="space-y-5"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             {/* Contact Info */}
-            <div className="bg-card rounded-lg p-6 border border-border/50">
-              <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
+            <div className="bg-card rounded-lg p-5 border border-border/50">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 Informations
               </h3>
               <div className="space-y-3">
                 {[
                   { icon: Phone, label: 'Téléphone', value: '+41 (0)21 843 11 09', href: 'tel:+41218431109' },
                   { icon: Mail, label: 'Email', value: 'boucherievaz@gmail.com', href: 'mailto:boucherievaz@gmail.com' },
-                  { icon: MapPin, label: 'Adresse', value: 'Rue du faubourg 5, 1337 Vallorbe', href: '#' },
+                  { icon: MapPin, label: 'Adresse', value: 'Rue du faubourg 5, 1337 Vallorbe', href: 'https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe' },
                 ].map((contact, index) => (
                   <motion.a
                     key={index}
                     href={contact.href}
+                    target={contact.icon === MapPin ? '_blank' : undefined}
+                    rel={contact.icon === MapPin ? 'noopener noreferrer' : undefined}
                     className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <contact.icon className="w-5 h-5 text-primary flex-shrink-0" />
+                    <contact.icon className="w-6 h-6 text-primary flex-shrink-0" />
                     <div className="min-w-0">
-                      <p className="text-xs text-foreground/80 uppercase tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
+                      <p className="text-sm md:text-base text-foreground/80 uppercase tracking-wide font-semibold font-sans">
                         {contact.label}
                       </p>
-                      <p className="text-sm font-semibold truncate text-foreground/95" style={{ fontFamily: 'var(--font-sans)' }}>
+                      <p className="text-base md:text-lg font-bold truncate text-foreground/95 font-sans">
                         {contact.value}
                       </p>
                     </div>
@@ -93,8 +94,8 @@ export function ContactSection() {
             </div>
 
             {/* Form */}
-            <div className="bg-card rounded-lg p-6 border border-border/50">
-              <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
+            <div className="bg-card rounded-lg p-5 border border-border/50">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 Envoyez-nous un message
               </h3>
               <motion.form
@@ -109,8 +110,7 @@ export function ContactSection() {
                 <input
                   type="text"
                   placeholder="Votre nom"
-                  className="w-full px-3 py-2 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium font-sans"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
@@ -118,8 +118,7 @@ export function ContactSection() {
                 <input
                   type="email"
                   placeholder="Votre email"
-                  className="w-full px-3 py-2 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium font-sans"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
@@ -127,16 +126,14 @@ export function ContactSection() {
                 <textarea
                   placeholder="Votre message"
                   rows={4}
-                  className="w-full px-3 py-2 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-sm resize-none"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="w-full px-4 py-3 bg-muted rounded-lg border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary text-base md:text-lg font-medium resize-none font-sans"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
                 />
                 <motion.button
                   type="submit"
-                  className="w-full px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold transition-all text-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="w-full px-4 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-bold transition-all text-lg font-sans"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -160,11 +157,11 @@ export function ContactSection() {
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                   <Clock className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-bold text-2xl" style={{ fontFamily: 'var(--font-serif)' }}>
+                <h3 className="font-bold text-2xl font-serif">
                   Horaires d'ouverture
                 </h3>
               </div>
-              <div className="space-y-3 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
+              <div className="space-y-3 text-sm font-sans">
                 {horaires.map((horaire, index) => (
                   <motion.div
                     key={index}

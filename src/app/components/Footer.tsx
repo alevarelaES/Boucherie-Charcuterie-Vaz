@@ -1,63 +1,79 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
+  const socialLinks = [
+    { icon: Facebook, href: '#', label: 'Facebook' },
+    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Mail, href: 'mailto:boucherievaz@gmail.com', label: 'Email' }
+  ];
+
+  const quickLinks = [
+    { label: t('nav.home', 'Accueil'), href: '#accueil' },
+    { label: t('nav.products', 'Produits'), href: '#produits' },
+    { label: t('nav.about', 'À propos'), href: '#a-propos' },
+    { label: t('nav.contact', 'Contact'), href: '#contact' }
+  ];
+
+  const hours = [
+    { jour: t('days.monThu', 'Lun-Jeu'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.friday', 'Vendredi'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.saturday', 'Samedi'), heures: '07:00-13:00' },
+    { jour: t('days.sunday', 'Dimanche'), heures: t('closed', 'Fermé'), closed: true },
+  ];
+
   return (
-    <footer className="bg-foreground text-background relative overflow-hidden">
+    <footer className="bg-foreground text-background relative overflow-hidden font-sans">
       {/* Decorative Top Border */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent" />
-      
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+
       <div className="py-16 px-4 md:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             {/* Brand Column */}
-            <motion.div 
+            <motion.div
               className="md:col-span-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <motion.div 
+                <motion.div
                   className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl flex items-center justify-center p-2"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <img 
-                    src="/images/logo/Boucherie Charcuterie Vaz sans fond.png" 
-                    alt="Boucherie Vaz" 
+                  <img
+                    src="/images/logo/Boucherie Charcuterie Vaz sans fond.png"
+                    alt="Boucherie Vaz"
                     className="w-full h-full object-contain"
                   />
                 </motion.div>
                 <div>
-                  <p className="text-xl font-bold" style={{ fontFamily: 'var(--font-serif)' }}>
+                  <p className="text-2xl md:text-3xl font-bold font-serif">
                     Boucherie Vaz
                   </p>
-                  <p className="text-sm text-background/75" style={{ fontFamily: 'var(--font-sans)' }}>
-                    L'art de la viande depuis 2025
+                  <p className="text-base md:text-lg text-background/75 font-medium">
+                    {t('footer.tagline', "L'art de la viande depuis 2025")}
                   </p>
                 </div>
               </div>
-              <p className="text-background/80 leading-relaxed mb-6 max-w-md" style={{ fontFamily: 'var(--font-sans)' }}>
-                Une boucherie-charcuterie artisanale au cœur de Vallorbe, 
-                où tradition et excellence se rencontrent pour vous offrir 
-                le meilleur de la gastronomie locale.
+              <p className="text-base md:text-lg text-background/80 leading-relaxed mb-6 max-w-md font-normal">
+                {t('footer.description', "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.")}
               </p>
-              
+
               {/* Social Links */}
               <div className="flex gap-3">
-                {[
-                  { icon: Facebook, href: '#', label: 'Facebook' },
-                  { icon: Instagram, href: '#', label: 'Instagram' },
-                  { icon: Mail, href: 'mailto:boucherievaz@gmail.com', label: 'Email' }
-                ].map((social, index) => (
+                {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 bg-background/10 hover:bg-primary rounded-xl flex items-center justify-center transition-all"
+                    className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-all text-background"
                     whileHover={{ scale: 1.1, y: -3 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -74,22 +90,16 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
-                Navigation
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
+                {t('footer.navigation', 'Navigation')}
               </h3>
-              <ul className="space-y-3" style={{ fontFamily: 'var(--font-sans)' }}>
-                {[
-                  { label: 'Accueil', href: '#accueil' },
-                  { label: 'Notre entreprise', href: '#metiers' },
-                  { label: 'Produits', href: '#produits' },
-                  { label: 'À propos', href: '#a-propos' },
-                  { label: 'Contact', href: '#contact' }
-                ].map((link, index) => (
-                  <motion.li 
+              <ul className="space-y-3">
+                {quickLinks.map((link, index) => (
+                  <motion.li
                     key={index}
                     whileHover={{ x: 5 }}
                   >
-                    <a href={link.href} className="text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group">
+                    <a href={link.href} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium">
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.label}
                     </a>
@@ -105,31 +115,31 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
-                Contact
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
+                {t('footer.contact', 'Contact')}
               </h3>
-              <ul className="space-y-4" style={{ fontFamily: 'var(--font-sans)' }}>
+              <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <a 
+                  <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <a
                     href="https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-background/80 hover:text-primary transition-colors"
+                    className="text-base md:text-lg text-background/80 hover:text-primary transition-colors font-medium"
                   >
                     Rue du faubourg 5<br />
                     1337 Vallorbe
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                  <a href="tel:+41218431109" className="text-sm text-background/85 hover:text-primary transition-colors">
+                  <Phone className="w-6 h-6 text-primary flex-shrink-0" />
+                  <a href="tel:+41218431109" className="text-base md:text-lg text-background/85 hover:text-primary transition-colors font-medium">
                     +41 21 843 11 09
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                  <a href="mailto:boucherievaz@gmail.com" className="text-sm text-background/85 hover:text-primary transition-colors break-all">
+                  <Mail className="w-6 h-6 text-primary flex-shrink-0" />
+                  <a href="mailto:boucherievaz@gmail.com" className="text-base md:text-lg text-background/85 hover:text-primary transition-colors break-all font-medium">
                     boucherievaz@gmail.com
                   </a>
                 </li>
@@ -138,7 +148,7 @@ export function Footer() {
           </div>
 
           {/* Horaires Section */}
-          <motion.div 
+          <motion.div
             className="mb-12 pb-8 border-b border-background/10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -146,19 +156,14 @@ export function Footer() {
             transition={{ delay: 0.3 }}
           >
             <div className="flex items-center gap-2 mb-3">
-              <Clock className="w-5 h-5 text-primary" />
-              <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ fontFamily: 'var(--font-serif)' }}>
-                Horaires
+              <Clock className="w-6 h-6 text-primary" />
+              <h3 className="text-base md:text-lg font-bold uppercase tracking-wider font-serif">
+                {t('footer.hours', 'Horaires')}
               </h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-xs text-background/60" style={{ fontFamily: 'var(--font-sans)' }}>
-              {[
-                { jour: 'Lun-Jeu', heures: '07:00-12:00 | 13:30-18:00' },
-                { jour: 'Vendredi', heures: '07:00-12:00 | 13:30-18:00' },
-                { jour: 'Samedi', heures: '07:00-13:00' },
-                { jour: 'Dimanche', heures: 'Fermé', closed: true },
-              ].map((horaire, index) => (
-                <div 
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-sm md:text-base text-background/60">
+              {hours.map((horaire, index) => (
+                <div
                   key={index}
                   className={`${horaire.closed ? 'text-background/40 italic' : ''}`}
                 >
@@ -170,38 +175,38 @@ export function Footer() {
           </motion.div>
 
           {/* Bottom Bar */}
-          <motion.div 
+          <motion.div
             className="pt-8 border-t border-background/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-background/60" style={{ fontFamily: 'var(--font-sans)' }}>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-base md:text-lg text-background/60 font-normal">
               <p>
-                © {currentYear} Boucherie Vaz. Tous droits réservés.
+                © {currentYear} Boucherie Vaz. {t('footer.rights', 'Tous droits réservés.')}
               </p>
               <div className="flex gap-6">
-                <motion.a 
-                  href="#" 
+                <motion.a
+                  href="#"
                   className="hover:text-primary transition-colors"
                   whileHover={{ y: -2 }}
                 >
-                  Mentions légales
+                  {t('footer.legal', 'Mentions légales')}
                 </motion.a>
-                <motion.a 
-                  href="#" 
+                <motion.a
+                  href="#"
                   className="hover:text-primary transition-colors"
                   whileHover={{ y: -2 }}
                 >
-                  Politique de confidentialité
+                  {t('footer.privacy', 'Politique de confidentialité')}
                 </motion.a>
-                <motion.a 
-                  href="#" 
+                <motion.a
+                  href="#"
                   className="hover:text-primary transition-colors"
                   whileHover={{ y: -2 }}
                 >
-                  CGV
+                  {t('footer.terms', 'CGV')}
                 </motion.a>
               </div>
             </div>
