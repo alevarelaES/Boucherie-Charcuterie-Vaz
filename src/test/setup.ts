@@ -8,6 +8,7 @@ import i18n from '../i18n';
 afterEach(async () => {
     cleanup();
     await i18n.changeLanguage('fr');
+    localStorage.clear();
 });
 
 // Mock IntersectionObserver for Motion
@@ -52,4 +53,26 @@ Object.defineProperty(window, 'matchMedia', {
         removeEventListener: vi.fn(),
         dispatchEvent: vi.fn(),
     })),
+});
+
+// Mock localStorage
+const localStorageMock = (() => {
+    let store: Record<string, string> = {};
+
+    return {
+        getItem: (key: string) => store[key] || null,
+        setItem: (key: string, value: string) => {
+            store[key] = value.toString();
+        },
+        removeItem: (key: string) => {
+            delete store[key];
+        },
+        clear: () => {
+            store = {};
+        }
+    };
+})();
+
+Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock
 });

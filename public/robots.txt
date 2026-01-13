@@ -1,4 +1,24 @@
 User-agent: *
 Allow: /
 
+# Sitemaps
 Sitemap: https://boucherie-charcuterie-vaz.ch/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Important pages
+Allow: /fr/
+Allow: /en/
+Allow: /de/
+Allow: /it/
+
+# Legal pages
+Allow: /fr/mentions-legales
+Allow: /fr/politique-confidentialite
+Allow: /en/mentions-legales
+Allow: /en/politique-confidentialite
+Allow: /de/mentions-legales
+Allow: /de/politique-confidentialite
+Allow: /it/mentions-legales
+Allow: /it/politique-confidentialite

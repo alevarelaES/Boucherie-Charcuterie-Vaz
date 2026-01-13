@@ -7,10 +7,16 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "extract-i18n": "i18next-parser",
     "check:i18n": "node check-i18n.js",
     "check:mobile": "node check-mobile-perf.js",
-    "check:all": "npm run check:i18n && npm run check:mobile"
+    "check:seo": "node check-seo.js",
+    "check:all": "npm run check:i18n && npm run check:mobile && npm run check:seo",
+    "fullpush": "node fullpush.js"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
