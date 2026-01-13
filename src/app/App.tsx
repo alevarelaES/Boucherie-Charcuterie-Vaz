@@ -1,5 +1,6 @@
 import { Header } from './components/Header';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ScrollRestoration } from './components/ScrollRestoration';
 import { CustomScrollbar } from './components/CustomScrollbar';
 import { CookieBanner } from './components/CookieBanner';
 import { TransitionOverlay } from './components/TransitionOverlay';
@@ -63,6 +64,7 @@ export default function App() {
       <CustomScrollbar />
       <Header />
       <ScrollToTop />
+      <ScrollRestoration />
       <CookieBanner />
       <WelcomeMessage />
       <TransitionOverlay pendingLang={pendingLang} />

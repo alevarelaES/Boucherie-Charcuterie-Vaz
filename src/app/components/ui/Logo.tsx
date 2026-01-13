@@ -13,16 +13,16 @@ export function Logo({ isTransparent, className = "" }: LogoProps) {
             className={`relative transition-all duration-500 ${!isTransparent ? 'scale-90' : 'scale-100'} ${className}`}
         >
             <div
-                className={`relative overflow-hidden rounded-full border-2 transition-all duration-500 bg-white 
+                className={`relative overflow-hidden rounded-full border-4 transition-all duration-500 bg-white flex items-center justify-center
           ${isTransparent
-                        ? 'border-white/20 shadow-2xl scale-110 p-0.5'
-                        : 'border-primary/10 shadow-md p-0'
+                        ? 'border-[#C5A059] shadow-2xl p-0 w-16 h-16 md:w-20 md:h-20'
+                        : 'border-[#C5A059] shadow-md p-0 w-12 h-12 md:w-16 md:h-16'
                     }`}
             >
                 <OptimizedImage
                     src={settings.images.logo}
                     alt="Logo Boucherie Vaz"
-                    className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                    className="w-full h-full object-contain"
                     priority
                 />
             </div>

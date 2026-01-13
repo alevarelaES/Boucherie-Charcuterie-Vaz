@@ -48,14 +48,14 @@ export function Footer() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <motion.div
-                  className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl flex items-center justify-center p-2"
+                  className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden"
                   whileHover={isMobile ? {} : { rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
                   <OptimizedImage
                     src={settings.images.logo}
                     alt="Boucherie Vaz"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain scale-105"
                     priority
                   />
                 </motion.div>

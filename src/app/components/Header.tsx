@@ -139,7 +139,7 @@ export function Header() {
                             <span className={`font-serif text-base md:text-2xl font-black leading-none tracking-tight ${!isTransparent ? 'text-primary' : 'text-white'}`}>
                                 Boucherie Vaz
                             </span>
-                            <span className={`text-[8px] md:text-xs uppercase tracking-[0.2em] font-sans font-bold ${!isTransparent ? 'text-muted-foreground/80' : 'text-white/80'}`}>
+                            <span className={`text-[8px] md:text-xs uppercase tracking-[0.2em] font-sans font-bold ${!isTransparent ? 'text-primary/80' : 'text-white/80'}`}>
                                 Vallorbe
                             </span>
                         </div>

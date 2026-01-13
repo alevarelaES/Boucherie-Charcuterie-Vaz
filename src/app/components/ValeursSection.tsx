@@ -1,6 +1,6 @@
 import { Heart, Award, Leaf, Users } from 'lucide-react';
 import { motion } from 'motion/react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { OptimizedImage } from './OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 import { SectionHeader } from './ui/SectionHeader';
@@ -67,15 +67,15 @@ export function ValeursSection() {
           >
             <div className="absolute -inset-4 bg-gold/5 rounded-[2rem] -rotate-2 z-0" />
             <motion.div
-              className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white/10"
+              className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/10"
               whileHover={isMobile ? {} : { scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
-              <ImageWithFallback
+              <OptimizedImage
                 src={settings.images.about}
                 alt={t('about.imageAlt', 'Boucherie Vaz - Notre histoire')}
-                className="w-full h-full object-cover object-bottom"
-                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="w-full h-auto object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </motion.div>

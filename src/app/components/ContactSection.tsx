@@ -181,6 +181,32 @@ export function ContactSection() {
                 {t('contact.submit', 'Envoyer')}
               </motion.button>
             </form>
+
+            <div className="mt-8 pt-6 border-t border-border/50">
+              <p className="text-base font-bold text-foreground/80 mb-4 font-sans text-center">
+                {t('contact.followUs', 'Suivez-nous')}
+              </p>
+              <div className="flex justify-center gap-4">
+                <a
+                  href={settings.info.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={24} />
+                </a>
+                <a
+                  href={settings.info.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-[#E4405F]/10 hover:bg-linear-to-tr hover:from-[#405DE6] hover:via-[#E1306C] hover:to-[#FFDC80] text-[#E4405F] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={24} />
+                </a>
+              </div>
+            </div>
           </motion.div>
 
           {/* MIDDLE RIGHT: Horaires (3/5 size) */}

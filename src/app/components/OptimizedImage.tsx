@@ -49,28 +49,21 @@ export function OptimizedImage({
     const originalExt = src.match(/\.(jpg|jpeg|png)$/i)?.[1];
 
     return (
-        <picture ref={imgRef as any}>
+        <picture ref={imgRef as any} className="flex items-center justify-center w-full h-full">
             {/* WebP version for modern browsers */}
-            {isInView && (
-                <source
-                    srcSet={webpSrc}
-                    type="image/webp"
-                />
-            )}
+
 
             {/* Fallback to original format */}
             <img
                 src={isInView ? src : undefined}
                 alt={alt}
-                className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
-                    } ${className}`}
+                className={className}
                 width={width}
                 height={height}
                 loading={priority ? 'eager' : 'lazy'}
                 decoding="async"
                 onLoad={() => setIsLoaded(true)}
                 style={{
-                    backgroundColor: '#f3f4f6', // Placeholder color
                     minHeight: height ? `${height}px` : 'auto'
                 }}
             />

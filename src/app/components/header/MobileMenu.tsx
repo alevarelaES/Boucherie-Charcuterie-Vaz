@@ -25,7 +25,7 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
         <AnimatePresence>
             {isOpen && (
                 <motion.div
-                    className="fixed inset-0 z-[100] bg-background flex flex-col"
+                    className="fixed inset-0 z-[10000] bg-background flex flex-col"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -47,7 +47,10 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                                     <a
                                         href={`/${currentLang}/${item.href}`}
                                         onClick={(e) => {
-                                            if (window.location.pathname.startsWith(`/${currentLang}`)) {
+                                            const currentPath = window.location.pathname;
+                                            const isHomePage = currentPath === `/${currentLang}` || currentPath === `/${currentLang}/`;
+
+                                            if (isHomePage) {
                                                 e.preventDefault();
                                                 const id = item.href.replace('#', '');
                                                 const element = document.getElementById(id);
@@ -55,10 +58,13 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                                                     onClose();
                                                     setTimeout(() => {
                                                         element.scrollIntoView({ behavior: 'smooth' });
-                                                    }, 300); // Wait for menu to start closing
+                                                    }, 300);
                                                 }
                                             } else {
+                                                // Force navigation to the home page with the hash
+                                                e.preventDefault();
                                                 onClose();
+                                                window.location.href = `/${currentLang}/${item.href}`;
                                             }
                                         }}
                                         className={`transition-colors ${activeSection === item.id ? 'text-primary' : 'text-foreground/80'}`}
