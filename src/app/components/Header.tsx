@@ -1,6 +1,6 @@
 import { Menu } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import settings from '../../settings.json';
@@ -19,20 +19,23 @@ export function Header() {
     const [activeSection, setActiveSection] = useState('accueil');
 
     // Scroll and Section Detection
+    const lastScrollYRef = useRef(0);
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            setScrolled(currentScrollY > 50);
+            setScrolled(currentScrollY > 20);
 
-            // Desktop top bar show/hide logic
-            if (currentScrollY < 10) {
-                setShowTopBar(true);
-            } else if (currentScrollY < lastScrollY) {
-                setShowTopBar(true);
-            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setShowTopBar(false);
+            // Desktop top bar show/hide logic - skip on mobile for simplicity
+            if (window.innerWidth >= 1024) {
+                if (currentScrollY < 10) {
+                    setShowTopBar(true);
+                } else if (currentScrollY < lastScrollYRef.current) {
+                    setShowTopBar(true);
+                } else if (currentScrollY > lastScrollYRef.current && currentScrollY > 100) {
+                    setShowTopBar(false);
+                }
             }
-            setLastScrollY(currentScrollY);
+            lastScrollYRef.current = currentScrollY;
         };
 
         const handleResize = () => {
@@ -45,7 +48,7 @@ export function Header() {
         // Observer for active section highlighting
         const observerOptions = {
             root: null,
-            rootMargin: '-10% 0px -40% 0px',
+            rootMargin: '-20% 0px -40% 0px',
             threshold: 0
         };
 
@@ -71,7 +74,7 @@ export function Header() {
             observer.disconnect();
             clearTimeout(timeoutId);
         };
-    }, [lastScrollY]);
+    }, []);
 
     // Body scroll lock
     useEffect(() => {
@@ -92,13 +95,15 @@ export function Header() {
         navigate(pathParts.join('/') + location.hash);
     };
 
-    const isTransparent = !scrolled && activeSection === 'accueil';
+    const isTransparent = !scrolled && activeSection === 'accueil' && location.pathname.length <= 4;
 
-    // CLASSES LOGIC: Separation between Mobile Floating and Desktop Traditional
-    const headerBaseClasses = "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out px-4 md:px-8";
+    // CLASSES LOGIC: More robust mobile header
+    const headerBaseClasses = "fixed left-0 right-0 z-50 transition-all duration-300 md:duration-500 ease-in-out px-4 md:px-8";
+
+    // On mobile, keep it simple: if scrolled, it's a solid white bar. No floating stuff that bugs out.
     const headerStyleClasses = isTransparent
         ? "top-0 lg:top-10 py-5 bg-transparent border-transparent text-white"
-        : "top-2 mx-2 md:mx-auto lg:top-0 lg:mx-0 max-w-[calc(100%-1rem)] lg:max-w-none bg-white/90 lg:bg-white/95 backdrop-blur-xl border border-gray-200/50 lg:border-b lg:border-x-0 lg:border-t-0 shadow-lg rounded-[2rem] lg:rounded-none py-2 lg:py-4 text-foreground";
+        : "top-0 lg:mx-0 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3 lg:py-4 text-foreground";
 
     return (
         <>
@@ -112,14 +117,23 @@ export function Header() {
 
             <header className={`${headerBaseClasses} ${headerStyleClasses}`}>
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    {/* Logo Section - Circular Brand Emblem */}
-                    <a href={`/${i18n.language}/#accueil`} className="flex items-center gap-3 md:gap-4 group">
+                    {/* Logo Section */}
+                    <a
+                        href={`/${i18n.language}/#accueil`}
+                        className="flex items-center gap-2 md:gap-4 group transition-transform active:scale-95"
+                        onClick={(e) => {
+                            if (location.pathname.startsWith(`/${i18n.language}`)) {
+                                e.preventDefault();
+                                document.getElementById('accueil')?.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                    >
                         <Logo isTransparent={isTransparent} />
                         <div className="flex flex-col">
-                            <span className={`font-serif text-lg md:text-2xl font-black leading-none tracking-tight ${!isTransparent ? 'text-primary' : 'text-white'}`}>
+                            <span className={`font-serif text-base md:text-2xl font-black leading-none tracking-tight ${!isTransparent ? 'text-primary' : 'text-white'}`}>
                                 Boucherie Vaz
                             </span>
-                            <span className={`text-[9px] md:text-xs uppercase tracking-[0.25em] font-sans font-bold ${!isTransparent ? 'text-muted-foreground' : 'text-white/90'}`}>
+                            <span className={`text-[8px] md:text-xs uppercase tracking-[0.2em] font-sans font-bold ${!isTransparent ? 'text-muted-foreground/80' : 'text-white/80'}`}>
                                 Vallorbe
                             </span>
                         </div>
@@ -142,6 +156,7 @@ export function Header() {
                                             className="absolute bottom-0 left-0 h-0.5 bg-primary"
                                             initial={false}
                                             animate={{ width: activeSection === item.id ? '100%' : '0%' }}
+                                            transition={{ duration: 0.2 }}
                                         />
                                     </a>
                                 </li>

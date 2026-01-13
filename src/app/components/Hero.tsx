@@ -6,9 +6,13 @@ export function Hero() {
   const { t } = useTranslation();
   const { scrollY } = useScroll();
 
-  // Desktop only parallax effects
+  // No parallax on small screens for better performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
   const yContent = useTransform(scrollY, [0, 500], [0, -50]);
+  const scaleHero = useTransform(scrollY, [0, 500], [1.1, 1.2]);
+  const yHero = useTransform(scrollY, [0, 500], [0, 50]);
 
   const scrollToContent = () => {
     const section = document.querySelector('#a-propos');
@@ -19,16 +23,14 @@ export function Hero() {
     <section id="accueil" className="relative h-[100dvh] w-full overflow-hidden bg-black">
       {/* 
           STABLE BACKGROUND LOGIC 
-          - Absolute position ensures it scrolls with the page naturally.
-          - Bleeding heights (110%) and slight offset (-5%) ensure no gaps.
       */}
       <div className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden">
         <motion.div
           className="absolute inset-x-0 -top-[5%] -bottom-[5%] h-[110%] w-full bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${settings.images.hero})`,
-            scale: useTransform(scrollY, [0, 500], [1.1, 1.2]),
-            y: useTransform(scrollY, [0, 500], [0, 50])
+            scale: isMobile ? 1.05 : scaleHero,
+            y: isMobile ? 0 : yHero
           }}
         />
         {/* Superior premium overlays - Softer for elegance */}
@@ -39,7 +41,10 @@ export function Hero() {
       {/* Hero Content - Unified Layout for better consistency */}
       <motion.div
         className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
-        style={{ opacity: opacityHero, y: yContent }}
+        style={{
+          opacity: isMobile ? 1 : opacityHero,
+          y: isMobile ? 0 : yContent
+        }}
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-10 pt-10">
           {/* Main Title - Responsive sizing */}

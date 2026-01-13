@@ -25,26 +25,45 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
         <AnimatePresence>
             {isOpen && (
                 <motion.div
-                    className="fixed inset-0 z-[100] bg-background/98 backdrop-blur-2xl flex flex-col"
-                    initial={{ opacity: 0, x: '100%' }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: '100%' }}
-                    transition={{ type: "spring", damping: 30, stiffness: 250 }}
+                    className="fixed inset-0 z-[100] bg-background flex flex-col"
+                    initial={{ opacity: 0, y: '10%' }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: '10%' }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                    <div className="p-6 flex justify-between items-center border-b border-border/50">
-                        <span className="font-serif text-2xl font-bold text-primary tracking-tight">Boucherie Vaz</span>
-                        <button onClick={onClose} className="p-3 bg-muted rounded-full transition-colors">
+                    <div className="p-4 flex justify-between items-center border-b border-border/50">
+                        <span className="font-serif text-xl font-bold text-primary tracking-tight">Boucherie Vaz</span>
+                        <button onClick={onClose} className="p-2 bg-muted rounded-full transition-colors active:scale-90">
                             <X className="w-6 h-6 text-foreground" />
                         </button>
                     </div>
-                    <div className="flex-1 flex flex-col justify-center px-12 gap-10">
-                        <ul className="flex flex-col gap-8 font-serif text-4xl font-bold">
+                    <div className="flex-1 flex flex-col justify-center px-10 gap-8">
+                        <ul className="flex flex-col gap-6 font-serif text-3xl font-bold">
                             {navItems.map((item, i) => (
-                                <motion.li key={item.id} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.1 }}>
+                                <motion.li
+                                    key={item.id}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.2, delay: 0.05 * i }}
+                                >
                                     <a
                                         href={`/${currentLang}/${item.href}`}
-                                        onClick={onClose}
-                                        className={`transition-colors ${activeSection === item.id ? 'text-primary' : 'hover:text-gold'}`}
+                                        onClick={(e) => {
+                                            if (window.location.pathname.startsWith(`/${currentLang}`)) {
+                                                e.preventDefault();
+                                                const id = item.href.replace('#', '');
+                                                const element = document.getElementById(id);
+                                                if (element) {
+                                                    onClose();
+                                                    setTimeout(() => {
+                                                        element.scrollIntoView({ behavior: 'smooth' });
+                                                    }, 300); // Wait for menu to start closing
+                                                }
+                                            } else {
+                                                onClose();
+                                            }
+                                        }}
+                                        className={`transition-colors ${activeSection === item.id ? 'text-primary' : 'text-foreground/80'}`}
                                     >
                                         {item.label}
                                     </a>
@@ -52,17 +71,17 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                             ))}
                         </ul>
                     </div>
-                    <div className="p-10 space-y-8 bg-muted/30 rounded-t-[3rem] border-t border-border/50">
-                        <div className="text-center space-y-3">
-                            <p className="text-sm font-medium text-muted-foreground">{settings.info.address}</p>
-                            <a href={`tel:${settings.info.phoneRaw}`} className="text-primary font-black text-2xl tracking-tighter block">{settings.info.phone}</a>
+                    <div className="p-8 space-y-6 bg-muted/20 border-t border-border/30">
+                        <div className="text-center space-y-2">
+                            <p className="text-xs font-medium text-muted-foreground">{settings.info.address}</p>
+                            <a href={`tel:${settings.info.phoneRaw}`} className="text-primary font-black text-xl tracking-tighter block">{settings.info.phone}</a>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-3">
                             {['fr', 'en', 'de', 'it'].map((lang) => (
                                 <button
                                     key={lang}
                                     onClick={() => { onLanguageChange(lang); onClose(); }}
-                                    className={`py-4 rounded-2xl font-bold text-xs border-2 transition-all ${currentLang === lang ? 'bg-primary text-white border-primary shadow-xl scale-105' : 'bg-white text-muted-foreground border-border/20'}`}
+                                    className={`py-3 rounded-xl font-bold text-xs border transition-all active:scale-95 ${currentLang === lang ? 'bg-primary text-white border-primary shadow-md' : 'bg-white text-muted-foreground border-border/20'}`}
                                 >
                                     {lang.toUpperCase()}
                                 </button>
