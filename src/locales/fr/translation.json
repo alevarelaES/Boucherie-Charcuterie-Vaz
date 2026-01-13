@@ -116,6 +116,14 @@
       "name": "Votre nom"
     },
     "submit": "Envoyer",
+    "status": {
+      "open": "Ouvert",
+      "closed": "Fermé"
+    },
+    "today": "Aujourd'hui",
+    "morning": "Matin",
+    "afternoon": "Après-midi",
+    "subtitle": "Parlons ensemble",
     "title": "Contactez-nous"
   },
   "metiers": {
@@ -193,5 +201,11 @@
       "specialty": "Spécialité"
     },
     "title": "Produits phares"
+  },
+  "welcome": {
+    "title": "Boucherie-Charcuterie Vaz",
+    "subtitle": "L'excellence au service du goût",
+    "description": "Bienvenue dans notre univers artisanal à Vallorbe, où tradition rime avec passion. Découvrez nos viandes sélectionnées et nos spécialités maison.",
+    "cta": "Entrer dans la boutique"
   }
 }

@@ -12,10 +12,11 @@ import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
 console.log('\n🖼️  Starting Image Optimization Process...\n');
 
-const publicDir = path.join(__dirname, 'public');
+const publicDir = path.join(rootDir, 'public');
 const imagesDir = path.join(publicDir, 'images');
 
 function scanImages(dir) {
@@ -100,3 +101,4 @@ const images = scanImages(imagesDir);
 generateOptimizationReport(images);
 
 console.log('\n✅ Image optimization report complete!\n');
+

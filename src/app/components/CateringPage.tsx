@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, CheckCircle2, Star, Calendar, Quote } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
 
 export function CateringPage() {
@@ -38,10 +39,11 @@ export function CateringPage() {
         >
             {/* Mini Hero */}
             <div className="relative h-[60vh] w-full overflow-hidden">
-                <img
+                <OptimizedImage
                     src="/images/image_viande_1.jpg"
                     alt="Service Traiteur"
                     className="w-full h-full object-cover scale-110"
+                    priority
                 />
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">

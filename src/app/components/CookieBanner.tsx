@@ -10,8 +10,13 @@ export function CookieBanner() {
 
     useEffect(() => {
         const consent = localStorage.getItem('cookie-consent');
+        const hasSeenWelcome = localStorage.getItem('welcome-last-seen');
+
+        // Wait for faster curtain animation (approx 3s total)
+        const delay = (hasSeenWelcome && !consent) ? 3200 : 1500;
+
         if (!consent) {
-            const timer = setTimeout(() => setIsVisible(true), 1500);
+            const timer = setTimeout(() => setIsVisible(true), delay);
             return () => clearTimeout(timer);
         }
     }, []);

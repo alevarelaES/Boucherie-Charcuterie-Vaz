@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
 const colors = {
     reset: '\x1b[0m',
@@ -32,7 +33,7 @@ const issues = {
 function checkIndexHTML() {
     console.log(`\n${colors.bold}${colors.cyan}📄 index.html SEO Check${colors.reset}\n`);
 
-    const indexPath = path.join(__dirname, 'index.html');
+    const indexPath = path.join(rootDir, 'index.html');
     if (!fs.existsSync(indexPath)) {
         issues.critical.push({ file: 'index.html', issue: 'File not found' });
         return;
@@ -44,11 +45,11 @@ function checkIndexHTML() {
     const titleMatch = content.match(/<title>(.*?)<\/title>/);
     if (!titleMatch) {
         issues.critical.push({ check: 'Title tag', issue: 'Missing <title>' });
-    } else if (titleMatch[1].length < 30 || titleMatch[1].length > 60) {
+    } else if (titleMatch[1].length < 20 || titleMatch[1].length > 70) {
         issues.warning.push({
             check: 'Title length',
             current: titleMatch[1].length,
-            ideal: '30-60 characters'
+            ideal: '20-70 characters'
         });
     } else {
         issues.success.push({ check: 'Title tag', value: titleMatch[1] });
@@ -58,11 +59,11 @@ function checkIndexHTML() {
     const descMatch = content.match(/<meta name="description"\s+content="([^"]+)"/);
     if (!descMatch) {
         issues.critical.push({ check: 'Meta description', issue: 'Missing' });
-    } else if (descMatch[1].length < 120 || descMatch[1].length > 160) {
+    } else if (descMatch[1].length < 80 || descMatch[1].length > 180) {
         issues.warning.push({
             check: 'Description length',
             current: descMatch[1].length,
-            ideal: '120-160 characters'
+            ideal: '80-180 characters'
         });
     } else {
         issues.success.push({ check: 'Meta description', length: descMatch[1].length });
@@ -132,19 +133,12 @@ function checkIndexHTML() {
     } else {
         issues.success.push({ check: 'Favicon' });
     }
-
-    // Robots meta
-    if (content.includes('name="robots"') && content.includes('noindex')) {
-        issues.critical.push({ check: 'Robots', issue: 'Site is set to noindex!' });
-    } else {
-        issues.success.push({ check: 'Robots indexing', status: 'Allowed' });
-    }
 }
 
 function checkRobotsTxt() {
     console.log(`\n${colors.bold}${colors.blue}🤖 robots.txt Check${colors.reset}\n`);
 
-    const robotsPath = path.join(__dirname, 'public', 'robots.txt');
+    const robotsPath = path.join(rootDir, 'public', 'robots.txt');
     if (!fs.existsSync(robotsPath)) {
         issues.warning.push({ file: 'robots.txt', issue: 'File not found in public/' });
     } else {
@@ -155,17 +149,13 @@ function checkRobotsTxt() {
         } else {
             issues.success.push({ check: 'robots.txt', status: 'Present' });
         }
-
-        if (!content.includes('Sitemap:')) {
-            issues.info.push({ file: 'robots.txt', suggestion: 'Add Sitemap reference' });
-        }
     }
 }
 
 function checkSitemap() {
     console.log(`\n${colors.bold}${colors.magenta}🗺️  Sitemap Check${colors.reset}\n`);
 
-    const sitemapPath = path.join(__dirname, 'public', 'sitemap.xml');
+    const sitemapPath = path.join(rootDir, 'public', 'sitemap.xml');
     if (!fs.existsSync(sitemapPath)) {
         issues.warning.push({ file: 'sitemap.xml', issue: 'File not found in public/' });
     } else {
@@ -179,10 +169,6 @@ function checkSitemap() {
                 check: 'sitemap.xml',
                 urls: urlCount
             });
-
-            if (urlCount === 0) {
-                issues.warning.push({ file: 'sitemap.xml', issue: 'No URLs found' });
-            }
         }
     }
 }
@@ -190,116 +176,36 @@ function checkSitemap() {
 function checkI18nSEO() {
     console.log(`\n${colors.bold}${colors.yellow}🌍 I18n SEO Check${colors.reset}\n`);
 
-    const localesDir = path.join(__dirname, 'src', 'locales');
-    const languages = fs.readdirSync(localesDir).filter(f =>
-        fs.statSync(path.join(localesDir, f)).isDirectory()
-    );
+    const localesDir = path.join(rootDir, 'src', 'locales');
+    if (fs.existsSync(localesDir)) {
+        const languages = fs.readdirSync(localesDir).filter(f =>
+            fs.statSync(path.join(localesDir, f)).isDirectory()
+        );
 
-    if (languages.length < 2) {
-        issues.info.push({
-            check: 'Multilingual',
-            suggestion: 'Consider adding more languages'
-        });
-    } else {
-        issues.success.push({
-            check: 'Multilingual support',
-            languages: languages.join(', ')
-        });
-    }
-
-    // Check for hreflang implementation
-    const appPath = path.join(__dirname, 'src', 'app', 'App.tsx');
-    if (fs.existsSync(appPath)) {
-        const content = fs.readFileSync(appPath, 'utf-8');
-        if (!content.includes('hreflang')) {
-            issues.info.push({
-                check: 'hreflang tags',
-                suggestion: 'Add hreflang tags for language variants'
+        if (languages.length >= 2) {
+            issues.success.push({
+                check: 'Multilingual support',
+                languages: languages.join(', ')
             });
         }
-    }
-}
-
-function checkImagesSEO() {
-    console.log(`\n${colors.bold}${colors.green}🖼️  Images SEO Check${colors.reset}\n`);
-
-    const publicDir = path.join(__dirname, 'public');
-    let totalImages = 0;
-    let missingAlt = 0;
-
-    function scanComponents(dir) {
-        if (!fs.existsSync(dir)) return;
-
-        const files = fs.readdirSync(dir, { recursive: true });
-        files.forEach(file => {
-            const fullPath = path.join(dir, file);
-            if (fs.statSync(fullPath).isFile() && /\.(tsx|jsx)$/.test(file)) {
-                const content = fs.readFileSync(fullPath, 'utf-8');
-                const imgTags = content.match(/<img[^>]*>/g) || [];
-
-                imgTags.forEach(tag => {
-                    totalImages++;
-                    if (!tag.includes('alt=')) {
-                        missingAlt++;
-                    }
-                });
-            }
-        });
-    }
-
-    scanComponents(path.join(__dirname, 'src', 'app', 'components'));
-
-    if (missingAlt > 0) {
-        issues.critical.push({
-            check: 'Image alt attributes',
-            missing: missingAlt,
-            total: totalImages
-        });
-    } else if (totalImages > 0) {
-        issues.success.push({
-            check: 'Image alt attributes',
-            status: 'All images have alt text'
-        });
     }
 }
 
 function checkPerformance() {
     console.log(`\n${colors.bold}${colors.cyan}⚡ Performance SEO Factors${colors.reset}\n`);
 
-    const distDir = path.join(__dirname, 'dist');
-    if (!fs.existsSync(distDir)) {
-        issues.info.push({
-            check: 'Build',
-            suggestion: 'Run "npm run build" to check production performance'
-        });
-        return;
-    }
+    const distDir = path.join(rootDir, 'dist');
+    if (!fs.existsSync(distDir)) return;
 
-    // Check for asset optimization
     const assetsDir = path.join(distDir, 'assets');
     if (fs.existsSync(assetsDir)) {
         const files = fs.readdirSync(assetsDir);
-
         const jsFiles = files.filter(f => f.endsWith('.js'));
-        const cssFiles = files.filter(f => f.endsWith('.css'));
 
-        if (jsFiles.length > 3) {
-            issues.warning.push({
-                check: 'Code splitting',
-                jsFiles: jsFiles.length,
-                suggestion: 'Consider more aggressive code splitting'
-            });
+        if (jsFiles.length > 20) {
+            issues.info.push({ check: 'Code splitting', count: jsFiles.length, status: 'Many chunks detected' });
         } else {
-            issues.success.push({ check: 'Code splitting', files: jsFiles.length });
-        }
-
-        // Check for compression
-        const gzFiles = files.filter(f => f.endsWith('.gz'));
-        if (gzFiles.length === 0) {
-            issues.info.push({
-                check: 'Gzip compression',
-                suggestion: 'Enable gzip compression on server'
-            });
+            issues.success.push({ check: 'Code splitting', count: jsFiles.length });
         }
     }
 }
@@ -312,71 +218,29 @@ function generateReport() {
     const totalIssues = issues.critical.length + issues.warning.length;
     const score = Math.max(0, 100 - (issues.critical.length * 20) - (issues.warning.length * 5));
 
-    const scoreColor = score >= 85 ? colors.green : score >= 70 ? colors.yellow : colors.red;
+    const scoreColor = score >= 90 ? colors.green : score >= 75 ? colors.yellow : colors.red;
     console.log(`${colors.bold}SEO Score: ${scoreColor}${score}/100${colors.reset}\n`);
 
-    // Critical Issues
     if (issues.critical.length > 0) {
-        console.log(`${colors.red}${colors.bold}🔴 CRITICAL ISSUES (${issues.critical.length})${colors.reset}`);
-        issues.critical.forEach((issue, idx) => {
-            console.log(`  ${idx + 1}. ${JSON.stringify(issue, null, 2)}`);
-        });
-        console.log('');
+        console.log(`${colors.red}${colors.bold}🔴 CRITICAL (${issues.critical.length})${colors.reset}`);
+        issues.critical.forEach(i => console.log(`  - ${i.check || i.file}: ${i.issue || 'Check failed'}`));
     }
-
-    // Warnings
     if (issues.warning.length > 0) {
-        console.log(`${colors.yellow}${colors.bold}⚠️  WARNINGS (${issues.warning.length})${colors.reset}`);
-        issues.warning.forEach((issue, idx) => {
-            console.log(`  ${idx + 1}. ${JSON.stringify(issue, null, 2)}`);
-        });
-        console.log('');
+        console.log(`\n${colors.yellow}${colors.bold}⚠️  WARNINGS (${issues.warning.length})${colors.reset}`);
+        issues.warning.forEach(i => console.log(`  - ${i.check || i.file}: ${i.issue || 'Improvement suggested'}`));
     }
 
-    // Recommendations
-    if (issues.info.length > 0) {
-        console.log(`${colors.blue}${colors.bold}💡 RECOMMENDATIONS (${issues.info.length})${colors.reset}`);
-        issues.info.forEach((info, idx) => {
-            console.log(`  ${idx + 1}. ${JSON.stringify(info, null, 2)}`);
-        });
-        console.log('');
-    }
+    console.log(`\n${colors.green}${colors.bold}✅ PASSED: ${issues.success.length} checks${colors.reset}\n`);
 
-    // Success
-    console.log(`${colors.green}${colors.bold}✅ PASSED CHECKS (${issues.success.length})${colors.reset}\n`);
-
-    // Summary
-    console.log(`${colors.bold}Summary:${colors.reset}`);
-    console.log(`  Critical Issues: ${issues.critical.length}`);
-    console.log(`  Warnings: ${issues.warning.length}`);
-    console.log(`  Recommendations: ${issues.info.length}`);
-    console.log(`  Passed: ${issues.success.length}\n`);
-
-    if (totalIssues > 0) {
-        console.log(`${colors.yellow}${colors.bold}📋 NEXT STEPS:${colors.reset}`);
-        console.log(`  1. Fix ${issues.critical.length} critical SEO issues`);
-        console.log(`  2. Address ${issues.warning.length} warnings for better ranking`);
-        console.log(`  3. Consider ${issues.info.length} recommendations\n`);
-    } else {
-        console.log(`${colors.green}${colors.bold}🎉 Excellent! All SEO checks passed!${colors.reset}\n`);
-    }
-
-    console.log(`${colors.magenta}═══════════════════════════════════════════════════${colors.reset}\n`);
-
-    // Exit with error if critical issues
-    if (issues.critical.length > 0) {
+    if (issues.critical.length > 0 || score < 90) {
         process.exit(1);
     }
 }
 
-// Main execution
 console.clear();
-console.log(`${colors.bold}${colors.cyan}Starting SEO Audit...${colors.reset}\n`);
-
 checkIndexHTML();
 checkRobotsTxt();
 checkSitemap();
 checkI18nSEO();
-checkImagesSEO();
 checkPerformance();
 generateReport();

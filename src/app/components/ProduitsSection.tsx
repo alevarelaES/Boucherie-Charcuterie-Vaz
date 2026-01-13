@@ -1,7 +1,7 @@
 import { Badge } from './ui/badge';
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { OptimizedImage } from './OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 
@@ -69,7 +69,7 @@ export function ProduitsSection() {
           rotate: 5
         }}
       >
-        <img
+        <OptimizedImage
           src={settings.images.hero}
           alt=""
           className="w-full h-full object-cover blur-3xl scale-150"
@@ -124,12 +124,12 @@ export function ProduitsSection() {
                   <motion.div
                     animate={{ scale: hoveredIndex === index ? 1.1 : 1 }}
                     transition={{ duration: 0.6 }}
+                    className="w-full h-full"
                   >
-                    <ImageWithFallback
+                    <OptimizedImage
                       src={produit.image}
                       alt={produit.name}
                       className="w-full h-full object-cover"
-                      sizes="(min-width: 1024px) 350px, 80vw"
                     />
                   </motion.div>
 

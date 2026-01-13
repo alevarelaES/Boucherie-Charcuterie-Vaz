@@ -116,6 +116,14 @@
       "name": "Your name"
     },
     "submit": "Submit",
+    "status": {
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "today": "Today",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "subtitle": "Let's talk",
     "title": "Contact us today"
   },
   "metiers": {
@@ -193,5 +201,11 @@
       "specialty": "Specialty"
     },
     "title": "Our Best Products"
+  },
+  "welcome": {
+    "title": "Boucherie-Charcuterie Vaz",
+    "subtitle": "Excellence in every bite",
+    "description": "Welcome to our artisanal shop in Vallorbe, where tradition meets passion. Discover our selected meats and homemade specialties.",
+    "cta": "Enter the shop"
   }
 }

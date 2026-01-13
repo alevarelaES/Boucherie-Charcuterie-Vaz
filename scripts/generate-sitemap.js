@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
 const SITE_URL = 'https://boucherie-charcuterie-vaz.ch';
 const LANGUAGES = ['fr', 'en', 'de', 'it'];
@@ -96,3 +97,4 @@ try {
     console.error('❌ Error generating sitemap:', error);
     process.exit(1);
 }
+

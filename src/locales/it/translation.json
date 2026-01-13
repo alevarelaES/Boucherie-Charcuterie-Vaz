@@ -193,5 +193,11 @@
             "specialty": "Specialità"
         },
         "title": "La nostra selezione"
+    },
+    "welcome": {
+        "title": "Boucherie-Charcuterie Vaz",
+        "subtitle": "L'eccellenza al servizio del gusto",
+        "description": "Benvenuti nel nostro universo artigianale a Vallorbe, dove la tradizione incontra la passione. Scoprite le nostre carni selezionate e le nostre specialità della casa.",
+        "cta": "Entra nel negozio"
     }
 }

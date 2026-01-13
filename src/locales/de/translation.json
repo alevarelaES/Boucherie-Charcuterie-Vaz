@@ -193,5 +193,11 @@
             "specialty": "Spezialität"
         },
         "title": "Ausgewählte Produkte"
+    },
+    "welcome": {
+        "title": "Metzgerei Vaz",
+        "subtitle": "Exzellenz im Dienste des Geschmacks",
+        "description": "Willkommen in unserer handwerklichen Welt in Vallorbe, wo Tradition auf Leidenschaft trifft. Entdecken Sie unser ausgewähltes Fleisch und unsere hausgemachten Spezialitäten.",
+        "cta": "Das Geschäft betreten"
     }
 }

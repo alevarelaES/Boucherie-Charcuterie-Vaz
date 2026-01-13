@@ -6,51 +6,56 @@ import { useEffect } from 'react';
  * to match the premium brand identity of Boucherie Vaz.
  */
 export function CustomScrollbar() {
-    useEffect(() => {
-        // We update the styles via a style tag to ensure it's applied globally
-        const styleId = 'custom-scrollbar-styles';
-        if (!document.getElementById(styleId)) {
-            const style = document.createElement('style');
-            style.id = styleId;
-            style.innerHTML = `
-        /* Hide scrollbars globally but allow scrolling */
-        * {
-          -ms-overflow-style: none;  /* Internet Explorer 10+ */
-          scrollbar-width: none;     /* Firefox */
-        }
-        *::-webkit-scrollbar { 
-          display: none;             /* Safari and Chrome */
+  useEffect(() => {
+    // We update the styles via a style tag to ensure it's applied globally
+    const styleId = 'custom-scrollbar-styles';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.innerHTML = `
+        /* Global Smooth Scroll */
+        html {
+          scroll-behavior: smooth;
         }
 
-        /* Re-enable and style ONLY the main document scrollbar */
-        html::-webkit-scrollbar {
-          display: block;
-          width: 10px;
+        /* Webkit Scrollbar Styling */
+        ::-webkit-scrollbar {
+          width: 12px;
+          height: 12px; /* For horizontal scrolling if needed */
         }
 
-        html::-webkit-scrollbar-track {
-          background: #FAF7F2;
+        ::-webkit-scrollbar-track {
+          background: transparent; /* Clean, transparent track */
         }
 
-        html::-webkit-scrollbar-thumb {
-          background: #8B1538;
-          border: 2px solid #FAF7F2;
-          border-radius: 10px;
+        ::-webkit-scrollbar-thumb {
+          background-color: #8B1538; /* Brand Primary */
+          border-radius: 20px;       /* pill shape */
+          border: 3px solid transparent; /* Creates a 'floating' narrower effect */
+          background-clip: content-box;
+          transition: background-color 0.3s ease;
         }
 
-        html::-webkit-scrollbar-thumb:hover {
-          background: #6D102C;
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #6D102C; /* Darker on hover */
         }
 
-        /* Re-enable for Firefox on html only */
+        /* Firefox */
         html {
           scrollbar-width: thin;
-          scrollbar-color: #8B1538 #FAF7F2;
+          scrollbar-color: #8B1538 transparent;
         }
       `;
-            document.head.appendChild(style);
-        }
-    }, []);
+      document.head.appendChild(style);
+    }
 
-    return null; // This component doesn't render visual DOM elements directly
+    return () => {
+      const style = document.getElementById(styleId);
+      if (style) {
+        style.remove();
+      }
+    };
+  }, []);
+
+  return null; // This component doesn't render visual DOM elements directly
 }

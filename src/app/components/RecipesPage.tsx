@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronLeft, Clock, Users, Utensils, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
 
 interface Recipe {
@@ -109,8 +110,8 @@ export function RecipesPage() {
                             key={cat.id}
                             onClick={() => setActiveCategory(cat.id)}
                             className={`px-6 py-2 rounded-full font-sans font-bold text-sm transition-all ${activeCategory === cat.id
-                                    ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-105'
-                                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                                ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-105'
+                                : 'bg-muted text-muted-foreground hover:bg-muted/80'
                                 }`}
                         >
                             {cat.label}
@@ -129,10 +130,11 @@ export function RecipesPage() {
                             className="group cursor-pointer"
                         >
                             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/10">
-                                <img
+                                <OptimizedImage
                                     src={recipe.image}
                                     alt={recipe.title}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    priority={i < 2}
                                 />
 
                                 {/* Overlay Blur for bottom text visibility */}

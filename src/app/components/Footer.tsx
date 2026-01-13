@@ -2,6 +2,7 @@ import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { OptimizedImage } from './OptimizedImage';
 import settings from '../../settings.json';
 
 export function Footer() {
@@ -49,10 +50,11 @@ export function Footer() {
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <img
+                  <OptimizedImage
                     src={settings.images.logo}
                     alt="Boucherie Vaz"
                     className="w-full h-full object-contain"
+                    priority
                   />
                 </motion.div>
                 <div>

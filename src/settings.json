@@ -1,8 +1,8 @@
 {
     "images": {
-        "hero": "/images/Boucherie vaz Viandes.jpeg",
+        "hero": "/images/meats.jpg",
         "about": "/images/image_viande_1.jpg",
-        "logo": "/images/logo/Boucherie Charcuterie Vaz sans fond.png"
+        "logo": "/images/logo/logo-no-bg.png"
     },
     "info": {
         "phone": "+41 21 843 11 09",

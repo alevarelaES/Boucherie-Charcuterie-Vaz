@@ -1,13 +1,34 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { compression } from 'vite-plugin-compression2'
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    compression(), // Gzip
+    compression({ algorithms: ['brotliCompress'], exclude: [/\.(br)$/, /\.(gz)$/] }), // Brotli
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom', 'motion/react', 'lucide-react', 'react-i18next', 'i18next'],
+          'charts': ['recharts'],
+          'ui': [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-navigation-menu',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-select'
+          ]
+        }
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -30,7 +51,7 @@ export default defineConfig({
         },
       },
       include: ['src/app/components/**/*.{ts,tsx}', 'src/app/App.tsx'],
-      exclude: ['src/app/components/ui/**', 'src/app/components/figma/**'], // Exclude UI lib and helpers
+      exclude: ['src/app/components/ui/**', 'src/app/components/figma/**'],
     },
   },
 })

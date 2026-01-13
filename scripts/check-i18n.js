@@ -4,8 +4,9 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
-const localesDir = path.join(__dirname, 'src', 'locales');
+const localesDir = path.join(rootDir, 'src', 'locales');
 const frFile = path.join(localesDir, 'fr', 'translation.json');
 
 // Common words that are acceptable to be identical across languages
@@ -355,3 +356,4 @@ try {
     console.error('\x1b[31m❌ Error running check:\x1b[0m', err.stack);
     process.exit(1);
 }
+

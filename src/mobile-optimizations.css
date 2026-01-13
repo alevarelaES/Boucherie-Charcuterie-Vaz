@@ -13,21 +13,18 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Prevent text selection on tap targets */
-button,
-a:not([href^="mailto"]):not([href^="tel"]) {
-    -webkit-user-select: none;
-    user-select: none;
-}
+/* Improve button/link tap targets for mobile (minimum 48x48px suggest for best UX) */
+@media (max-width: 1023px) {
 
-/* Improve button/link tap targets for mobile (minimum 44x44px) */
-button,
-a {
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    button,
+    .nav-link,
+    .btn-mobile {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* GPU Acceleration for Animations */
