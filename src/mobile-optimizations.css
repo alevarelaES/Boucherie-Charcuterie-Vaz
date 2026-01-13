@@ -1,0 +1,163 @@
+/* Mobile Performance Optimizations */
+
+/* Touch Optimization */
+* {
+    -webkit-tap-highlight-color: rgba(139, 21, 56, 0.2);
+    touch-action: manipulation;
+}
+
+/* Smooth Scrolling with Performance */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent text selection on tap targets */
+button,
+a:not([href^="mailto"]):not([href^="tel"]) {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Improve button/link tap targets for mobile (minimum 44x44px) */
+button,
+a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* GPU Acceleration for Animations */
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+/* Optimize images for mobile */
+img {
+    max-width: 100%;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Prevent layout shift during image load */
+img[width][height] {
+    aspect-ratio: attr(width) / attr(height);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+
+    /* Larger tap targets on mobile */
+    button,
+    a {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    /* Prevent zoom on input focus (iOS) */
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+
+    /* Optimize font rendering on mobile */
+    body {
+        text-rendering: optimizeSpeed;
+    }
+
+    /* Reduce animation complexity on mobile */
+    * {
+        animation-timing-function: ease-in-out;
+    }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+
+    /* Prevent rubber banding */
+    body {
+        overscroll-behavior-y: none;
+    }
+
+    /* Fix iOS input zoom */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px;
+    }
+}
+
+/* Android specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+
+    /* Improve tap response */
+    * {
+        -webkit-tap-highlight-color: rgba(139, 21, 56, 0.15);
+    }
+}
+
+/* Optimize for dark mode */
+@media (prefers-color-scheme: dark) {
+    img:not([src*=".svg"]) {
+        filter: brightness(0.9);
+    }
+}
+
+/* Performance: Use GPU for specific elements */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Lazy load placeholder styles */
+.lazy-loading {
+    background: linear-gradient(110deg, #f3f4f6 8%, #e5e7eb 18%, #f3f4f6 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* Optimize SVG rendering */
+svg {
+    shape-rendering: geometricPrecision;
+}
+
+/* Improve scrolling performance */
+.scroll-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+}
+
+/* Critical CSS - Keep above the fold content styled */
+.above-fold {
+    contain: layout style paint;
+}
