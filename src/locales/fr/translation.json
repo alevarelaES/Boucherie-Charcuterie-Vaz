@@ -33,29 +33,43 @@
     "saturday": "Samedi",
     "sunday": "Dimanche"
   },
+  "rights": "Tous droits réservés.",
+  "tagline": "L'art de la viande depuis 2025",
   "footer": {
-    "contact": "Contact",
-    "description": "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.",
-    "hours": "Horaires",
-    "legal": "Mentions légales",
-    "legalContent": {
-      "hosting": "Hébergement",
-      "hostingText": "Infomaniak Network SA\nRue Eugène-Marziano 25\n1227 Les Acacias, Suisse",
-      "owner": "Propriétaire & Responsable",
-      "ownerText": "Boucherie-Charcuterie Vaz\nRue du Faubourg 5\n1337 Vallorbe, Suisse\nCHE-XXX.XXX.XXX (en cours)",
-      "title": "Mentions Légales"
-    },
-    "navigation": "Navigation",
-    "privacy": "Politique de confidentialité",
-    "privacyContent": {
-      "dataTitle": "Collecte des données",
-      "dataText": "Nous ne collectons aucune donnée personnelle via des cookies tiers. Les seules données transmises sont celles que vous nous envoyez volontairement via le formulaire de contact par email.",
-      "title": "Confidentialité"
-    },
-    "rights": "Tous droits réservés.",
     "tagline": "L'art de la viande depuis 2025",
-    "terms": "CGV"
+    "description": "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "hours": "Horaires",
+    "rights": "Tous droits réservés."
   },
+  "terms": "CGV",
+  "cookie": {
+    "title": "Respect de votre vie privée",
+    "description": "Nous utilisons des cookies pour optimiser votre expérience et analyser notre trafic. En continuant, vous acceptez l'usage des cookies nécessaires au bon fonctionnement du site.",
+    "accept": "Tout accepter",
+    "decline": "Refuser",
+    "settings": "Paramètres"
+  },
+  "legalContent": {
+    "title": "Mentions Légales",
+    "owner": "Propriétaire du site",
+    "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSuisse\nEmail : boucherievaz@gmail.com\nTéléphone : +41 21 843 11 09",
+    "hosting": "Hébergement",
+    "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSuisse",
+    "termsTitle": "Conditions Générales",
+    "termsText": "Nos produits étant des denrées périssables, les retours ne sont pas acceptés après la vente, sauf en cas de défaut de qualité manifeste constaté au moment du retrait ou de la livraison."
+  },
+  "privacyContent": {
+    "title": "Politique de Confidentialité",
+    "dataTitle": "Protection des données",
+    "dataText": "Conformément à la nLPD (nouvelle Loi fédérale sur la Protection des Données en Suisse), nous nous engageons à protéger vos données personnelles. Les données collectées via notre formulaire de contact ne sont utilisées que pour répondre à vos demandes et ne sont jamais transmises à des tiers.",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "Nous utilisons uniquement des cookies techniques nécessaires au bon fonctionnement du site (par exemple pour mémoriser votre choix de langue ou votre consentement aux cookies). Nous n'utilisons pas de cookies publicitaires ou de traçage tiers.",
+    "rightsTitle": "Vos droits",
+    "rightsText": "Vous avez le droit de demander l'accès à vos données, leur correction ou leur suppression. Pour toute question, contactez-nous à l'adresse email indiquée dans les mentions légales."
+  },
+  "back": "Retour",
   "hero": {
     "badge": "Ouvert aujourd'hui",
     "cta": {

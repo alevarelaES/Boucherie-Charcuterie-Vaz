@@ -1,13 +1,15 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useTranslation } from 'react-i18next';
+import settings from '../../settings.json';
 
 export function Hero() {
   const { t } = useTranslation();
   const { scrollY } = useScroll();
 
   // Parallax effect for background
-  const yBackend = useTransform(scrollY, [0, 800], [0, 400]);
+  const yBackend = useTransform(scrollY, [0, 1000], [0, 500]);
+  const scaleHero = useTransform(scrollY, [0, 1000], [1.05, 1.2]);
   const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
 
   const scrollToContent = () => {
@@ -22,17 +24,17 @@ export function Hero() {
       {/* Dynamic Background with Parallax */}
       <motion.div
         className="absolute inset-0 z-0"
-        style={{ y: yBackend }}
+        style={{ y: yBackend, scale: scaleHero }}
       >
         <ImageWithFallback
-          src="/images/Boucherie vaz Viandes.jpeg"
+          src={settings.images.hero}
           alt={t('hero.imageAlt', "Boucherie Vaz - L'art de la viande")}
           className="w-full h-full object-cover scale-105"
           loading="eager"
         />
         {/* Gradients pour lisibilité optimale */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60" />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/80" />
       </motion.div>
 
       {/* Hero Content */}

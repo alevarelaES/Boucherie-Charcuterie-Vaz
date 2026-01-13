@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import settings from '../../settings.json';
 
 export function ContactSection() {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ export function ContactSection() {
 
     const subject = encodeURIComponent(`${t('contact.emailSubject', 'Message depuis le site')} - ${name}`);
     const body = encodeURIComponent(`${t('contact.emailBody.name', 'Nom')}: ${name}\nEmail: ${email}\n\n${t('contact.emailBody.message', 'Message')}:\n${message}`);
-    window.location.href = `mailto:boucherievaz@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${settings.info.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -66,9 +67,9 @@ export function ContactSection() {
               </h3>
               <div className="space-y-3">
                 {[
-                  { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: '+41 (0)21 843 11 09', href: 'tel:+41218431109' },
-                  { icon: Mail, label: t('contact.labels.email', 'Email'), value: 'boucherievaz@gmail.com', href: 'mailto:boucherievaz@gmail.com' },
-                  { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: 'Rue du faubourg 5, 1337 Vallorbe', href: 'https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe' },
+                  { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: settings.info.phone, href: `tel:${settings.info.phoneRaw}` },
+                  { icon: Mail, label: t('contact.labels.email', 'Email'), value: settings.info.email, href: `mailto:${settings.info.email}` },
+                  { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: settings.info.address, href: settings.info.addressMap },
                 ].map((contact, index) => (
                   <motion.a
                     key={index}
@@ -100,7 +101,7 @@ export function ContactSection() {
                 </p>
                 <div className="flex gap-4">
                   <motion.a
-                    href="https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/"
+                    href={settings.info.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
@@ -110,7 +111,7 @@ export function ContactSection() {
                     <Facebook className="w-6 h-6" />
                   </motion.a>
                   <motion.a
-                    href="https://www.instagram.com/boucherievaz/"
+                    href={settings.info.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"

@@ -1,64 +1,32 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Clock, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import settings from '../../settings.json';
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
-  const [modalContent, setModalContent] = useState<{ title: string; content: React.ReactNode } | null>(null);
 
   const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/boucherievaz/', label: 'Instagram' },
-    { icon: Mail, href: 'mailto:boucherievaz@gmail.com', label: 'Email' }
+    { icon: Facebook, href: settings.info.facebook, label: 'Facebook' },
+    { icon: Instagram, href: settings.info.instagram, label: 'Instagram' },
+    { icon: Mail, href: `mailto:${settings.info.email}`, label: 'Email' }
   ];
 
   const quickLinks = [
-    { label: t('nav.home', 'Accueil'), href: '#accueil' },
-    { label: t('nav.about', 'À propos'), href: '#a-propos' },
-    { label: t('nav.products', 'Produits'), href: '#produits' },
-    { label: t('nav.contact', 'Contact'), href: '#contact' }
+    { label: t('nav.home'), href: '#accueil' },
+    { label: t('nav.about'), href: '#a-propos' },
+    { label: t('nav.products'), href: '#produits' },
+    { label: t('nav.contact'), href: '#contact' }
   ];
 
   const hours = [
-    { jour: t('days.monThu', 'Lun-Jeu'), heures: '07:00-12:00 | 13:30-18:00' },
-    { jour: t('days.friday', 'Vendredi'), heures: '07:00-12:00 | 13:30-18:00' },
-    { jour: t('days.saturday', 'Samedi'), heures: '07:00-13:00' },
-    { jour: t('days.sunday', 'Dimanche'), heures: t('closed', 'Fermé'), closed: true },
+    { jour: t('days.monThu'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.friday'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.saturday'), heures: '07:00-13:00' },
+    { jour: t('days.sunday'), heures: t('closed'), closed: true },
   ];
-
-  const openLegal = () => {
-    setModalContent({
-      title: t('footer.legalContent.title'),
-      content: (
-        <div className="space-y-6">
-          <section>
-            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.legalContent.owner')}</h4>
-            <p className="whitespace-pre-line leading-relaxed">{t('footer.legalContent.ownerText')}</p>
-          </section>
-          <section>
-            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.legalContent.hosting')}</h4>
-            <p className="whitespace-pre-line leading-relaxed">{t('footer.legalContent.hostingText')}</p>
-          </section>
-        </div>
-      )
-    });
-  };
-
-  const openPrivacy = () => {
-    setModalContent({
-      title: t('footer.privacyContent.title'),
-      content: (
-        <div className="space-y-6">
-          <section>
-            <h4 className="font-bold text-primary mb-2 text-lg">{t('footer.privacyContent.dataTitle')}</h4>
-            <p className="leading-relaxed">{t('footer.privacyContent.dataText')}</p>
-          </section>
-        </div>
-      )
-    });
-  };
 
   return (
     <footer className="bg-foreground text-background relative overflow-hidden font-sans">
@@ -82,7 +50,7 @@ export function Footer() {
                   transition={{ duration: 0.6 }}
                 >
                   <img
-                    src="/images/logo/Boucherie Charcuterie Vaz sans fond.png"
+                    src={settings.images.logo}
                     alt="Boucherie Vaz"
                     className="w-full h-full object-contain"
                   />
@@ -92,12 +60,12 @@ export function Footer() {
                     Boucherie Vaz
                   </p>
                   <p className="text-base md:text-lg text-background/75 font-medium">
-                    {t('footer.tagline', "L'art de la viande depuis 2025")}
+                    {t('footer.tagline')}
                   </p>
                 </div>
               </div>
               <p className="text-base md:text-lg text-background/80 leading-relaxed mb-6 max-w-md font-normal">
-                {t('footer.description', "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.")}
+                {t('footer.description')}
               </p>
 
               {/* Social Links */}
@@ -125,7 +93,7 @@ export function Footer() {
               transition={{ delay: 0.1 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
-                {t('footer.navigation', 'Navigation')}
+                {t('footer.navigation')}
               </h3>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
@@ -133,7 +101,7 @@ export function Footer() {
                     key={index}
                     whileHover={{ x: 5 }}
                   >
-                    <a href={link.href} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium">
+                    <a href={`/${i18n.language}/${link.href}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium">
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.label}
                     </a>
@@ -150,31 +118,31 @@ export function Footer() {
               transition={{ delay: 0.2 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
-                {t('footer.contact', 'Contact')}
+                {t('footer.contact')}
               </h3>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe"
+                    href={settings.info.addressMap}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base md:text-lg text-background/80 hover:text-primary transition-colors font-medium"
                   >
-                    Rue du faubourg 5<br />
-                    1337 Vallorbe
+                    {settings.info.address.split(',')[0]}<br />
+                    {settings.info.address.split(',')[1]}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href="tel:+41218431109" className="text-base md:text-lg text-background/85 hover:text-primary transition-colors font-medium">
-                    +41 21 843 11 09
+                  <a href={`tel:${settings.info.phoneRaw}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors font-medium">
+                    {settings.info.phone}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href="mailto:boucherievaz@gmail.com" className="text-base md:text-lg text-background/85 hover:text-primary transition-colors break-all font-medium">
-                    boucherievaz@gmail.com
+                  <a href={`mailto:${settings.info.email}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors break-all font-medium">
+                    {settings.info.email}
                   </a>
                 </li>
               </ul>
@@ -192,7 +160,7 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-6 h-6 text-primary" />
               <h3 className="text-base md:text-lg font-bold uppercase tracking-wider font-serif">
-                {t('footer.hours', 'Horaires')}
+                {t('footer.hours')}
               </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-sm md:text-base text-background/60">
@@ -216,23 +184,23 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-base md:text-lg text-background/60 font-normal">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base text-background/60 font-normal">
               <p>
-                © {currentYear} Boucherie Vaz. {t('footer.rights', 'Tous droits réservés.')}
+                © {currentYear} Boucherie Vaz. {t('footer.rights')}
               </p>
               <div className="flex gap-6">
-                <button
-                  onClick={openLegal}
+                <Link
+                  to={`/${i18n.language}/mentions-legales`}
                   className="hover:text-primary transition-colors cursor-pointer"
                 >
-                  {t('footer.legal', 'Mentions légales')}
-                </button>
-                <button
-                  onClick={openPrivacy}
+                  {t('legalContent.title')}
+                </Link>
+                <Link
+                  to={`/${i18n.language}/politique-confidentialite`}
                   className="hover:text-primary transition-colors cursor-pointer"
                 >
-                  {t('footer.privacy', 'Politique de confidentialité')}
-                </button>
+                  {t('privacyContent.title')}
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -242,40 +210,6 @@ export function Footer() {
       {/* Decorative Background Elements */}
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-0" />
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0" />
-
-      {/* Legal Modal */}
-      <AnimatePresence>
-        {modalContent && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setModalContent(null)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl bg-background border border-border rounded-2xl shadow-2xl z-[101] overflow-hidden"
-            >
-              <div className="p-6 border-b border-border flex justify-between items-center bg-muted/30">
-                <h3 className="text-2xl font-bold font-serif text-foreground">{modalContent.title}</h3>
-                <button
-                  onClick={() => setModalContent(null)}
-                  className="p-2 hover:bg-muted rounded-full transition-colors text-foreground"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-              <div className="p-8 max-h-[70vh] overflow-y-auto text-foreground/80 font-sans text-lg leading-relaxed">
-                {modalContent.content}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </footer>
   );
 }

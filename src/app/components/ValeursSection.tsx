@@ -2,6 +2,7 @@ import { Heart, Award, Leaf, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useTranslation } from 'react-i18next';
+import settings from '../../settings.json';
 
 export function ValeursSection() {
   const { t } = useTranslation();
@@ -80,7 +81,7 @@ export function ValeursSection() {
               transition={{ duration: 0.5 }}
             >
               <ImageWithFallback
-                src="/images/image_viande_1.jpg"
+                src={settings.images.about}
                 alt={t('about.imageAlt', 'Boucherie Vaz - Notre histoire')}
                 className="w-full h-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"

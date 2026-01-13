@@ -1,0 +1,197 @@
+{
+    "about": {
+        "badge": "La nostra storia",
+        "engagement": "Più che una semplice macelleria, siamo un luogo di fiducia, dove si viene tanto per la qualità eccezionale dei nostri prodotti quanto per condividere la nostra passione per la carne.",
+        "intro": "La Macelleria Vaz è nata nel 2025 con un'idea chiara: predicare prima di tutto la qualità. Ogni carne che offriamo è frutto di un saper fare artigianale e scelta con esigenza.",
+        "listTitle": "Da noi troverete",
+        "promiseText": "Situata nel cuore della tradizione macellaia, la nostra boutique è il vostro nuovo indirizzo gourmet a Vallorbe. Selezioniamo le nostre carni con la massima cura per garantire freschezza, gusto e tenerezza.",
+        "promiseTitle": "La nostra Promessa",
+        "title": "Valori & Territorio",
+        "valeurs": {
+            "animal": {
+                "desc": "Allevati nel rispetto del benessere animale e delle tradizioni locali.",
+                "title": "Rispetto dell'animale"
+            },
+            "knowhow": {
+                "desc": "Artigianato tramandato di generazione in generazione.",
+                "title": "Saper fare"
+            },
+            "quality": {
+                "desc": "Selezione rigorosa che garantisce tracciabilità ed eccellenza.",
+                "title": "Qualità Premium"
+            },
+            "terroir": {
+                "desc": "Filiera corta e produttori della nostra regione.",
+                "title": "Territorio Locale"
+            }
+        }
+    },
+    "closed": "Chiuso",
+    "days": {
+        "friday": "Venerdì",
+        "monThu": "Lun-Gio",
+        "saturday": "Sabato",
+        "sunday": "Domenica"
+    },
+    "rights": "Tutti i diritti riservati.",
+    "tagline": "L'arte della carne dal 2025",
+    "footer": {
+        "tagline": "L'arte della carne dal 2025",
+        "description": "Una macelleria artigianale nel cuore di Vallorbe, dove tradizione ed eccellenza si incontrano per offrirvi il meglio della gastronomia locale.",
+        "navigation": "Navigazione",
+        "contact": "Contatto",
+        "hours": "Orari",
+        "rights": "Tutti i diritti riservati."
+    },
+    "terms": "CGV",
+    "cookie": {
+        "title": "Rispetto della vostra privacy",
+        "description": "Utilizziamo i cookie per ottimizzare la vostra esperienza e analizzare il nostro traffico. Continuando, accettate l'uso dei cookie necessari al buon funzionamento del sito.",
+        "accept": "Accetta tutto",
+        "decline": "Rifiuta",
+        "settings": "Impostazioni"
+    },
+    "legalContent": {
+        "title": "Note Legali",
+        "owner": "Proprietario del sito",
+        "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSvizzera\nEmail : boucherievaz@gmail.com\nTelefono : +41 21 843 11 09",
+        "hosting": "Hosting",
+        "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSvizzera",
+        "termsTitle": "Condizioni Generali",
+        "termsText": "Dato che i nostri prodotti sono beni deperibili, i resi non sont accettati dopo la vendita, tranne in caso di palese difetto di qualità riscontrato al momento del ritiro o della consegna."
+    },
+    "privacyContent": {
+        "title": "Informativa sulla Privacy",
+        "dataTitle": "Protezione dei dati",
+        "dataText": "In conformità con la nLPD (nuova Legge federale sulla Protezione dei Dati in Svizzera), ci impegniamo a proteggere i vostri dati personali. I dati raccolti tramite il nostro modulo di contatto vengono utilizzati solo per rispondere alle vostre richieste e non vengono mai trasmessi a terzi.",
+        "cookiesTitle": "Cookie",
+        "cookiesText": "Utilizziamo solo cookie tecnici necessari al corretto funzionamento del sito (ad esempio per memorizzare la vostra scelta della lingua o il vostro consenso ai cookie). Non utilizziamo cookie pubblicitari o di tracciamento di terze parti.",
+        "rightsTitle": "I diritti",
+        "rightsText": "Avete il diritto di richiedere l'accesso ai vostri dati, la loro rettifica o cancellazione. Per qualsiasi domanda, contattateci all'indirizzo email indicato nelle note legali."
+    },
+    "back": "Indietro",
+    "hero": {
+        "badge": "Aperto oggi",
+        "cta": {
+            "contact": "Contattateci subito",
+            "products": "Scopri i nostri prodotti"
+        },
+        "description": "Eccellenza artigianale e carni d'eccezione a",
+        "imageAlt": "Boucherie Vaz - L'arte della carne",
+        "scroll": "Scorrere",
+        "titleHighlight": "proprio vicino a voi",
+        "titleInitial": "La macelleria"
+    },
+    "menu": {
+        "title": "Menu"
+    },
+    "contact": {
+        "alertFill": "Si prega di compilare tutti i campi.",
+        "days": {
+            "friday": "Venerdì",
+            "monday": "Lunedì",
+            "saturday": "Sabato",
+            "sunday": "Domenica",
+            "thursday": "Giov.",
+            "tuesday": "Mart.",
+            "wednesday": "Mercoledì"
+        },
+        "emailBody": {
+            "message": "Messaggio",
+            "name": "Nome"
+        },
+        "emailSubject": "Messaggio dal sito web",
+        "followUs": "Seguici",
+        "formTitle": "Inviaci un messaggio",
+        "hoursTitle": "Orari di apertura",
+        "infoTitle": "Informazioni",
+        "labels": {
+            "address": "Indirizzo",
+            "email": "Email",
+            "phone": "Telefono"
+        },
+        "placeholders": {
+            "email": "La tua email",
+            "message": "Il tuo messaggio",
+            "name": "Il tuo nome"
+        },
+        "submit": "Spedire",
+        "title": "Contattaci subito"
+    },
+    "metiers": {
+        "badge": "La nostra azienda",
+        "boucherie": {
+            "desc": "Carni selezionate",
+            "detail": "Una selezione rigorosa di carni fresche e saporite, preparate con cura ogni giorno per garantire gusto e qualità eccezionale.",
+            "stats": {
+                "label": "Origine Svizzera"
+            },
+            "title": "Macelleria"
+        },
+        "charcuterie": {
+            "desc": "Saper fare fatto in casa",
+            "detail": "Ricette tradizionali tramandate di generazione in generazione, sviluppate nel rispetto dell'artigianato locale e del territorio.",
+            "stats": {
+                "label": "Specialità della casa"
+            },
+            "title": "Salumeria"
+        },
+        "more": "Scopri di più",
+        "subtitle": "Una selezione fresca e saporita, preparata ogni giorno con esigenza affinché tutto vi arrivi senza sforzo: qualità, consulenza e gusto.",
+        "title": "Carni, salumi, gastronomia",
+        "traiteur": {
+            "desc": "Servizi su misura",
+            "detail": "Selezioni preparate su misura per sublimare i vostri momenti di convivialità: consulenza esperta, preparazioni speciali e sapori del territorio per ogni occasione.",
+            "stats": {
+                "label": "Soddisfazione"
+            },
+            "title": "Gastronomia"
+        }
+    },
+    "nav": {
+        "about": "Chi siamo",
+        "contact": "Contattaci",
+        "home": "Benvenuto",
+        "products": "Prodotti",
+        "reserve": "Prenotare",
+        "scrollTop": "Torna in cima",
+        "toggleMenu": "Apri menu"
+    },
+    "products": {
+        "badge": "La nostra selezione",
+        "description": "Scoprite carni fresche e saporite, preparate ogni giorno per garantire gusto e qualità.",
+        "itemDesc": "Scoprite le nostre selezioni fresche e saporite, preparate con cura.",
+        "items": {
+            "chicken": {
+                "name": "Pollo tenero e saporito",
+                "desc": "Una carne tenera e succosa, ideale per le vostre grigliate o piatti in umido."
+            },
+            "heifer": {
+                "name": "Manza frollata per amatori",
+                "desc": "Selezionata con cura per la sua tenerezza e marezzatura eccezionale."
+            },
+            "horse": {
+                "name": "Carne di cavallo ricca di gusto",
+                "desc": "Una carne magra e saporita, apprezzata per le sue qualità nutritive."
+            },
+            "lamb": {
+                "name": "Agnello dai sapori delicati",
+                "desc": "Pezzi scelti per la loro finezza e il loro gusto sottile e profumato."
+            },
+            "order": {
+                "name": "Carni su ordinazione",
+                "desc": "Taglieri di salumi e tagli specifici per tutti i vostri eventi."
+            },
+            "pork": {
+                "name": "Maiale di qualità superiore",
+                "desc": "Una qualità svizzera impeccabile, perfetta per tutte le vostre preparazioni."
+            }
+        },
+        "tags": {
+            "homemade": "Fatto in casa",
+            "premium": "Premium",
+            "specialty": "Specialità"
+        },
+        "title": "La nostra selezione"
+    }
+}

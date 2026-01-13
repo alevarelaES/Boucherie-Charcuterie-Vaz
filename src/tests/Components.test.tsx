@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect, vi } from 'vitest';
 import { Header } from '../app/components/Header';
 import { Footer } from '../app/components/Footer';
@@ -6,7 +7,6 @@ import { Hero } from '../app/components/Hero';
 import { ContactSection } from '../app/components/ContactSection';
 import { ValeursSection } from '../app/components/ValeursSection';
 import { ProduitsSection } from '../app/components/ProduitsSection';
-import { MetiersSection } from '../app/components/MetiersSection';
 import '../i18n';
 
 // Mock scroll for Header
@@ -19,14 +19,22 @@ describe('Components Integration', () => {
 
     describe('Header', () => {
         it('renders navigation links', () => {
-            render(<Header />);
+            render(
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
+            );
             expect(screen.getByText('Accueil')).toBeInTheDocument();
             expect(screen.getByText('Produits')).toBeInTheDocument();
             expect(screen.getByText('Contact')).toBeInTheDocument();
         });
 
         it('changes style on scroll', async () => {
-            render(<Header />);
+            render(
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
+            );
             const header = screen.getByRole('banner');
             expect(header).toHaveClass('bg-transparent');
             mockScroll(100);
@@ -40,7 +48,11 @@ describe('Components Integration', () => {
         });
 
         it('opens mobile menu', async () => {
-            render(<Header />);
+            render(
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
+            );
             // Force mobile view if possible, or trigger button
             // Button is hidden on desktop, but in JSDOM everything is visible unless media queries match (mocks needed)
             // We stubbed matchMedia in setup, so it returns false mostly.
@@ -63,15 +75,6 @@ describe('Components Integration', () => {
         it('renders main title', () => {
             render(<Hero />);
             expect(screen.getByText(/La boucherie/i)).toBeInTheDocument();
-        });
-    });
-
-    describe('MetiersSection', () => {
-        it('renders professions', () => {
-            render(<MetiersSection />);
-            expect(screen.getByText('Boucherie')).toBeInTheDocument();
-            expect(screen.getByText('Charcuterie')).toBeInTheDocument();
-            expect(screen.getByText('Traiteur')).toBeInTheDocument();
         });
     });
 

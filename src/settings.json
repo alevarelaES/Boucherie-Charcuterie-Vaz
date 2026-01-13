@@ -1,0 +1,42 @@
+{
+    "images": {
+        "hero": "/images/Boucherie vaz Viandes.jpeg",
+        "about": "/images/image_viande_1.jpg",
+        "logo": "/images/logo/Boucherie Charcuterie Vaz sans fond.png"
+    },
+    "info": {
+        "phone": "+41 21 843 11 09",
+        "phoneRaw": "+41218431109",
+        "email": "boucherievaz@gmail.com",
+        "address": "Rue du faubourg 5, 1337 Vallorbe",
+        "addressMap": "https://www.google.com/maps/search/?api=1&query=Rue+du+faubourg+5,+1337+Vallorbe",
+        "facebook": "https://www.facebook.com/people/Boucherie-Charcuterie-Vaz/61579169247905/",
+        "instagram": "https://www.instagram.com/boucherievaz/"
+    },
+    "products": [
+        {
+            "id": "chicken",
+            "image": "/images/products/chicken.png?v=2"
+        },
+        {
+            "id": "heifer",
+            "image": "/images/products/beef.png?v=2"
+        },
+        {
+            "id": "lamb",
+            "image": "/images/products/lamb.png?v=2"
+        },
+        {
+            "id": "pork",
+            "image": "/images/products/pork.png?v=2"
+        },
+        {
+            "id": "horse",
+            "image": "/images/products/horse.png?v=2"
+        },
+        {
+            "id": "order",
+            "image": "/images/products/order.png?v=3"
+        }
+    ]
+}

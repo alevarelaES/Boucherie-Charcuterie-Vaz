@@ -1,0 +1,197 @@
+{
+    "about": {
+        "badge": "Unsere Geschichte",
+        "engagement": "Mehr als nur eine Metzgerei sind wir ein Ort des Vertrauens, an dem man ebenso wegen der außergewöhnlichen Qualität unserer Produkte wie wegen unserer Leidenschaft für Fleisch zusammenkommt.",
+        "intro": "Boucherie Vaz wurde 2025 mit einer klaren Idee gegründet: Qualität über alles. Jedes Fleisch, das wir anbieten, stammt aus handwerklichem Können und wird mit höchsten Standards ausgewählt.",
+        "listTitle": "Bei uns finden Sie",
+        "promiseText": "Im Herzen der Metzgertradition gelegen, ist unser Geschäft Ihre neue Gourmet-Adresse in Vallorbe. Wir wählen unser Fleisch mit größter Sorgfalt aus, um Frische, Geschmack und Zartheit zu garantieren.",
+        "promiseTitle": "Unser Versprechen",
+        "title": "Werte & Terroir",
+        "valeurs": {
+            "animal": {
+                "desc": "Aufgewachsen mit Respekt vor dem Tierwohl und lokalen Traditionen.",
+                "title": "Respekt vor dem Tier"
+            },
+            "knowhow": {
+                "desc": "Handwerk, das von Generation zu Generation weitergegeben wird.",
+                "title": "Fachwissen"
+            },
+            "quality": {
+                "desc": "Strenge Auswahl, die Rückverfolgbarkeit und Exzellenz garantiert.",
+                "title": "Premium Qualität"
+            },
+            "terroir": {
+                "desc": "Kurze Wege und Produzenten aus unserer Region.",
+                "title": "Lokales Terroir"
+            }
+        }
+    },
+    "closed": "Ruhe",
+    "days": {
+        "friday": "Freitag",
+        "monThu": "Mon-Don",
+        "saturday": "Samstag",
+        "sunday": "Sonntag"
+    },
+    "rights": "Alle Rechte vorbehalten.",
+    "tagline": "Die Kunst des Fleisches seit 2025",
+    "footer": {
+        "tagline": "Die Kunst des Fleisches seit 2025",
+        "description": "Eine handwerkliche Metzgerei im Herzen von Vallorbe, wo Tradition und Exzellenz aufeinandertreffen, um Ihnen das Beste der lokalen Gastronomie zu bieten.",
+        "navigation": "Navigation",
+        "contact": "Kontakt",
+        "hours": "Zeiten",
+        "rights": "Alle Rechte vorbehalten."
+    },
+    "terms": "AGB",
+    "cookie": {
+        "title": "Respekt für Ihre Privatsphäre",
+        "description": "Wir verwenden Cookies, um Ihr Erlebnis zu optimieren und unseren Datenverkehr zu analysieren. Durch die Fortsetzung akzeptieren Sie die Verwendung von Cookies, die für das ordnungsgemäße Funktionieren der Website erforderlich sind.",
+        "accept": "Alle akzeptieren",
+        "decline": "Ablehnen",
+        "settings": "Einstellungen"
+    },
+    "legalContent": {
+        "title": "Rechtliche Hinweise",
+        "owner": "Website-Besitzer",
+        "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSchweiz\nE-Mail: boucherievaz@gmail.com\nTelefon: +41 21 843 11 09",
+        "hosting": "Hosting",
+        "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSchweiz",
+        "termsTitle": "Bedingungen",
+        "termsText": "Da es sich bei unseren Produkten um verderbliche Waren handelt, ist eine Rückgabe nach dem Verkauf nicht möglich, es sei denn, es liegt ein offensichtlicher Qualitätsmangel vor, der zum Zeitpunkt der Abholung oder Lieferung festgestellt wird."
+    },
+    "privacyContent": {
+        "title": "Datenschutzrichtlinie",
+        "dataTitle": "Schutz Ihrer Daten",
+        "dataText": "In Übereinstimmung mit dem nDSG (neues Bundesgesetz über den Datenschutz in der Schweiz) verpflichten wir uns zum Schutz Ihrer persönlichen Daten. Die über unser Kontaktformular erhobenen Daten werden nur zur Beantwortung Ihrer Anfragen verwendet und niemals an Dritte weitergegeben.",
+        "cookiesTitle": "Cookies",
+        "cookiesText": "Wir verwenden nur technische Cookies, die für das ordnungsgemäße Funktionieren der Website erforderlich sind (zum Beispiel, um Ihre Sprachwahl oder Ihre Zustimmung zu Cookies zu speichern). Wir verwenden keine Werbe- oder Drittanbieter-Tracking-Cookies.",
+        "rightsTitle": "Ihre Rechte",
+        "rightsText": "Sie haben das Recht, Auskunft über Ihre Daten sowie deren Berichtigung oder Löschung zu verlangen. Bei Fragen wenden Sie sich bitte an die im Impressum angegebene E-Mail-Adresse."
+    },
+    "back": "Zurück",
+    "hero": {
+        "badge": "Heute geöffnet",
+        "cta": {
+            "contact": "Schreiben Sie uns",
+            "products": "Unsere Produkte entdecken"
+        },
+        "description": "Handwerkliche Exzellenz und außergewöhnliches Fleisch in",
+        "imageAlt": "Boucherie Vaz - Die Kunst des Fleisches",
+        "scroll": "Scrollen",
+        "titleHighlight": "ganz nah bei Ihnen",
+        "titleInitial": "Die Metzgerei"
+    },
+    "menu": {
+        "title": "Menü"
+    },
+    "contact": {
+        "alertFill": "Bitte füllen Sie alle Felder aus.",
+        "days": {
+            "friday": "Freitag",
+            "monday": "Montag",
+            "saturday": "Samstag",
+            "sunday": "Sonntag",
+            "thursday": "Donner",
+            "tuesday": "Diens.",
+            "wednesday": "Mittwoch"
+        },
+        "emailBody": {
+            "message": "Nachricht",
+            "name": "Name"
+        },
+        "emailSubject": "Nachricht von der Website",
+        "followUs": "Folgen Sie uns",
+        "formTitle": "Senden Sie uns eine Nachricht",
+        "hoursTitle": "Öffnungszeiten",
+        "infoTitle": "Informationen",
+        "labels": {
+            "address": "Adresse",
+            "email": "E-Mail",
+            "phone": "Telefon"
+        },
+        "placeholders": {
+            "email": "Ihre E-Mail",
+            "message": "Ihre Nachricht",
+            "name": "Ihr Name"
+        },
+        "submit": "Senden",
+        "title": "Schreiben Sie uns"
+    },
+    "metiers": {
+        "badge": "Unser Unternehmen",
+        "boucherie": {
+            "desc": "Ausgewähltes Fleisch",
+            "detail": "Eine strenge Auswahl an frischem und schmackhaftem Fleisch, das jeden Tag mit Sorgfalt zubereitet wird, um Geschmack und außergewöhnliche Qualität zu garantieren.",
+            "stats": {
+                "label": "Schweizer Herkunft"
+            },
+            "title": "Metzgerei"
+        },
+        "charcuterie": {
+            "desc": "Hausgemachtes Know-how",
+            "detail": "Traditionelle Rezepte, die von Generation zu Generation weitergegeben werden, entwickelt mit Respekt vor lokalem Handwerk und Terroir.",
+            "stats": {
+                "label": "Hausspezialitäten"
+            },
+            "title": "Feinkost"
+        },
+        "more": "Mehr erfahren",
+        "subtitle": "Eine frische und schmackhafte Auswahl, die jeden Tag mit hohen Standards zubereitet wird, damit alles mühelos zu Ihnen kommt: Qualität, Beratung und Geschmack.",
+        "title": "Fleisch, Wurstwaren, Catering",
+        "traiteur": {
+            "desc": "Gastronomieservice",
+            "detail": "Maßgeschneiderte Auswahl, um Ihre Momente der Geselligkeit zu verschönern: Expertenberatung, spezielle Zubereitungen und Aromen der Region für jeden Anlass.",
+            "stats": {
+                "label": "Zufriedenheit"
+            },
+            "title": "Catering"
+        }
+    },
+    "nav": {
+        "about": "Über uns",
+        "contact": "Kontakt",
+        "home": "Startseite",
+        "products": "Produkte",
+        "reserve": "Reservieren",
+        "scrollTop": "Nach oben",
+        "toggleMenu": "Menü öffnen"
+    },
+    "products": {
+        "badge": "Unsere Auswahl",
+        "description": "Entdecken Sie frisches und schmackhaftes Fleisch, das jeden Tag zubereitet wird, um Geschmack und Qualität zu garantieren.",
+        "itemDesc": "Entdecken Sie unsere frische und schmackhafte Auswahl, die mit Sorgfalt zubereitet wird.",
+        "items": {
+            "chicken": {
+                "name": "Zartes und schmackhaftes Hähnchen",
+                "desc": "Zartes und saftiges Fleisch, ideal für Ihre Grillabende oder Schmorgerichte."
+            },
+            "heifer": {
+                "name": "Gereifte Färse für Liebhaber",
+                "desc": "Sorgfältig ausgewählt wegen seiner Zartheit und außergewöhnlichen Marmorierung."
+            },
+            "horse": {
+                "name": "Geschmackvolles Pferdefleisch",
+                "desc": "Ein mageres und schmackhaftes Fleisch, geschätzt für seine ernährungsphysiologischen Qualitäten."
+            },
+            "lamb": {
+                "name": "Lamm mit feinen Aromen",
+                "desc": "Ausgewählte Stücke wegen ihrer Finesse und ihres subtilen, duftenden Geschmacks."
+            },
+            "order": {
+                "name": "Fleisch auf Bestellung",
+                "desc": "Wurstplatten und spezifische Schnitte für alle Ihre Veranstaltungen."
+            },
+            "pork": {
+                "name": "Schweinefleisch in Premiumqualität",
+                "desc": "Einwandfreie Schweizer Qualität, perfekt für all Ihre Zubereitungen."
+            }
+        },
+        "tags": {
+            "homemade": "Hausgemacht",
+            "premium": "Premium",
+            "specialty": "Spezialität"
+        },
+        "title": "Ausgewählte Produkte"
+    }
+}

@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useTranslation } from 'react-i18next';
+import settings from '../../settings.json';
 
 export function ProduitsSection() {
   const { t } = useTranslation();
@@ -20,37 +21,37 @@ export function ProduitsSection() {
       name: t('products.items.chicken.name', 'Poulet tendre et savoureux'),
       description: t('products.items.chicken.desc', 'Une chair tendre et juteuse, idéale pour vos grillades ou plats mijotés.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: '/images/products/chicken.png?v=2'
+      image: settings.products.find(p => p.id === 'chicken')?.image || ''
     },
     {
       name: t('products.items.heifer.name', 'Génisse maturée pour les amateurs'),
       description: t('products.items.heifer.desc', 'Sélectionnée avec soin pour sa tendreté et son persillé exceptionnel.'),
       tag: t('products.tags.specialty', 'Spécialité'),
-      image: '/images/products/beef.png?v=2'
+      image: settings.products.find(p => p.id === 'heifer')?.image || ''
     },
     {
       name: t('products.items.lamb.name', 'Agneau aux saveurs délicates'),
       description: t('products.items.lamb.desc', 'Des morceaux choisis pour leur finesse et leur goût subtil et parfumé.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: '/images/products/lamb.png?v=2'
+      image: settings.products.find(p => p.id === 'lamb')?.image || ''
     },
     {
       name: t('products.items.pork.name', 'Porc de qualité supérieure'),
       description: t('products.items.pork.desc', 'Une qualité suisse irréprochable, parfaite pour toutes vos préparations.'),
       tag: t('products.tags.specialty', 'Spécialité'),
-      image: '/images/products/pork.png?v=2'
+      image: settings.products.find(p => p.id === 'pork')?.image || ''
     },
     {
       name: t('products.items.horse.name', 'Viande de cheval riche en goût'),
       description: t('products.items.horse.desc', 'Une viande maigre et savoureuse, appréciée pour ses qualités nutritives.'),
       tag: t('products.tags.premium', 'Premium'),
-      image: '/images/products/horse.png?v=2'
+      image: settings.products.find(p => p.id === 'horse')?.image || ''
     },
     {
       name: t('products.items.order.name', 'Viandes sur commande'),
       description: t('products.items.order.desc', 'Plateaux de charcuterie et découpes spécifiques pour tous vos événements.'),
       tag: t('products.tags.homemade', 'Fait Maison'),
-      image: '/images/products/order.png?v=3'
+      image: settings.products.find(p => p.id === 'order')?.image || ''
     }
   ];
 
@@ -60,6 +61,21 @@ export function ProduitsSection() {
       ref={containerRef}
       className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20"
     >
+      {/* Parallax Background Background */}
+      <motion.div
+        className="absolute inset-x-0 -top-40 -bottom-40 z-0 opacity-[0.03] pointer-events-none"
+        style={{
+          y: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+          rotate: 5
+        }}
+      >
+        <img
+          src={settings.images.hero}
+          alt=""
+          className="w-full h-full object-cover blur-3xl scale-150"
+        />
+      </motion.div>
+
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
 

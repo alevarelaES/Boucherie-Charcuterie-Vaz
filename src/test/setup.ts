@@ -2,9 +2,12 @@ import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
 
+import i18n from '../i18n';
+
 // Cleanup after each test case
-afterEach(() => {
+afterEach(async () => {
     cleanup();
+    await i18n.changeLanguage('fr');
 });
 
 // Mock IntersectionObserver for Motion

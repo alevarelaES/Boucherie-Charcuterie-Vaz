@@ -1,21 +1,28 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 import App from '../app/App';
 import '../i18n';
+import '@testing-library/jest-dom';
 
 describe('App', () => {
     it('renders without crashing', () => {
-        render(<App />);
-        // Check for Hero title presence (using a key part of the text or role)
-        // Since i18n is async/needs init, we might see the fallback or key if not waited.
-        // However, default i18n config here syncs imports if using resources directly.
-        // Let's check for "Boucherie Vaz" text which is in Header/Footer.
+        render(
+            <MemoryRouter initialEntries={['/fr']}>
+                <App />
+            </MemoryRouter>
+        );
         expect(screen.getAllByText(/Boucherie Vaz/i).length).toBeGreaterThan(0);
     });
 
-    it('renders the Hero section', () => {
-        render(<App />);
-        // "Ouvert aujourd'hui" is a key translated as "Ouvert aujourd'hui" in fr default.
-        expect(screen.getByText(/Ouvert aujourd'hui/i)).toBeInTheDocument();
+    it('renders the Hero section', async () => {
+        render(
+            <MemoryRouter initialEntries={['/fr']}>
+                <App />
+            </MemoryRouter>
+        );
+        // Use async find to wait for translations and animations to settle
+        const title = await screen.findByText(/La boucherie/i, {}, { timeout: 4000 });
+        expect(title).toBeInTheDocument();
     });
 });
