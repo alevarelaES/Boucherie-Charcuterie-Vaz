@@ -80,11 +80,14 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "4.7.0",
     "@vitest/coverage-v8": "^4.0.17",
-    "i18next-parser": "^9.0.2",
+    "i18next-parser": "^9.3.0",
     "jsdom": "^27.4.0",
     "tailwindcss": "4.1.12",
     "vite": "^6.4.1",
     "vitest": "^4.0.17"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "react": "18.3.1",
