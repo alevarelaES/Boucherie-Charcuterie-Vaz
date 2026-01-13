@@ -45,10 +45,10 @@ export function ValeursSection() {
         {/* Bloc 1 : Introduction */}
         <motion.div
           className="bg-primary/5 border-l-4 border-gold rounded-r-2xl p-6 md:p-10 mb-12 max-w-5xl mx-auto shadow-sm"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: isMobile ? 0 : 0.2 }}
         >
           <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed text-center font-medium font-sans italic">
             {t('about.intro', "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.")}
@@ -59,22 +59,22 @@ export function ValeursSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: isMobile ? 0 : 0.8 }}
             className="relative"
           >
             <div className="absolute -inset-4 bg-gold/5 rounded-[2rem] -rotate-2 z-0" />
             <motion.div
               className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white/10"
-              whileHover={{ scale: 1.02 }}
+              whileHover={isMobile ? {} : { scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
               <ImageWithFallback
                 src={settings.images.about}
                 alt={t('about.imageAlt', 'Boucherie Vaz - Notre histoire')}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-bottom"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -85,10 +85,10 @@ export function ValeursSection() {
           <div className="space-y-8">
             <motion.div
               className="bg-muted/50 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-sm"
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: isMobile ? 0 : 0.2 }}
             >
               <h3 className="text-3xl md:text-4xl font-bold mb-6 text-gold font-serif">
                 {t('about.promiseTitle', 'Notre Promesse')}
@@ -100,10 +100,10 @@ export function ValeursSection() {
 
             <motion.div
               className="bg-white rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-xl"
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: isMobile ? 0 : 0.3 }}
             >
               <h3 className="text-2xl md:text-3xl font-bold mb-6 text-primary font-serif">
                 {t('about.listTitle', 'Vous trouverez chez nous')}
@@ -118,7 +118,7 @@ export function ValeursSection() {
                   t('products.items.order.name', 'Viandes sur commande')
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-4 text-base md:text-lg text-foreground/80 font-sans font-semibold group">
-                    <span className="w-2.5 h-2.5 bg-gold rounded-full flex-shrink-0 group-hover:scale-150 transition-transform"></span>
+                    <span className={`w-2.5 h-2.5 bg-gold rounded-full flex-shrink-0 ${isMobile ? '' : 'group-hover:scale-150'} transition-transform`}></span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -133,18 +133,18 @@ export function ValeursSection() {
             <motion.div
               key={index}
               className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-500 group text-center"
-              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
+              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: isMobile ? 0 : 0.1 * index }}
               whileHover={isMobile ? {} : { y: -10 }}
             >
               <div className="flex flex-col items-center gap-6">
-                <div className="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0">
-                  <valeur.icon className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
+                <div className={`w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center ${isMobile ? '' : 'group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0'}`}>
+                  <valeur.icon className={`w-8 h-8 text-gold ${isMobile ? '' : 'group-hover:text-white transition-colors'}`} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl md:text-2xl mb-3 font-serif group-hover:text-primary transition-colors">
+                  <h3 className={`font-bold text-xl md:text-2xl mb-3 font-serif ${isMobile ? '' : 'group-hover:text-primary transition-colors'}`}>
                     {valeur.title}
                   </h3>
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans font-medium">
@@ -159,10 +159,10 @@ export function ValeursSection() {
         {/* Bloc 4 : Notre engagement */}
         <motion.div
           className="bg-primary text-white rounded-[3rem] p-10 md:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: isMobile ? 0 : 0.5 }}
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32" />
           <p className="text-xl md:text-3xl text-center font-serif italic leading-relaxed relative z-10">

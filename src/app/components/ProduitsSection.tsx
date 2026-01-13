@@ -63,19 +63,21 @@ export function ProduitsSection() {
       className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20"
     >
       {/* Parallax Background Background */}
-      <motion.div
-        className="absolute inset-x-0 -top-40 -bottom-40 z-0 opacity-[0.03] pointer-events-none"
-        style={{
-          y: useTransform(scrollYProgress, [0, 1], [-100, 100]),
-          rotate: 5
-        }}
-      >
-        <OptimizedImage
-          src={settings.images.hero}
-          alt=""
-          className="w-full h-full object-cover blur-3xl scale-150"
-        />
-      </motion.div>
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-x-0 -top-40 -bottom-40 z-0 opacity-[0.03] pointer-events-none"
+          style={{
+            y: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+            rotate: 5
+          }}
+        >
+          <OptimizedImage
+            src={settings.images.hero}
+            alt=""
+            className="w-full h-full object-cover blur-3xl scale-150"
+          />
+        </motion.div>
+      )}
 
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
@@ -83,11 +85,11 @@ export function ProduitsSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-8"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          style={{ y: yTitle }}
+          transition={{ duration: isMobile ? 0 : 0.8 }}
+          style={{ y: isMobile ? 0 : yTitle }}
         >
           <motion.span
             className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans"
@@ -108,7 +110,7 @@ export function ProduitsSection() {
           {produits.map((produit, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: isMobile ? 1 : 0, scale: isMobile ? 1 : 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: isMobile ? 0 : index * 0.1 }}
@@ -123,7 +125,7 @@ export function ProduitsSection() {
                 {/* Image */}
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <motion.div
-                    animate={{ scale: hoveredIndex === index ? 1.1 : 1 }}
+                    animate={{ scale: !isMobile && hoveredIndex === index ? 1.1 : 1 }}
                     transition={{ duration: 0.6 }}
                     className="w-full h-full"
                   >
@@ -140,7 +142,7 @@ export function ProduitsSection() {
                   {/* Tag Badge */}
                   <motion.div
                     className="absolute top-3 right-3"
-                    initial={{ x: isMobile ? 0 : 100, opacity: 0 }}
+                    initial={{ x: isMobile ? 0 : 100, opacity: isMobile ? 1 : 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: isMobile ? 0 : index * 0.1 + 0.2 }}

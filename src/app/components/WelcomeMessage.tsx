@@ -8,6 +8,11 @@ export function WelcomeMessage() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        // Disable on mobile completely for immediate access
+        if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+            return;
+        }
+
         const lastSeen = localStorage.getItem('welcome-last-seen');
         const now = Date.now();
         const thirtyDays = 30 * 24 * 60 * 60 * 1000;

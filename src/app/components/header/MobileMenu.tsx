@@ -26,10 +26,10 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
             {isOpen && (
                 <motion.div
                     className="fixed inset-0 z-[100] bg-background flex flex-col"
-                    initial={{ opacity: 0, y: '10%' }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: '10%' }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
                 >
                     <div className="p-4 flex justify-between items-center border-b border-border/50">
                         <span className="font-serif text-xl font-bold text-primary tracking-tight">Boucherie Vaz</span>
@@ -42,9 +42,7 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                             {navItems.map((item, i) => (
                                 <motion.li
                                     key={item.id}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.2, delay: 0.05 * i }}
+                                // Removed entry animation for instant feel
                                 >
                                     <a
                                         href={`/${currentLang}/${item.href}`}

@@ -93,20 +93,22 @@ export function Hero() {
         </div>
 
         {/* Scroll Indicator - Hidden on very small screens to avoid clutter */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer hidden sm:flex flex-col items-center gap-2"
-          onClick={scrollToContent}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1.5 backdrop-blur-sm">
-            <motion.div
-              className="w-1 h-2 bg-gold/80 rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
+        {!isMobile && (
+          <motion.div
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer hidden sm:flex flex-col items-center gap-2"
+            onClick={scrollToContent}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1.5 backdrop-blur-sm">
+              <motion.div
+                className="w-1 h-2 bg-gold/80 rounded-full"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            </div>
+          </motion.div>
+        )}
       </motion.div>
     </section>
   );
