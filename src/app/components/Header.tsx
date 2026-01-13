@@ -22,8 +22,11 @@ export function Header() {
     const lastScrollYRef = useRef(0);
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            setScrolled(currentScrollY > 20);
+            // Secure scroll detection for mobile (prevent negative scroll bounce)
+            const currentScrollY = Math.max(window.scrollY, 0);
+
+            // Lower threshold for mobile to ensure it becomes white quickly
+            setScrolled(currentScrollY > 10);
 
             // Desktop top bar show/hide logic - skip on mobile for simplicity
             if (window.innerWidth >= 1024) {
@@ -42,6 +45,7 @@ export function Header() {
             if (window.innerWidth >= 1024) setMobileMenuOpen(false);
         };
 
+        // Passive listener is better for scroll performance
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleResize);
 
@@ -97,13 +101,15 @@ export function Header() {
 
     const isTransparent = !scrolled && activeSection === 'accueil' && location.pathname.length <= 4;
 
-    // CLASSES LOGIC: More robust mobile header
-    const headerBaseClasses = "fixed left-0 right-0 z-50 transition-all duration-300 md:duration-500 ease-in-out px-4 md:px-8";
+    // CLASSES LOGIC: More robust mobile header with hardware acceleration
+    // Added 'transform-gpu' and 'top-0' explicit to fix Chrome Mobile disappearing issues
+    const headerBaseClasses = "fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 md:duration-500 ease-in-out px-4 md:px-8 transform-gpu backface-hidden";
 
     // On mobile, keep it simple: if scrolled, it's a solid white bar. No floating stuff that bugs out.
+    // Removed backdrop-blur on mobile if scrolled to avoid rendering glitches on some androids? kept for now but with solid opacity.
     const headerStyleClasses = isTransparent
-        ? "top-0 lg:top-10 py-5 bg-transparent border-transparent text-white"
-        : "top-0 lg:mx-0 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3 lg:py-4 text-foreground";
+        ? "lg:top-10 py-3 bg-transparent border-transparent text-white"
+        : "py-2 lg:py-3 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-md text-foreground lg:top-0 lg:mx-0";
 
     return (
         <>

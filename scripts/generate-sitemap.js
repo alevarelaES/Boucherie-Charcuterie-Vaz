@@ -25,6 +25,18 @@ const routes = [
         description: 'Homepage'
     },
     {
+        path: '/traiteur',
+        priority: 0.9,
+        changefreq: 'monthly',
+        description: 'Catering Service'
+    },
+    {
+        path: '/recettes',
+        priority: 0.8,
+        changefreq: 'monthly',
+        description: 'Recipes & Tips'
+    },
+    {
         path: '/mentions-legales',
         priority: 0.3,
         changefreq: 'monthly',
@@ -97,4 +109,3 @@ try {
     console.error('❌ Error generating sitemap:', error);
     process.exit(1);
 }
-

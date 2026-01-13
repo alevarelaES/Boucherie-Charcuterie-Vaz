@@ -31,6 +31,8 @@ export function ValeursSection() {
     }
   ];
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   return (
     <section id="a-propos" className="py-16 md:py-24 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
@@ -131,11 +133,11 @@ export function ValeursSection() {
             <motion.div
               key={index}
               className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-500 group text-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 * index }}
-              whileHover={{ y: -10 }}
+              transition={{ delay: isMobile ? 0 : 0.1 * index }}
+              whileHover={isMobile ? {} : { y: -10 }}
             >
               <div className="flex flex-col items-center gap-6">
                 <div className="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0">

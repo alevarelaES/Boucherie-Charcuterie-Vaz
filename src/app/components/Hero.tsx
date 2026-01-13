@@ -49,9 +49,9 @@ export function Hero() {
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-10 pt-10">
           {/* Main Title - Responsive sizing */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.2 }}
             className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-[1.1] tracking-tight drop-shadow-2xl"
           >
             {t('hero.titleInitial', 'La boucherie')} <br />
@@ -62,9 +62,9 @@ export function Hero() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.4 }}
             className="text-white/90 text-lg md:text-2xl font-sans font-medium max-w-2xl leading-relaxed drop-shadow-lg"
           >
             {t('hero.description', "Excellence artisanale et viandes d'exception à")} <span className="text-white font-bold underline decoration-gold decoration-4 underline-offset-4">Vallorbe</span>.
@@ -72,9 +72,9 @@ export function Hero() {
 
           {/* CTA Buttons - Premium Rounded-Full */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.6 }}
             className="flex flex-col sm:flex-row gap-5 mt-4"
           >
             <a

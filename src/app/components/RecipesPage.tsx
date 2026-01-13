@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
+import { MetaSEO } from './MetaSEO';
+import { Breadcrumbs } from './ui/Breadcrumbs';
 
 interface Recipe {
     id: string;
@@ -74,10 +76,35 @@ export function RecipesPage() {
             exit={{ opacity: 0 }}
             className="min-h-screen bg-background pt-32"
         >
+            <MetaSEO
+                title="Recettes & Astuces"
+                description="Découvrez les recettes exclusives de la Boucherie Vaz : bœuf maturé, agneau en croûte et conseils de préparation pour des repas d'exception."
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "ItemList",
+                    "itemListElement": recipes.map((r, i) => ({
+                        "@type": "ListItem",
+                        "position": i + 1,
+                        "item": {
+                            "@type": "Recipe",
+                            "name": r.title,
+                            "image": `https://boucherie-charcuterie-vaz.ch${r.image}`,
+                            "author": {
+                                "@type": "Person",
+                                "name": "Boucherie Vaz"
+                            },
+                            "cookTime": r.time.includes('h') ? `PT${r.time.replace('h', 'H').replace(' ', 'M')}` : `PT${r.time.replace(' min', 'M')}`,
+                            "recipeYield": r.servings,
+                            "recipeCategory": r.category
+                        }
+                    }))
+                }}
+            />
             <main className="max-w-7xl mx-auto px-6 pb-20">
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div className="flex-grow">
+                        <Breadcrumbs items={[{ label: 'Recettes' }]} />
                         <button
                             onClick={() => navigate(-1)}
                             className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all mb-8 group"

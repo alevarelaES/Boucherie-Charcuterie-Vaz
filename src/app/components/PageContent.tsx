@@ -1,13 +1,16 @@
 import { motion } from 'motion/react';
 import { useLocation, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
 import { Hero } from './Hero';
 import { ValeursSection } from './ValeursSection';
 import { ProduitsSection } from './ProduitsSection';
 import { ContactSection } from './ContactSection';
 import { Footer } from './Footer';
+import { MetaSEO } from './MetaSEO';
 
 export function PageContent() {
+    const { t } = useTranslation();
     const location = useLocation();
     const { lang } = useParams();
     const isInitialMount = useRef(true);
@@ -49,6 +52,7 @@ export function PageContent() {
                 ease: "easeOut"
             }}
         >
+            <MetaSEO />
             <main>
                 <Hero />
                 <ValeursSection />

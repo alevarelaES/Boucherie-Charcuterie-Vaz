@@ -50,6 +50,86 @@
         <xhtml:link rel="alternate" hreflang="it" href="https://boucherie-charcuterie-vaz.ch/it"/>
     </url>
     
+    <!-- Catering Service (FR) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/fr/traiteur</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://boucherie-charcuterie-vaz.ch/en/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://boucherie-charcuterie-vaz.ch/de/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://boucherie-charcuterie-vaz.ch/it/traiteur"/>
+    </url>
+    
+    <!-- Catering Service (EN) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/en/traiteur</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://boucherie-charcuterie-vaz.ch/en/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://boucherie-charcuterie-vaz.ch/de/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://boucherie-charcuterie-vaz.ch/it/traiteur"/>
+    </url>
+    
+    <!-- Catering Service (DE) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/de/traiteur</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://boucherie-charcuterie-vaz.ch/en/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://boucherie-charcuterie-vaz.ch/de/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://boucherie-charcuterie-vaz.ch/it/traiteur"/>
+    </url>
+    
+    <!-- Catering Service (IT) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/it/traiteur</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://boucherie-charcuterie-vaz.ch/en/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://boucherie-charcuterie-vaz.ch/de/traiteur"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://boucherie-charcuterie-vaz.ch/it/traiteur"/>
+    </url>
+    
+    <!-- Recipes & Tips (FR) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/fr/recettes</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Recipes & Tips (EN) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/en/recettes</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Recipes & Tips (DE) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/de/recettes</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Recipes & Tips (IT) -->
+    <url>
+        <loc>https://boucherie-charcuterie-vaz.ch/it/recettes</loc>
+        <lastmod>2026-01-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
     <!-- Legal Notice (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr/mentions-legales</loc>

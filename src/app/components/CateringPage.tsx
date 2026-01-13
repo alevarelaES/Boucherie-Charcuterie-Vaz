@@ -4,6 +4,8 @@ import { ChevronLeft, CheckCircle2, Star, Calendar, Quote } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
+import { MetaSEO } from './MetaSEO';
+import { Breadcrumbs } from './ui/Breadcrumbs';
 
 export function CateringPage() {
     const { t } = useTranslation();
@@ -37,6 +39,43 @@ export function CateringPage() {
             exit={{ opacity: 0 }}
             className="min-h-screen bg-background"
         >
+            <MetaSEO
+                title={t('metiers.traiteur.title', 'Service Traiteur')}
+                description={t('metiers.traiteur.detail', "Sublimez vos événements avec l'excellence de la Boucherie Vaz. Buffets froids, banquets et apéritifs sur mesure à Vallorbe.")}
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "Service",
+                    "name": "Service Traiteur Boucherie Vaz",
+                    "description": t('metiers.traiteur.detail', "Service traiteur pour mariages, banquets et événements."),
+                    "provider": {
+                        "@type": "LocalBusiness",
+                        "name": "Boucherie-Charcuterie Vaz",
+                        "image": "https://boucherie-charcuterie-vaz.ch/images/logo/logo-no-bg.png",
+                        "priceRange": "$$"
+                    },
+                    "areaServed": {
+                        "@type": "City",
+                        "name": "Vallorbe"
+                    },
+                    "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Services Traiteur",
+                        "itemListElement": services.map((s, i) => ({
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": s.title,
+                                "description": s.description
+                            },
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "price": s.price.replace(/[^0-9.]/g, '') || "0",
+                                "priceCurrency": "CHF"
+                            }
+                        }))
+                    }
+                }}
+            />
             {/* Mini Hero */}
             <div className="relative h-[60vh] w-full overflow-hidden">
                 <OptimizedImage
@@ -64,6 +103,8 @@ export function CateringPage() {
 
             <main className="max-w-7xl mx-auto px-6 -mt-20 relative z-10 pb-20">
                 <div className="bg-white rounded-[3rem] shadow-2xl p-8 md:p-16">
+                    <Breadcrumbs items={[{ label: t('metiers.traiteur.title', 'Service Traiteur') }]} />
+
                     <button
                         onClick={() => navigate(-1)}
                         className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all mb-12 group"

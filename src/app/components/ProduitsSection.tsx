@@ -14,6 +14,7 @@ export function ProduitsSection() {
     offset: ["start end", "end start"]
   });
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
   const yTitle = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const produits = [
@@ -110,13 +111,13 @@ export function ProduitsSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
+              transition={{ delay: isMobile ? 0 : index * 0.1 }}
+              onHoverStart={() => !isMobile && setHoveredIndex(index)}
+              onHoverEnd={() => !isMobile && setHoveredIndex(null)}
             >
               <motion.div
                 className="bg-card rounded-xl overflow-hidden shadow-xl h-full flex flex-col group"
-                whileHover={{ y: -5 }}
+                whileHover={isMobile ? {} : { y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {/* Image */}
@@ -139,10 +140,10 @@ export function ProduitsSection() {
                   {/* Tag Badge */}
                   <motion.div
                     className="absolute top-3 right-3"
-                    initial={{ x: 100, opacity: 0 }}
+                    initial={{ x: isMobile ? 0 : 100, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + 0.2 }}
+                    transition={{ delay: isMobile ? 0 : index * 0.1 + 0.2 }}
                   >
                     <Badge className={`${produit.tag === t('products.tags.premium', 'Premium') ? 'bg-gold hover:bg-gold/90' : 'bg-primary hover:bg-primary/90'} text-white border-0 shadow-xl text-sm md:text-base font-bold px-3 py-1`}>
                       {produit.tag}

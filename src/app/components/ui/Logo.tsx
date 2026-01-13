@@ -15,8 +15,8 @@ export function Logo({ isTransparent, className = "" }: LogoProps) {
             <div
                 className={`relative overflow-hidden rounded-full border-2 transition-all duration-500 bg-white 
           ${isTransparent
-                        ? 'border-white/20 shadow-2xl scale-110 p-1.5'
-                        : 'border-primary/10 shadow-md p-1'
+                        ? 'border-white/20 shadow-2xl scale-110 p-0.5'
+                        : 'border-primary/10 shadow-md p-0'
                     }`}
             >
                 <OptimizedImage

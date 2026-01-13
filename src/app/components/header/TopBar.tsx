@@ -16,7 +16,7 @@ export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageC
 
     return (
         <motion.div
-            className="hidden lg:flex fixed top-0 w-full z-[60] border-b border-white/10 transition-all duration-300"
+            className="hidden lg:flex fixed top-0 w-full z-[10001] border-b border-white/10 transition-all duration-300"
             initial={{ y: 0 }}
             animate={{ y: (show || !scrolled) ? 0 : -100 }}
             style={{ backgroundColor: isTransparent ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0.9)' }}
