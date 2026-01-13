@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "npm run generate:sitemap && vite build",
     "dev": "vite",
     "preview": "vite preview",
     "test": "vitest run",
@@ -12,11 +12,14 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "extract-i18n": "i18next-parser",
-    "check:i18n": "node check-i18n.js",
-    "check:mobile": "node check-mobile-perf.js",
-    "check:seo": "node check-seo.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "optimize:images": "node scripts/auto-optimize-images.js",
+    "check:i18n": "node scripts/check-i18n.js",
+    "check:mobile": "node scripts/check-mobile-perf.js",
+    "check:seo": "node scripts/check-seo.js",
     "check:all": "npm run check:i18n && npm run check:mobile && npm run check:seo",
-    "fullpush": "node fullpush.js"
+    "fullpush": "node scripts/fullpush.js",
+    "prebuild": "npm run optimize:images && npm run generate:sitemap"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -91,6 +94,7 @@
     "@vitest/coverage-v8": "^4.0.17",
     "i18next-parser": "^9.3.0",
     "jsdom": "^27.4.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "4.1.12",
     "vite": "^6.4.1",
     "vitest": "^4.0.17"
