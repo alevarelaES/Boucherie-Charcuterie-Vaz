@@ -40,6 +40,8 @@ export function ContactSection() {
   };
 
   const { isOpen, currentDay } = getCurrentStatus();
+  // Safe detection for animations
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   const horaires = [
     { id: 1, jour: t('contact.days.monday', 'Lundi'), matin: '07:00 - 12:00', apresMidi: '13:30 - 18:00', isClosed: false },
@@ -70,28 +72,30 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-12 md:py-24 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20">
       {/* Decorative background elements consistent with whole site */}
-      <motion.div
-        className="absolute inset-x-0 -top-40 -bottom-40 z-0 opacity-[0.03] pointer-events-none"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.03 }}
-        viewport={{ once: true }}
-      >
-        <OptimizedImage
-          src={settings.images.hero}
-          alt=""
-          className="w-full h-full object-cover blur-3xl scale-150"
-        />
-      </motion.div>
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-x-0 -top-40 -bottom-40 z-0 opacity-[0.03] pointer-events-none"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.03 }}
+          viewport={{ once: true }}
+        >
+          <OptimizedImage
+            src={settings.images.hero}
+            alt=""
+            className="w-full h-full object-cover blur-3xl scale-150"
+          />
+        </motion.div>
+      )}
 
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: isMobile ? 0 : 0.8 }}
         >
           <motion.span
             className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans"
@@ -116,11 +120,11 @@ export function ContactSection() {
               target={contact.icon === MapPin ? '_blank' : undefined}
               rel={contact.icon === MapPin ? 'noopener noreferrer' : undefined}
               className="bg-card p-6 rounded-2xl shadow-xl flex items-center gap-4 group transition-all"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              transition={{ delay: isMobile ? 0 : index * 0.1 }}
+              whileHover={isMobile ? {} : { y: -5 }}
             >
               <div className="w-12 h-12 flex-shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                 <contact.icon size={24} />
@@ -137,7 +141,7 @@ export function ContactSection() {
           {/* MIDDLE LEFT: Messaging Form (2/5 size) */}
           <motion.div
             className="lg:col-span-2 bg-card rounded-2xl p-6 md:p-8 shadow-xl h-full"
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
@@ -172,7 +176,7 @@ export function ContactSection() {
               <motion.button
                 type="submit"
                 className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 font-sans"
-                whileHover={{ scale: 1.01 }}
+                whileHover={isMobile ? {} : { scale: 1.01 }}
               >
                 {t('contact.submit', 'Envoyer')}
               </motion.button>
@@ -182,7 +186,7 @@ export function ContactSection() {
           {/* MIDDLE RIGHT: Horaires (3/5 size) */}
           <motion.div
             className="lg:col-span-3 bg-card rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden"
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
@@ -206,7 +210,7 @@ export function ContactSection() {
                       ? 'bg-primary/5 border border-primary/20 shadow-inner'
                       : 'bg-muted/30'
                       }`}
-                    initial={{ opacity: 0, x: 10 }}
+                    initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                   >
@@ -253,7 +257,7 @@ export function ContactSection() {
         {/* BOTTOM: Massive Map - Full width */}
         <motion.div
           className="bg-card rounded-2xl overflow-hidden shadow-xl h-[450px] group relative"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >

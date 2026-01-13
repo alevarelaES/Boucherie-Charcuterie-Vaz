@@ -8,6 +8,8 @@ import settings from '../../settings.json';
 export function Footer() {
   const { t, i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
+  // Safe detection for animations
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   const socialLinks = [
     { icon: Facebook, href: settings.info.facebook, label: 'Facebook' },
@@ -40,14 +42,14 @@ export function Footer() {
             {/* Brand Column */}
             <motion.div
               className="md:col-span-2"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <motion.div
                   className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl flex items-center justify-center p-2"
-                  whileHover={{ rotate: 360 }}
+                  whileHover={isMobile ? {} : { rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
                   <OptimizedImage
@@ -78,8 +80,8 @@ export function Footer() {
                     href={social.href}
                     aria-label={social.label}
                     className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all text-background"
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={isMobile ? {} : { scale: 1.1, y: -3 }}
+                    whileTap={isMobile ? {} : { scale: 0.9 }}
                   >
                     <social.icon className="w-5 h-5" />
                   </motion.a>
@@ -89,10 +91,10 @@ export function Footer() {
 
             {/* Quick Links */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: isMobile ? 0 : 0.1 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 {t('footer.navigation')}
@@ -101,7 +103,7 @@ export function Footer() {
                 {quickLinks.map((link, index) => (
                   <motion.li
                     key={index}
-                    whileHover={{ x: 5 }}
+                    whileHover={isMobile ? {} : { x: 5 }}
                   >
                     <a href={`/${i18n.language}/${link.href}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium">
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -114,10 +116,10 @@ export function Footer() {
 
             {/* Contact Info */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: isMobile ? 0 : 0.2 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 {t('footer.contact')}
@@ -154,10 +156,10 @@ export function Footer() {
           {/* Horaires Section */}
           <motion.div
             className="mb-12 pb-8 border-b border-background/10"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: isMobile ? 0 : 0.3 }}
           >
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-6 h-6 text-primary" />
@@ -181,10 +183,10 @@ export function Footer() {
           {/* Bottom Bar */}
           <motion.div
             className="pt-8 border-t border-background/10"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: isMobile ? 1 : 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: isMobile ? 0 : 0.3 }}
           >
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base text-background/60 font-normal">
               <p>
