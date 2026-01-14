@@ -1,13 +1,20 @@
 import { Badge } from './ui/badge';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { OptimizedImage } from './OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from './ui/carousel';
 
 export function ProduitsSection() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  // Custom hook to sync carousel state
+  useCarouselSync(api, setCurrent);
+
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -106,70 +113,147 @@ export function ProduitsSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {/* Desktop Grid Layout */}
+        <div className="hidden lg:grid grid-cols-3 gap-6">
           {produits.map((produit, index) => (
-            <motion.div
+            <ProductCard
               key={index}
-              initial={{ opacity: isMobile ? 1 : 0, scale: isMobile ? 1 : 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: isMobile ? 0 : index * 0.1 }}
-              onHoverStart={() => !isMobile && setHoveredIndex(index)}
-              onHoverEnd={() => !isMobile && setHoveredIndex(null)}
-            >
-              <motion.div
-                className="bg-card rounded-xl overflow-hidden shadow-xl h-full flex flex-col group"
-                whileHover={isMobile ? {} : { y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {/* Image */}
-                <div className="relative aspect-[3/2] overflow-hidden">
-                  <motion.div
-                    animate={{ scale: !isMobile && hoveredIndex === index ? 1.1 : 1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full h-full"
-                  >
-                    <OptimizedImage
-                      src={produit.image}
-                      alt={produit.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
-
-                  {/* Tag Badge */}
-                  <motion.div
-                    className="absolute top-3 right-3"
-                    initial={{ x: isMobile ? 0 : 100, opacity: isMobile ? 1 : 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: isMobile ? 0 : index * 0.1 + 0.2 }}
-                  >
-                    <Badge className={`${produit.tag === t('products.tags.premium', 'Premium') ? 'bg-gold hover:bg-gold/90' : 'bg-primary hover:bg-primary/90'} text-white border-0 shadow-xl text-sm md:text-base font-bold px-3 py-1`}>
-                      {produit.tag}
-                    </Badge>
-                  </motion.div>
-                </div>
-
-                {/* Content */}
-                <div className="p-4 md:p-5 flex-grow flex flex-col justify-between">
-                  <h3
-                    className="text-xl sm:text-2xl md:text-3xl mb-2 font-bold group-hover:text-primary transition-colors font-serif"
-                  >
-                    {produit.name}
-                  </h3>
-
-                  <p className="text-base md:text-lg text-muted-foreground font-medium font-sans">
-                    {produit.description}
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
+              produit={produit}
+              index={index}
+              isMobile={false}
+              hoveredIndex={hoveredIndex}
+              setHoveredIndex={setHoveredIndex}
+            />
           ))}
+        </div>
+
+        {/* Mobile Carousel Layout */}
+        <div className="lg:hidden -mx-4">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+              dragFree: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {produits.map((produit, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-[85%] sm:basis-[45%]">
+                  <ProductCard
+                    produit={produit}
+                    index={index}
+                    isMobile={true}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+          </Carousel>
         </div>
       </div>
     </section>
+  );
+}
+
+// Add effect to sync current slide
+function useCarouselSync(api: CarouselApi | undefined, setCurrent: (val: number) => void) {
+  useEffect(() => {
+    if (!api) return;
+
+    // Set initial state
+    setCurrent(api.selectedScrollSnap());
+
+    // Subscribing to scroll event for real-time reactivity
+    const onScroll = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    api.on("scroll", onScroll);
+    api.on("reInit", onScroll);
+
+    return () => {
+      api.off("scroll", onScroll);
+      api.off("reInit", onScroll);
+    };
+  }, [api, setCurrent]);
+}
+
+function ProductCard({
+  produit,
+  index,
+  isMobile,
+  hoveredIndex,
+  setHoveredIndex
+}: {
+  produit: any;
+  index: number;
+  isMobile: boolean;
+  hoveredIndex?: number | null;
+  setHoveredIndex?: (idx: number | null) => void;
+}) {
+  const { t } = useTranslation();
+
+  return (
+    <motion.div
+      initial={{ opacity: isMobile ? 1 : 0, scale: isMobile ? 1 : 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: isMobile ? 0 : index * 0.1 }}
+      onHoverStart={() => !isMobile && setHoveredIndex?.(index)}
+      onHoverEnd={() => !isMobile && setHoveredIndex?.(null)}
+      className="h-full"
+    >
+      <motion.div
+        className="bg-card rounded-xl overflow-hidden shadow-xl h-full flex flex-col group"
+        whileHover={isMobile ? {} : { y: -5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        {/* Image */}
+        <div className="relative aspect-[3/2] overflow-hidden">
+          <motion.div
+            animate={{ scale: !isMobile && hoveredIndex === index ? 1.1 : 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-full h-full"
+          >
+            <OptimizedImage
+              src={produit.image}
+              alt={produit.name}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+
+          {/* Tag Badge */}
+          <motion.div
+            className="absolute top-3 right-3"
+            initial={{ x: isMobile ? 0 : 100, opacity: isMobile ? 1 : 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: isMobile ? 0 : index * 0.1 + 0.2 }}
+          >
+            <Badge className={`${produit.tag === t('products.tags.premium', 'Premium') ? 'bg-gold hover:bg-gold/90' : 'bg-primary hover:bg-primary/90'} text-white border-0 shadow-xl text-xs md:text-sm font-bold px-2 md:px-3 py-1`}>
+              {produit.tag}
+            </Badge>
+          </motion.div>
+        </div>
+
+        {/* Content */}
+        <div className="p-4 md:p-5 flex-grow flex flex-col">
+          <h3
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 font-bold group-hover:text-primary transition-colors font-serif line-clamp-2"
+          >
+            {produit.name}
+          </h3>
+
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground font-medium font-sans line-clamp-3">
+            {produit.description}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
