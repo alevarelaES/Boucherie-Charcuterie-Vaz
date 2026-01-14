@@ -1,12 +1,13 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { OptimizedImage } from './OptimizedImage';
 import settings from '../../settings.json';
 
 export function Footer() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
   // Safe detection for animations
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
@@ -105,7 +106,25 @@ export function Footer() {
                     key={index}
                     whileHover={isMobile ? {} : { x: 5 }}
                   >
-                    <a href={`/${i18n.language}/${link.href}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium">
+                    <a
+                      href={`/${i18n.language}${link.href}`}
+                      onClick={(e) => {
+                        const targetPath = `/${i18n.language}`;
+                        if (window.location.pathname === targetPath || window.location.pathname === `${targetPath}/`) {
+                          e.preventDefault();
+                          const id = link.href.replace('#', '');
+                          const element = document.getElementById(id);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                            window.history.pushState(null, '', `/${i18n.language}${link.href}`);
+                          }
+                        } else {
+                          e.preventDefault();
+                          navigate(`/${i18n.language}${link.href}`);
+                        }
+                      }}
+                      className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium"
+                    >
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.label}
                     </a>

@@ -4,16 +4,11 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { OptimizedImage } from './OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel';
 
 export function ProduitsSection() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  // Custom hook to sync carousel state
-  useCarouselSync(api, setCurrent);
 
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -123,6 +118,7 @@ export function ProduitsSection() {
               isMobile={false}
               hoveredIndex={hoveredIndex}
               setHoveredIndex={setHoveredIndex}
+            // hoveredIndex={hoveredIndex} // Removed as per instructions, assuming it's not needed for desktop
             />
           ))}
         </div>
@@ -130,9 +126,8 @@ export function ProduitsSection() {
         {/* Mobile Carousel Layout */}
         <div className="lg:hidden -mx-4">
           <Carousel
-            setApi={setApi}
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
               dragFree: true,
             }}
@@ -150,34 +145,15 @@ export function ProduitsSection() {
               ))}
             </CarouselContent>
 
+            <div className="flex justify-center gap-4 mt-8">
+              <CarouselPrevious className="static translate-y-0 translate-x-0 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 hover:border-primary/50" />
+              <CarouselNext className="static translate-y-0 translate-x-0 bg-primary/10 hover:bg-primary/20 text-primary border-primary/20 hover:border-primary/50" />
+            </div>
           </Carousel>
         </div>
       </div>
     </section>
   );
-}
-
-// Add effect to sync current slide
-function useCarouselSync(api: CarouselApi | undefined, setCurrent: (val: number) => void) {
-  useEffect(() => {
-    if (!api) return;
-
-    // Set initial state
-    setCurrent(api.selectedScrollSnap());
-
-    // Subscribing to scroll event for real-time reactivity
-    const onScroll = () => {
-      setCurrent(api.selectedScrollSnap());
-    };
-
-    api.on("scroll", onScroll);
-    api.on("reInit", onScroll);
-
-    return () => {
-      api.off("scroll", onScroll);
-      api.off("reInit", onScroll);
-    };
-  }, [api, setCurrent]);
 }
 
 function ProductCard({

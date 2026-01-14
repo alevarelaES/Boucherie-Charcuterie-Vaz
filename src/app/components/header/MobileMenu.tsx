@@ -1,6 +1,7 @@
 import { X, Facebook, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import settings from '../../../settings.json';
 
 interface NavItem {
@@ -20,6 +21,7 @@ interface MobileMenuProps {
 
 export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLang, onLanguageChange }: MobileMenuProps) {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <AnimatePresence>
@@ -45,7 +47,7 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                                 // Removed entry animation for instant feel
                                 >
                                     <a
-                                        href={`/${currentLang}/${item.href}`}
+                                        href={`/${currentLang}${item.href}`}
                                         onClick={(e) => {
                                             const currentPath = window.location.pathname;
                                             const isHomePage = currentPath === `/${currentLang}` || currentPath === `/${currentLang}/`;
@@ -60,11 +62,10 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                                                         element.scrollIntoView({ behavior: 'smooth' });
                                                     }, 300);
                                                 }
-                                            } else {
                                                 // Force navigation to the home page with the hash
                                                 e.preventDefault();
                                                 onClose();
-                                                window.location.href = `/${currentLang}/${item.href}`;
+                                                navigate(`/${currentLang}${item.href}`);
                                             }
                                         }}
                                         className={`transition-colors ${activeSection === item.id ? 'text-primary' : 'text-foreground/80'}`}

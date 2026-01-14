@@ -132,12 +132,17 @@ export function Header() {
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo Section */}
                     <a
-                        href={`/${i18n.language}/#accueil`}
+                        href={`/${i18n.language}#accueil`}
                         className="flex items-center gap-2 md:gap-4 group transition-transform active:scale-95"
                         onClick={(e) => {
-                            if (location.pathname.startsWith(`/${i18n.language}`)) {
+                            const targetPath = `/${i18n.language}`;
+                            if (location.pathname === targetPath || location.pathname === `${targetPath}/`) {
                                 e.preventDefault();
                                 document.getElementById('accueil')?.scrollIntoView({ behavior: 'smooth' });
+                                window.history.pushState(null, '', `/${i18n.language}#accueil`);
+                            } else {
+                                e.preventDefault();
+                                navigate(`/${i18n.language}#accueil`);
                             }
                         }}
                     >
@@ -158,7 +163,22 @@ export function Header() {
                             {navItems.map((item) => (
                                 <li key={item.id}>
                                     <a
-                                        href={`/${i18n.language}/${item.href}`}
+                                        href={`/${i18n.language}${item.href}`}
+                                        onClick={(e) => {
+                                            const targetPath = `/${i18n.language}`;
+                                            if (location.pathname === targetPath || location.pathname === `${targetPath}/`) {
+                                                e.preventDefault();
+                                                const id = item.href.replace('#', '');
+                                                const element = document.getElementById(id);
+                                                if (element) {
+                                                    element.scrollIntoView({ behavior: 'smooth' });
+                                                    window.history.pushState(null, '', `/${i18n.language}${item.href}`);
+                                                }
+                                            } else {
+                                                e.preventDefault();
+                                                navigate(`/${i18n.language}${item.href}`);
+                                            }
+                                        }}
                                         className={`relative py-2 transition-all duration-300 group ${activeSection === item.id
                                             ? (isTransparent ? 'text-gold' : 'text-primary')
                                             : (isTransparent ? 'text-white/90 hover:text-white' : 'text-foreground/70 hover:text-primary')

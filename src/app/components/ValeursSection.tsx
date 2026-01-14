@@ -5,8 +5,11 @@ import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 import { SectionHeader } from './ui/SectionHeader';
 
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel';
+
 export function ValeursSection() {
   const { t } = useTranslation();
+
 
   const valeurs = [
     {
@@ -127,34 +130,47 @@ export function ValeursSection() {
           </div>
         </div>
 
-        {/* 4 Values Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {/* 4 Values Grid - Desktop */}
+        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {valeurs.map((valeur, index) => (
-            <motion.div
+            <ValeurCard
               key={index}
-              className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-500 group text-center"
-              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: isMobile ? 0 : 0.1 * index }}
-              whileHover={isMobile ? {} : { y: -10 }}
-            >
-              <div className="flex flex-col items-center gap-6">
-                <div className={`w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center ${isMobile ? '' : 'group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0'}`}>
-                  <valeur.icon className={`w-8 h-8 text-gold ${isMobile ? '' : 'group-hover:text-white transition-colors'}`} />
-                </div>
-                <div>
-                  <h3 className={`font-bold text-xl md:text-2xl mb-3 font-serif ${isMobile ? '' : 'group-hover:text-primary transition-colors'}`}>
-                    {valeur.title}
-                  </h3>
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans font-medium">
-                    {valeur.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+              valeur={valeur}
+              index={index}
+              isMobile={false}
+            />
           ))}
         </div>
+
+        {/* 4 Values Carousel - Mobile */}
+        <div className="sm:hidden -mx-4 mb-16">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+              dragFree: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {valeurs.map((valeur, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-[85%]">
+                  <ValeurCard
+                    valeur={valeur}
+                    index={index}
+                    isMobile={true}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <div className="flex justify-center gap-4 mt-8">
+              <CarouselPrevious className="static translate-y-0 translate-x-0 bg-gold/10 hover:bg-gold/20 text-gold border-gold/20 hover:border-gold/50" />
+              <CarouselNext className="static translate-y-0 translate-x-0 bg-gold/10 hover:bg-gold/20 text-gold border-gold/20 hover:border-gold/50" />
+            </div>
+          </Carousel>
+        </div>
+
 
         {/* Bloc 4 : Notre engagement */}
         <motion.div
@@ -171,5 +187,40 @@ export function ValeursSection() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function ValeurCard({
+  valeur,
+  index,
+  isMobile
+}: {
+  valeur: any;
+  index: number;
+  isMobile: boolean;
+}) {
+  return (
+    <motion.div
+      className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-500 group text-center h-full"
+      initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: isMobile ? 0 : 0.1 * index }}
+      whileHover={isMobile ? {} : { y: -10 }}
+    >
+      <div className="flex flex-col items-center gap-6">
+        <div className={`w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center ${isMobile ? '' : 'group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0'}`}>
+          <valeur.icon className={`w-8 h-8 text-gold ${isMobile ? '' : 'group-hover:text-white transition-colors'}`} />
+        </div>
+        <div>
+          <h3 className={`font-bold text-xl md:text-2xl mb-3 font-serif ${isMobile ? '' : 'group-hover:text-primary transition-colors'}`}>
+            {valeur.title}
+          </h3>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans font-medium">
+            {valeur.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
