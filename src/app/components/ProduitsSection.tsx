@@ -118,7 +118,6 @@ export function ProduitsSection() {
               isMobile={false}
               hoveredIndex={hoveredIndex}
               setHoveredIndex={setHoveredIndex}
-            // hoveredIndex={hoveredIndex} // Removed as per instructions, assuming it's not needed for desktop
             />
           ))}
         </div>
@@ -152,7 +151,7 @@ export function ProduitsSection() {
           </Carousel>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
