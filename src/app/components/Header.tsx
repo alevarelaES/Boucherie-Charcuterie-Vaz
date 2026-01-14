@@ -103,13 +103,13 @@ export function Header() {
 
     // CLASSES LOGIC: More robust mobile header with hardware acceleration
     // Added 'transform-gpu' and 'top-0' explicit to fix Chrome Mobile disappearing issues
-    const headerBaseClasses = "fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 md:duration-500 ease-in-out px-4 md:px-8 transform-gpu backface-hidden";
+    const headerBaseClasses = "fixed top-0 left-0 right-0 z-[9999] px-4 md:px-8 transform-gpu backface-hidden";
 
     // On mobile, keep it simple: if scrolled, it's a solid white bar. No floating stuff that bugs out.
     // Removed backdrop-blur on mobile if scrolled to avoid rendering glitches on some androids? kept for now but with solid opacity.
     const headerStyleClasses = isTransparent
-        ? "lg:top-10 py-3 bg-transparent border-transparent text-white"
-        : "py-2 lg:py-3 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-md text-foreground lg:top-0 lg:mx-0";
+        ? "py-3 bg-transparent border-transparent text-white"
+        : "py-2 lg:py-3 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-md text-foreground lg:mx-0";
 
     return (
         <>
@@ -121,7 +121,14 @@ export function Header() {
                 onLanguageChange={changeLanguage}
             />
 
-            <header className={`${headerBaseClasses} ${headerStyleClasses}`}>
+            <motion.header
+                className={`${headerBaseClasses} ${headerStyleClasses}`}
+                initial={false}
+                animate={{
+                    y: (showTopBar || !scrolled) ? (window.innerWidth >= 1024 ? 35 : 0) : 0
+                }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            >
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo Section */}
                     <a
@@ -178,7 +185,7 @@ export function Header() {
                         <Menu className="w-6 h-6" />
                     </button>
                 </div>
-            </header>
+            </motion.header>
 
             <MobileMenu
                 isOpen={mobileMenuOpen}
