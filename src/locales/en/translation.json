@@ -29,9 +29,12 @@
   "closed": "Closed",
   "days": {
     "friday": "Friday",
+    "monTue": "Mon-Tue",
     "monThu": "Mon-Thu",
     "saturday": "Saturday",
-    "sunday": "Sunday"
+    "sunday": "Sunday",
+    "thursday": "Thursday",
+    "wednesday": "Wednesday"
   },
   "rights": "All rights reserved.",
   "tagline": "The art of meat since 2025",
@@ -171,28 +174,28 @@
     "itemDesc": "Discover our fresh and tasty selections, prepared with care.",
     "items": {
       "chicken": {
-        "name": "Tender and tasty chicken",
-        "desc": "Tender and juicy meat, ideal for your grills or braised dishes."
+        "name": "Aged Entrecôte",
+        "desc": "Aged three weeks on the bone."
       },
       "heifer": {
-        "name": "Aged heifer for meat lovers",
-        "desc": "Carefully selected for its tenderness and exceptional marbling."
+        "name": "Beef Fondue",
+        "desc": "Beef Fondue Chinoise."
       },
       "horse": {
-        "name": "Flavorful horse meat",
-        "desc": "A lean and tasty meat, appreciated for its nutritional qualities."
+        "name": "Chef's Terrine",
+        "desc": "A delicious artisanal creation."
       },
       "lamb": {
-        "name": "Lamb with delicate flavors",
-        "desc": "Chosen pieces for their finesse and their subtle, fragrant taste."
+        "name": "Ham Lard",
+        "desc": "Our selected ham lard."
       },
       "order": {
-        "name": "Meat on order",
-        "desc": "Charcuterie boards and specific cuts for all your events."
+        "name": "Plum Terrine",
+        "desc": "Homemade."
       },
       "pork": {
-        "name": "Premium quality pork",
-        "desc": "Flawless Swiss quality, perfect for all your preparations."
+        "name": "Charcuterie Platter",
+        "desc": "For your aperitifs."
       }
     },
     "tags": {

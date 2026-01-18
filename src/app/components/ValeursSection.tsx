@@ -48,10 +48,10 @@ export function ValeursSection() {
         {/* Bloc 1 : Introduction */}
         <motion.div
           className="bg-primary/5 border-l-4 border-gold rounded-r-2xl p-6 md:p-10 mb-12 max-w-5xl mx-auto shadow-sm"
-          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: isMobile ? 0 : 0.2 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
         >
           <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed text-center font-medium font-sans italic">
             {t('about.intro', "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.")}
@@ -62,17 +62,16 @@ export function ValeursSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           {/* Image */}
           <motion.div
-            initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: isMobile ? 0 : 0.8 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
             className="relative"
           >
             <div className="absolute -inset-4 bg-gold/5 rounded-[2rem] -rotate-2 z-0" />
-            <motion.div
-              className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/10"
-              whileHover={isMobile ? {} : { scale: 1.02 }}
-              transition={{ duration: 0.5 }}
+            <div
+              className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/10 transition-transform duration-500 hover:scale-[1.02]"
+              style={{ willChange: 'transform' }}
             >
               <OptimizedImage
                 src={settings.images.about}
@@ -81,17 +80,17 @@ export function ValeursSection() {
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Notre Promesse + Nos produits */}
           <div className="space-y-8">
             <motion.div
               className="bg-muted/50 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-sm"
-              initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 30 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: isMobile ? 0 : 0.2 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl md:text-4xl font-bold mb-6 text-gold font-serif">
                 {t('about.promiseTitle', 'Notre Promesse')}
@@ -103,10 +102,10 @@ export function ValeursSection() {
 
             <motion.div
               className="bg-white rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-xl"
-              initial={{ opacity: isMobile ? 1 : 0, x: isMobile ? 0 : 30 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: isMobile ? 0 : 0.3 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h3 className="text-2xl md:text-3xl font-bold mb-6 text-primary font-serif">
                 {t('about.listTitle', 'Vous trouverez chez nous')}
@@ -121,7 +120,7 @@ export function ValeursSection() {
                   t('products.items.order.name', 'Viandes sur commande')
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-4 text-base md:text-lg text-foreground/80 font-sans font-semibold group">
-                    <span className={`w-2.5 h-2.5 bg-gold rounded-full flex-shrink-0 ${isMobile ? '' : 'group-hover:scale-150'} transition-transform`}></span>
+                    <span className="w-2.5 h-2.5 bg-gold rounded-full flex-shrink-0 transition-transform group-hover:scale-125"></span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -175,10 +174,10 @@ export function ValeursSection() {
         {/* Bloc 4 : Notre engagement */}
         <motion.div
           className="bg-primary text-white rounded-[3rem] p-10 md:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden"
-          initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: isMobile ? 0 : 0.5 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32" />
           <p className="text-xl md:text-3xl text-center font-serif italic leading-relaxed relative z-10">
@@ -201,24 +200,28 @@ function ValeurCard({
 }) {
   return (
     <motion.div
-      className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-500 group text-center h-full"
-      initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: isMobile ? 0 : 0.1 * index }}
-      whileHover={isMobile ? {} : { y: -10 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.4, delay: isMobile ? 0 : 0.05 * index }}
+      className="h-full"
     >
-      <div className="flex flex-col items-center gap-6">
-        <div className={`w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center ${isMobile ? '' : 'group-hover:bg-gold transition-all duration-500 rotate-3 group-hover:rotate-0'}`}>
-          <valeur.icon className={`w-8 h-8 text-gold ${isMobile ? '' : 'group-hover:text-white transition-colors'}`} />
-        </div>
-        <div>
-          <h3 className={`font-bold text-xl md:text-2xl mb-3 font-serif ${isMobile ? '' : 'group-hover:text-primary transition-colors'}`}>
-            {valeur.title}
-          </h3>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans font-medium">
-            {valeur.description}
-          </p>
+      <div
+        className="bg-card hover:bg-muted/50 rounded-[2rem] p-8 border border-border/50 shadow-sm transition-all duration-300 group text-center h-full hover:-translate-y-2"
+        style={{ willChange: 'transform' }}
+      >
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center transition-all duration-300 rotate-3 group-hover:rotate-0 group-hover:bg-gold">
+            <valeur.icon className="w-8 h-8 text-gold transition-colors group-hover:text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-xl md:text-2xl mb-3 font-serif transition-colors group-hover:text-primary">
+              {valeur.title}
+            </h3>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans font-medium">
+              {valeur.description}
+            </p>
+          </div>
         </div>
       </div>
     </motion.div>

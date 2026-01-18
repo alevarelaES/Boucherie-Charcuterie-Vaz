@@ -1,18 +1,24 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 import settings from '../../settings.json';
 
 export function Hero() {
   const { t } = useTranslation();
-  const { scrollY } = useScroll();
 
-  // No parallax on small screens for better performance
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const heroImages = [
+    '/images/Photos Boucherie/Boucherie1.jpeg',
+    '/images/Photos Boucherie/Boucherie2.jpeg'
+  ];
 
-  const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
-  const yContent = useTransform(scrollY, [0, 500], [0, -50]);
-  const scaleHero = useTransform(scrollY, [0, 500], [1.1, 1.2]);
-  const yHero = useTransform(scrollY, [0, 500], [0, 50]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
 
   const scrollToContent = () => {
     const section = document.querySelector('#a-propos');
@@ -22,36 +28,39 @@ export function Hero() {
   return (
     <section id="accueil" className="relative h-[100dvh] w-full overflow-hidden bg-black">
       {/* 
-          STABLE BACKGROUND LOGIC 
+          OPTIMIZED BACKGROUND CAROUSEL
       */}
       <div className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute inset-x-0 -top-[5%] -bottom-[5%] h-[110%] w-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${settings.images.hero})`,
-            scale: isMobile ? 1.05 : scaleHero,
-            y: isMobile ? 0 : yHero
-          }}
-        />
+        {heroImages.map((img, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${idx === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            style={{ willChange: 'opacity' }}
+          >
+            <div
+              className="absolute inset-x-0 -top-[5%] -bottom-[5%] h-[110%] w-full bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url("${img}")`,
+                transform: 'scale(1.05)',
+                willChange: 'transform'
+              }}
+            />
+          </div>
+        ))}
         {/* Superior premium overlays - Softer for elegance */}
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
       </div>
 
-      {/* Hero Content - Unified Layout for better consistency */}
-      <motion.div
-        className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
-        style={{
-          opacity: isMobile ? 1 : opacityHero,
-          y: isMobile ? 0 : yContent
-        }}
-      >
+      {/* Hero Content - Optimized animations */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-10 pt-10">
-          {/* Main Title - Responsive sizing */}
+          {/* Main Title - Simplified animation */}
           <motion.h1
-            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-[1.1] tracking-tight drop-shadow-2xl"
           >
             {t('hero.titleInitial', 'La boucherie')} <br />
@@ -62,19 +71,19 @@ export function Hero() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.4 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="text-white/90 text-lg md:text-2xl font-sans font-medium max-w-2xl leading-relaxed drop-shadow-lg"
           >
             {t('hero.description', "Excellence artisanale et viandes d'exception à")} <span className="text-white font-bold underline decoration-gold decoration-4 underline-offset-4">Vallorbe</span>.
           </motion.p>
 
-          {/* CTA Buttons - Premium Rounded-Full */}
+          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: isMobile ? 0 : 0.6 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-5 mt-4"
           >
             <a
@@ -92,24 +101,22 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator - Hidden on very small screens to avoid clutter */}
-        {!isMobile && (
-          <motion.div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer hidden sm:flex flex-col items-center gap-2"
-            onClick={scrollToContent}
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1.5 backdrop-blur-sm">
-              <motion.div
-                className="w-1 h-2 bg-gold/80 rounded-full"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </motion.div>
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer hidden sm:flex flex-col items-center gap-2"
+          onClick={scrollToContent}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1.5 backdrop-blur-sm">
+            <motion.div
+              className="w-1 h-2 bg-gold/80 rounded-full"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

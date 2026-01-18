@@ -29,9 +29,12 @@
   "closed": "Fermé",
   "days": {
     "friday": "Vendredi",
+    "monTue": "Lun-Mar",
     "monThu": "Lun-Jeu",
     "saturday": "Samedi",
-    "sunday": "Dimanche"
+    "sunday": "Dimanche",
+    "thursday": "Jeudi",
+    "wednesday": "Mercredi"
   },
   "rights": "Tous droits réservés.",
   "tagline": "L'art de la viande depuis 2025",
@@ -171,28 +174,28 @@
     "itemDesc": "Découvrez nos sélections fraîches et savoureuses, préparées avec soin.",
     "items": {
       "chicken": {
-        "name": "Poulet tendre et savoureux",
-        "desc": "Une chair tendre et juteuse, idéale pour vos grillades ou plats mijotés."
+        "name": "Entrecôte Maturée",
+        "desc": "Maturé trois semaines sur l'os."
       },
       "heifer": {
-        "name": "Génisse maturée pour les amateurs",
-        "desc": "Sélectionnée avec soin pour sa tendreté et son persillé exceptionnel."
+        "name": "Fondue Chinoise",
+        "desc": "Fondue chinoise de bœuf."
       },
       "horse": {
-        "name": "Viande de cheval riche en goût",
-        "desc": "Une viande maigre et savoureuse, appréciée pour ses qualités nutritives."
+        "name": "Terrine du Chef",
+        "desc": "Une création artisanale savoureuse."
       },
       "lamb": {
-        "name": "Agneau aux saveurs délicates",
-        "desc": "Des morceaux choisis pour leur finesse et leur goût subtil et parfumé."
+        "name": "Lard de Jambon",
+        "desc": "Notre lard de jambon sélectionné."
       },
       "order": {
-        "name": "Viandes sur commande",
-        "desc": "Plateaux de charcuterie et découpes spécifiques pour tous vos événements."
+        "name": "Terrine au Pruneaux",
+        "desc": "Une création artisanale savoureuse."
       },
       "pork": {
-        "name": "Porc de qualité supérieure",
-        "desc": "Une qualité suisse irréprochable, parfaite pour toutes vos préparations."
+        "name": "Plat Charcuterie",
+        "desc": "Pour votre apéro."
       }
     },
     "tags": {

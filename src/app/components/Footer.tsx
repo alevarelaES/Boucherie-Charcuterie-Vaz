@@ -9,7 +9,6 @@ export function Footer() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
-  // Safe detection for animations
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   const socialLinks = [
@@ -26,7 +25,9 @@ export function Footer() {
   ];
 
   const hours = [
-    { jour: t('days.monThu'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.monTue'), heures: '07:00-12:00 | 13:30-18:00' },
+    { jour: t('days.wednesday'), heures: '07:00-12:00' },
+    { jour: t('days.thursday'), heures: '08:00-12:00 | 13:30-18:00' },
     { jour: t('days.friday'), heures: '07:00-12:00 | 13:30-18:00' },
     { jour: t('days.saturday'), heures: '07:00-13:00' },
     { jour: t('days.sunday'), heures: t('closed'), closed: true },
@@ -43,15 +44,14 @@ export function Footer() {
             {/* Brand Column */}
             <motion.div
               className="md:col-span-2"
-              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <motion.div
-                  className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden"
-                  whileHover={isMobile ? {} : { rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                <div
+                  className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden transition-transform duration-700 hover:rotate-[360deg]"
+                  style={{ willChange: 'transform' }}
                 >
                   <OptimizedImage
                     src={settings.images.logo}
@@ -59,7 +59,7 @@ export function Footer() {
                     className="w-full h-full object-contain scale-105"
                     priority
                   />
-                </motion.div>
+                </div>
                 <div>
                   <p className="text-2xl md:text-3xl font-bold font-serif">
                     Boucherie Vaz
@@ -76,25 +76,24 @@ export function Footer() {
               {/* Social Links */}
               <div className="flex gap-3">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all text-background"
-                    whileHover={isMobile ? {} : { scale: 1.1, y: -3 }}
-                    whileTap={isMobile ? {} : { scale: 0.9 }}
+                    className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all text-background hover:-translate-y-1"
+                    style={{ willChange: 'transform' }}
                   >
                     <social.icon className="w-5 h-5" />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </motion.div>
 
             {/* Quick Links */}
             <motion.div
-              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: isMobile ? 0 : 0.1 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
@@ -102,9 +101,10 @@ export function Footer() {
               </h3>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
-                  <motion.li
+                  <li
                     key={index}
-                    whileHover={isMobile ? {} : { x: 5 }}
+                    className="transition-transform duration-300 hover:translate-x-1"
+                    style={{ willChange: 'transform' }}
                   >
                     <a
                       href={`/${i18n.language}${link.href}`}
@@ -128,16 +128,16 @@ export function Footer() {
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.label}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>
 
             {/* Contact Info */}
             <motion.div
-              initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: isMobile ? 0 : 0.2 }}
             >
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
@@ -175,9 +175,9 @@ export function Footer() {
           {/* Horaires Section */}
           <motion.div
             className="mb-12 pb-8 border-b border-background/10"
-            initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: isMobile ? 0 : 0.3 }}
           >
             <div className="flex items-center gap-2 mb-3">
@@ -202,9 +202,9 @@ export function Footer() {
           {/* Bottom Bar */}
           <motion.div
             className="pt-8 border-t border-background/10"
-            initial={{ opacity: isMobile ? 1 : 0 }}
+            initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: isMobile ? 0 : 0.3 }}
           >
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base text-background/60 font-normal">

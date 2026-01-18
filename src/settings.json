@@ -16,27 +16,27 @@
     "products": [
         {
             "id": "chicken",
-            "image": "/images/products/chicken.png?v=2"
+            "image": "/images/Photos Boucherie/Produits/viande5.jpeg"
         },
         {
             "id": "heifer",
-            "image": "/images/products/beef.png?v=2"
-        },
-        {
-            "id": "lamb",
-            "image": "/images/products/lamb.png?v=2"
-        },
-        {
-            "id": "pork",
-            "image": "/images/products/pork.png?v=2"
+            "image": "/images/Photos Boucherie/Produits/viande4.jpeg"
         },
         {
             "id": "horse",
-            "image": "/images/products/horse.png?v=2"
+            "image": "/images/Photos Boucherie/Produits/viande2.jpeg"
+        },
+        {
+            "id": "lamb",
+            "image": "/images/Photos Boucherie/Produits/viande3.jpeg"
         },
         {
             "id": "order",
-            "image": "/images/products/order.png?v=3"
+            "image": "/images/Photos Boucherie/Produits/vinade1.jpeg"
+        },
+        {
+            "id": "pork",
+            "image": "/images/Photos Boucherie/Produits/Charcuterie.jpeg"
         }
     ]
 }
