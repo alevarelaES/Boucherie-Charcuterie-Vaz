@@ -1,17 +1,22 @@
 import { Badge } from './ui/badge';
-import { useState, useRef } from 'react';
-import { motion } from 'motion/react';
+import { useState, memo, useCallback } from 'react';
 import { OptimizedImage } from './OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel';
 
-export function ProduitsSection() {
+/**
+ * Products Section - Performance Optimized
+ * 
+ * Key optimizations:
+ * - No Framer Motion (pure CSS transitions)
+ * - Memoized ProductCard to prevent re-renders
+ * - content-visibility for lazy rendering
+ * - CSS-only hover effects
+ */
+export const ProduitsSection = memo(function ProduitsSection() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const containerRef = useRef<HTMLElement>(null);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   const produits = [
     {
@@ -58,14 +63,17 @@ export function ProduitsSection() {
     }
   ];
 
+  const handleHover = useCallback((index: number | null) => {
+    setHoveredIndex(index);
+  }, []);
+
   return (
     <section
       id="produits"
-      ref={containerRef}
-      className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20"
+      className="py-12 md:py-16 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20 content-auto"
     >
       {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-12">
@@ -80,7 +88,7 @@ export function ProduitsSection() {
           </p>
         </div>
 
-        {/* Carousel Layout for all screen sizes */}
+        {/* Carousel Layout */}
         <div className="-mx-4">
           <Carousel
             opts={{
@@ -92,13 +100,12 @@ export function ProduitsSection() {
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {produits.map((produit, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-[85%] sm:basis-[45%] lg:basis-1/3">
+                <CarouselItem key={produit.id} className="pl-2 md:pl-4 basis-[85%] sm:basis-[45%] lg:basis-1/3">
                   <ProductCard
                     produit={produit}
                     index={index}
-                    isMobile={isMobile}
-                    hoveredIndex={hoveredIndex}
-                    setHoveredIndex={setHoveredIndex}
+                    isHovered={hoveredIndex === index}
+                    onHover={handleHover}
                   />
                 </CarouselItem>
               ))}
@@ -111,42 +118,40 @@ export function ProduitsSection() {
           </Carousel>
         </div>
       </div>
-    </section >
+    </section>
   );
-}
+});
 
-function ProductCard({
+/**
+ * Memoized Product Card - Only re-renders when props change
+ */
+const ProductCard = memo(function ProductCard({
   produit,
   index,
-  isMobile,
-  hoveredIndex,
-  setHoveredIndex
+  isHovered,
+  onHover
 }: {
-  produit: any;
+  produit: { id: string; name: string; description: string; tag: string; image: string };
   index: number;
-  isMobile: boolean;
-  hoveredIndex?: number | null;
-  setHoveredIndex?: (idx: number | null) => void;
+  isHovered: boolean;
+  onHover: (index: number | null) => void;
 }) {
   const { t } = useTranslation();
 
   return (
     <div
       className="h-full"
-      onMouseEnter={() => !isMobile && setHoveredIndex?.(index)}
-      onMouseLeave={() => !isMobile && setHoveredIndex?.(null)}
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
     >
       <div
-        className={`bg-card rounded-xl overflow-hidden shadow-xl h-full flex flex-col group transition-transform duration-300 ease-out ${!isMobile && hoveredIndex === index ? '-translate-y-2' : ''
+        className={`bg-card rounded-xl overflow-hidden shadow-xl h-full flex flex-col group transition-transform duration-300 ease-out ${isHovered ? '-translate-y-2 shadow-2xl' : ''
           }`}
-        style={{ willChange: 'transform' }}
       >
         {/* Image */}
         <div className="relative aspect-square overflow-hidden bg-muted">
           <div
-            className={`w-full h-full transition-transform duration-700 ease-out ${!isMobile && hoveredIndex === index ? 'scale-110' : 'scale-100'
-              }`}
-            style={{ willChange: 'transform' }}
+            className="w-full h-full"
           >
             <OptimizedImage
               src={produit.image}
@@ -168,12 +173,9 @@ function ProductCard({
 
         {/* Content */}
         <div className="p-4 md:p-5 flex-grow flex flex-col">
-          <h3
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 font-bold group-hover:text-primary transition-colors font-serif line-clamp-2"
-          >
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 font-bold group-hover:text-primary transition-colors duration-200 font-serif line-clamp-2">
             {produit.name}
           </h3>
-
           <p className="text-sm md:text-base lg:text-lg text-muted-foreground font-medium font-sans line-clamp-3">
             {produit.description}
           </p>
@@ -181,4 +183,5 @@ function ProductCard({
       </div>
     </div>
   );
-}
+});
+

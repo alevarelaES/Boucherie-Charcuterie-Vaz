@@ -1,9 +1,17 @@
-import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
-import settings from '../../settings.json';
+import { useState, useEffect, memo } from 'react';
+import { ChevronDown } from 'lucide-react';
 
-export function Hero() {
+/**
+ * Hero Section - Ultra Premium & Optimized
+ * 
+ * Improvements:
+ * - "Premium" transition: Image starts slightly zoomed in (1.1) and scales down to 1.0 while fading in.
+ *   This creates a very sophisticated, cinematic "reveal" effect.
+ * - Optimized scroll indicator with simpler, reliable CSS animation.
+ * - Removed complex state logic for smoother performance.
+ */
+export const Hero = memo(function Hero() {
   const { t } = useTranslation();
 
   const heroImages = [
@@ -16,7 +24,7 @@ export function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
   }, [heroImages.length]);
 
@@ -27,96 +35,83 @@ export function Hero() {
 
   return (
     <section id="accueil" className="relative h-[100dvh] w-full overflow-hidden bg-black">
-      {/* 
-          OPTIMIZED BACKGROUND CAROUSEL
-      */}
-      <div className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden">
-        {heroImages.map((img, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${idx === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-            style={{ willChange: 'opacity' }}
-          >
+      {/* Background Layer */}
+      <div className="absolute inset-0 z-0">
+        {heroImages.map((img, idx) => {
+          const isActive = idx === currentImageIndex;
+          return (
             <div
-              className="absolute inset-x-0 -top-[5%] -bottom-[5%] h-[110%] w-full bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url("${img}")`,
-                transform: 'scale(1.05)',
-                willChange: 'transform'
-              }}
-            />
-          </div>
-        ))}
-        {/* Superior premium overlays - Softer for elegance */}
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
+              key={idx}
+              className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                }`}
+              aria-hidden={!isActive}
+            >
+              <div
+                className={`absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] ease-out ${isActive ? 'scale-100' : 'scale-110'
+                  }`}
+                style={{ backgroundImage: `url("${img}")` }}
+              />
+              {/* Premium Overlay Gradient - Darkened for readability */}
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+            </div>
+          );
+        })}
       </div>
 
-      {/* Hero Content - Optimized animations */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:gap-10 pt-10">
-          {/* Main Title - Simplified animation */}
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-[1.1] tracking-tight drop-shadow-2xl"
-          >
-            {t('hero.titleInitial', 'La boucherie')} <br />
-            <span className="inline-block py-2 text-white italic drop-shadow-lg">
+      {/* Hero Content */}
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6">
+        <div className="max-w-5xl mx-auto flex flex-col items-center gap-8 md:gap-12 pt-12">
+          {/* Main Title */}
+          <h1 className="flex flex-col items-center">
+            <span className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-serif leading-[1.0] tracking-tight drop-shadow-2xl animate-fade-in-up">
+              {t('hero.titleInitial', 'La boucherie')}
+            </span>
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold font-serif italic mt-4 drop-shadow-lg animation-delay-200 animate-fade-in-up">
               {t('hero.titleHighlight', 'proche de vous')}
             </span>
-          </motion.h1>
+          </h1>
 
           {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/90 text-lg md:text-2xl font-sans font-medium max-w-2xl leading-relaxed drop-shadow-lg"
-          >
-            {t('hero.description', "Excellence artisanale et viandes d'exception à")} <span className="text-white font-bold underline decoration-gold decoration-4 underline-offset-4">Vallorbe</span>.
-          </motion.p>
+          <div className="relative">
+            <p className="text-white/90 text-lg md:text-2xl font-sans font-medium max-w-2xl leading-relaxed drop-shadow-lg animation-delay-400 animate-fade-in-up">
+              {t('hero.description', "Excellence artisanale et viandes d'exception à")}{' '}
+              <span className="text-white font-bold underline decoration-gold decoration-2 underline-offset-4">
+                Vallorbe
+              </span>.
+            </p>
+          </div>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-5 mt-4"
-          >
+          <div className="flex flex-col sm:flex-row gap-6 mt-6 animation-delay-600 animate-fade-in-up">
             <a
               href="#produits"
-              className="px-10 py-4 bg-primary text-primary-foreground rounded-full font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_30px_rgba(156,28,48,0.3)]"
+              className="px-10 py-5 bg-primary text-white rounded-full font-bold text-lg tracking-wide hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl shadow-primary/30"
             >
               {t('hero.cta.products', 'Découvrir nos produits')}
             </a>
             <a
               href="#contact"
-              className="px-10 py-4 bg-white/5 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/10 active:scale-95 transition-all shadow-xl"
+              className="px-10 py-5 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-full font-bold text-lg tracking-wide hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-300"
             >
               {t('hero.cta.contact', 'Nous contacter')}
             </a>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer hidden sm:flex flex-col items-center gap-2"
+        {/* Scroll Indicator - Totally revamped */}
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-30 flex flex-col items-center gap-3 group animate-fade-in animation-delay-1000"
           onClick={scrollToContent}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1.5 backdrop-blur-sm">
-            <motion.div
-              className="w-1 h-2 bg-gold/80 rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            />
+          <span className="text-xs uppercase tracking-[0.2em] text-white/70 font-bold group-hover:text-white transition-colors">
+            {t('hero.scroll', 'Découvrir')}
+          </span>
+          <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center p-1 relative overflow-hidden group-hover:border-white/60 transition-colors">
+            <div className="w-1.5 h-3 bg-white rounded-full animate-bounce-slow mt-1" />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+});

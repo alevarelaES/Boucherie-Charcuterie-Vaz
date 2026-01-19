@@ -1,15 +1,22 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
-import { motion } from 'motion/react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { OptimizedImage } from './OptimizedImage';
 import settings from '../../settings.json';
 
-export function Footer() {
+/**
+ * Footer - Performance Optimized
+ * 
+ * Key optimizations:
+ * - No Framer Motion (pure CSS transitions)
+ * - Memoized component
+ * - CSS-only hover effects
+ */
+export const Footer = memo(function Footer() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   const socialLinks = [
     { icon: Facebook, href: settings.info.facebook, label: 'Facebook' },
@@ -33,6 +40,22 @@ export function Footer() {
     { jour: t('days.sunday'), heures: t('closed'), closed: true },
   ];
 
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    const targetPath = `/${i18n.language}`;
+    if (window.location.pathname === targetPath || window.location.pathname === `${targetPath}/`) {
+      e.preventDefault();
+      const id = href.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', `/${i18n.language}${href}`);
+      }
+    } else {
+      e.preventDefault();
+      navigate(`/${i18n.language}${href}`);
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background relative overflow-hidden font-sans">
       {/* Decorative Top Border */}
@@ -42,17 +65,9 @@ export function Footer() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             {/* Brand Column */}
-            <motion.div
-              className="md:col-span-2"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-            >
+            <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden transition-transform duration-700 hover:rotate-[360deg]"
-                  style={{ willChange: 'transform' }}
-                >
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden transition-transform duration-700 hover:rotate-[360deg]">
                   <OptimizedImage
                     src={settings.images.logo}
                     alt="Boucherie Vaz"
@@ -80,22 +95,16 @@ export function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all text-background hover:-translate-y-1"
-                    style={{ willChange: 'transform' }}
+                    className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all duration-300 text-background hover:-translate-y-1"
                   >
                     <social.icon className="w-5 h-5" />
                   </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Quick Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: isMobile ? 0 : 0.1 }}
-            >
+            <div>
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 {t('footer.navigation')}
               </h3>
@@ -104,42 +113,22 @@ export function Footer() {
                   <li
                     key={index}
                     className="transition-transform duration-300 hover:translate-x-1"
-                    style={{ willChange: 'transform' }}
                   >
                     <a
                       href={`/${i18n.language}${link.href}`}
-                      onClick={(e) => {
-                        const targetPath = `/${i18n.language}`;
-                        if (window.location.pathname === targetPath || window.location.pathname === `${targetPath}/`) {
-                          e.preventDefault();
-                          const id = link.href.replace('#', '');
-                          const element = document.getElementById(id);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                            window.history.pushState(null, '', `/${i18n.language}${link.href}`);
-                          }
-                        } else {
-                          e.preventDefault();
-                          navigate(`/${i18n.language}${link.href}`);
-                        }
-                      }}
-                      className="text-base md:text-lg text-background/85 hover:text-primary transition-colors inline-flex items-center gap-2 group font-medium"
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 inline-flex items-center gap-2 group font-medium"
                     >
-                      <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                       {link.label}
                     </a>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: isMobile ? 0 : 0.2 }}
-            >
+            <div>
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-serif">
                 {t('footer.contact')}
               </h3>
@@ -150,7 +139,7 @@ export function Footer() {
                     href={settings.info.addressMap}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base md:text-lg text-background/80 hover:text-primary transition-colors font-medium"
+                    className="text-base md:text-lg text-background/80 hover:text-primary transition-colors duration-200 font-medium"
                   >
                     {settings.info.address.split(',')[0]}<br />
                     {settings.info.address.split(',')[1]}
@@ -158,28 +147,22 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href={`tel:${settings.info.phoneRaw}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors font-medium">
+                  <a href={`tel:${settings.info.phoneRaw}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 font-medium">
                     {settings.info.phone}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href={`mailto:${settings.info.email}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors break-all font-medium">
+                  <a href={`mailto:${settings.info.email}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 break-all font-medium">
                     {settings.info.email}
                   </a>
                 </li>
               </ul>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Horaires Section */}
-          <motion.div
-            className="mb-12 pb-8 border-b border-background/10"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: isMobile ? 0 : 0.3 }}
-          >
+          {/* Hours Section */}
+          <div className="mb-12 pb-8 border-b border-background/10">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-6 h-6 text-primary" />
               <h3 className="text-base md:text-lg font-bold uppercase tracking-wider font-serif">
@@ -197,16 +180,10 @@ export function Footer() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Bottom Bar */}
-          <motion.div
-            className="pt-8 border-t border-background/10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: isMobile ? 0 : 0.3 }}
-          >
+          <div className="pt-8 border-t border-background/10">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base text-background/60 font-normal">
               <p>
                 © {currentYear} Boucherie Vaz. {t('footer.rights')}
@@ -214,19 +191,19 @@ export function Footer() {
               <div className="flex gap-6">
                 <Link
                   to={`/${i18n.language}/mentions-legales`}
-                  className="hover:text-primary transition-colors cursor-pointer"
+                  className="hover:text-primary transition-colors duration-200 cursor-pointer"
                 >
                   {t('legalContent.title')}
                 </Link>
                 <Link
                   to={`/${i18n.language}/politique-confidentialite`}
-                  className="hover:text-primary transition-colors cursor-pointer"
+                  className="hover:text-primary transition-colors duration-200 cursor-pointer"
                 >
                   {t('privacyContent.title')}
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -235,4 +212,5 @@ export function Footer() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0" />
     </footer>
   );
-}
+});
+

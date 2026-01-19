@@ -1,18 +1,25 @@
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
-import { motion } from 'motion/react';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
-import { OptimizedImage } from './OptimizedImage';
 import { Badge } from './ui/badge';
 
-export function ContactSection() {
+/**
+ * Contact Section - Performance Optimized
+ * 
+ * Key optimizations:
+ * - No Framer Motion (pure CSS transitions)
+ * - Memoized component
+ * - content-visibility for lazy rendering
+ * - CSS-only hover effects
+ */
+export const ContactSection = memo(function ContactSection() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const getCurrentStatus = () => {
     const now = new Date();
-    const day = now.getDay(); // 0 is Sunday, 1 is Monday...
+    const day = now.getDay();
     const currentTime = now.getHours() * 100 + now.getMinutes();
 
     const schedule: Record<number, { morning?: [number, number], afternoon?: [number, number] }> = {
@@ -22,25 +29,22 @@ export function ContactSection() {
       4: { morning: [800, 1200], afternoon: [1330, 1800] },
       5: { morning: [700, 1200], afternoon: [1330, 1800] },
       6: { morning: [700, 1300] },
-      0: {}, // Closed
+      0: {},
     };
 
     const today = schedule[day];
-    if (!today) return { isOpen: false, nextStatus: '' };
+    if (!today) return { isOpen: false, currentDay: day };
 
     const inMorning = today.morning && currentTime >= today.morning[0] && currentTime < today.morning[1];
     const inAfternoon = today.afternoon && currentTime >= today.afternoon[0] && currentTime < today.afternoon[1];
 
-    const isOpen = inMorning || inAfternoon;
-
     return {
-      isOpen,
+      isOpen: inMorning || inAfternoon,
       currentDay: day
     };
   };
 
-  const { isOpen, currentDay } = getCurrentStatus();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const { currentDay } = getCurrentStatus();
 
   const horaires = [
     { id: 1, jour: t('contact.days.monday', 'Lundi'), matin: '07:00 - 12:00', apresMidi: '13:30 - 18:00', isClosed: false },
@@ -68,9 +72,15 @@ export function ContactSection() {
     window.location.href = `mailto:${settings.info.email}?subject=${subject}&body=${body}`;
   };
 
+  const contactCards = [
+    { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: settings.info.phone, href: `tel:${settings.info.phoneRaw}` },
+    { icon: Mail, label: t('contact.labels.email', 'Email'), value: settings.info.email, href: `mailto:${settings.info.email}` },
+    { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: settings.info.address, href: settings.info.addressMap },
+  ];
+
   return (
-    <section id="contact" className="py-12 md:py-24 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20">
-      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-20" />
+    <section id="contact" className="py-12 md:py-24 px-4 md:px-8 bg-muted/30 relative overflow-hidden scroll-mt-20 content-auto">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
@@ -82,44 +92,31 @@ export function ContactSection() {
           </h2>
         </div>
 
-        {/* TOP: Contact Info Grid */}
+        {/* Contact Info Grid - CSS-only animations */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: settings.info.phone, href: `tel:${settings.info.phoneRaw}` },
-            { icon: Mail, label: t('contact.labels.email', 'Email'), value: settings.info.email, href: `mailto:${settings.info.email}` },
-            { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: settings.info.address, href: settings.info.addressMap },
-          ].map((contact, index) => (
-            <motion.a
+          {contactCards.map((contact, index) => (
+            <a
               key={index}
               href={contact.href}
               target={contact.icon === MapPin ? '_blank' : undefined}
               rel={contact.icon === MapPin ? 'noopener noreferrer' : undefined}
               className="bg-card p-6 rounded-2xl shadow-xl flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ delay: isMobile ? 0 : index * 0.1 }}
-              style={{ willChange: 'transform' }}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-12 h-12 flex-shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+              <div className="w-12 h-12 flex-shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <contact.icon size={24} />
               </div>
               <div className="min-w-0">
                 <p className="text-xs text-muted-foreground font-bold uppercase tracking-wider">{contact.label}</p>
                 <p className="font-bold text-foreground text-base sm:text-lg truncate font-sans">{contact.value}</p>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mb-12">
-          {/* MIDDLE LEFT: Messaging Form */}
-          <motion.div
-            className="lg:col-span-2 bg-card rounded-2xl p-6 md:p-8 shadow-xl h-full"
-            initial={{ opacity: 0, x: -15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
+          {/* Form */}
+          <div className="lg:col-span-2 bg-card rounded-2xl p-6 md:p-8 shadow-xl h-full">
             <h3 className="text-2xl font-bold mb-6 font-serif">
               {t('contact.formTitle', 'Envoyez-nous un message')}
             </h3>
@@ -150,7 +147,7 @@ export function ContactSection() {
               />
               <button
                 type="submit"
-                className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-primary/20 font-sans"
+                className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/20 font-sans"
               >
                 {t('contact.submit', 'Envoyer')}
               </button>
@@ -181,15 +178,10 @@ export function ContactSection() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* MIDDLE RIGHT: Horaires */}
-          <motion.div
-            className="lg:col-span-3 bg-card rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden"
-            initial={{ opacity: 0, x: 15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
+          {/* Hours */}
+          <div className="lg:col-span-3 bg-card rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
                 <Clock size={24} />
@@ -207,8 +199,8 @@ export function ContactSection() {
                   <div
                     key={horaire.id}
                     className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl transition-all duration-300 ${isToday
-                      ? 'bg-primary/5 border border-primary/20 shadow-inner'
-                      : 'bg-muted/30'
+                        ? 'bg-primary/5 border border-primary/20 shadow-inner'
+                        : 'bg-muted/30'
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -248,16 +240,11 @@ export function ContactSection() {
                 );
               })}
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* BOTTOM: Map */}
-        <motion.div
-          className="bg-card rounded-2xl overflow-hidden shadow-xl h-[450px] group relative"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-        >
+        {/* Map */}
+        <div className="bg-card rounded-2xl overflow-hidden shadow-xl h-[450px] group relative">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.381559828854!2d6.331591076891081!3d46.70194734346083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478f2d9c8a7d8d8d%3A0x1234567890abcdef!2sRue%20du%20Faubourg%205%2C%201337%20Vallorbe!5e0!3m2!1sfr!2sch!4v1700000000000"
             width="100%"
@@ -269,8 +256,9 @@ export function ContactSection() {
             title={`${t('contact.labels.address', 'Adresse')} - Rue du Faubourg 5, Vallorbe`}
             className="grayscale group-hover:grayscale-0 transition-all duration-700"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+});
+

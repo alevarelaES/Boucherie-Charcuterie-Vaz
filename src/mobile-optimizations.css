@@ -158,3 +158,179 @@ svg {
 .above-fold {
     contain: layout style paint;
 }
+
+/* ========================================
+   PERFORMANCE-OPTIMIZED CSS ANIMATIONS
+   GPU-accelerated, no JavaScript required
+   ======================================== */
+
+/* Fade in and up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Animation delays */
+.animation-delay-200 {
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+.animation-delay-600 {
+    animation-delay: 0.6s;
+    opacity: 0;
+}
+
+/* Slow bounce for scroll indicator */
+@keyframes bounceSlow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(15px);
+    }
+}
+
+.animate-bounce-slow {
+    animation: bounceSlow 2s ease-in-out infinite;
+}
+
+/* Scroll dot animation */
+@keyframes scrollDot {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}
+
+.animate-scroll-dot {
+    animation: scrollDot 1.5s ease-out infinite;
+}
+
+/* Fade in animation for sections */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Scale in animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* Content visibility for lazy sections - MAJOR PERFORMANCE BOOST */
+.content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+}
+
+/* ========================================
+   PREMIUM KEN BURNS EFFECT
+   Cinematic zoom + pan for hero carousel
+   ======================================== */
+
+@keyframes kenBurns {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    50% {
+        transform: scale(1.1) translate(-1%, -1%);
+    }
+
+    100% {
+        transform: scale(1.15) translate(1%, 0.5%);
+    }
+}
+
+.animate-ken-burns {
+    animation: kenBurns 8s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+/* Reduced motion: disable Ken Burns for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .animate-ken-burns {
+        animation: none;
+        transform: scale(1.05);
+    }
+}

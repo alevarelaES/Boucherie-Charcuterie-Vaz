@@ -2,7 +2,7 @@ import { Header } from './components/Header';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ScrollRestoration } from './components/ScrollRestoration';
 import { CustomScrollbar } from './components/CustomScrollbar';
-import { CookieBanner } from './components/CookieBanner';
+import { ConsentBanner } from './components/ConsentBanner';
 import { TransitionOverlay } from './components/TransitionOverlay';
 import { PageContent } from './components/PageContent';
 import { WelcomeMessage } from './components/WelcomeMessage';
@@ -65,7 +65,7 @@ export default function App() {
       <Header />
       <ScrollToTop />
       <ScrollRestoration />
-      <CookieBanner />
+      <ConsentBanner />
       <WelcomeMessage />
       <TransitionOverlay pendingLang={pendingLang} />
 
