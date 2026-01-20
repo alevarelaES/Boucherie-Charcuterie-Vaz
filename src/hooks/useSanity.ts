@@ -214,3 +214,28 @@ export function useOpeningHours() {
     return useSanityData<OpeningHours>(query);
 }
 
+// Hook pour récupérer les recettes
+export interface Recipe {
+    _id: string;
+    title: string;
+    category: 'beef' | 'poultry' | 'pork' | 'lamb' | 'veal' | 'other';
+    time: string;
+    servings: string;
+    difficulty: 'Easy' | 'Medium' | 'Advanced';
+    image: SanityImage;
+}
+
+export function useRecipes() {
+    const query = `*[_type == "recipe"] | order(_createdAt desc) {
+    _id,
+    title,
+    category,
+    time,
+    servings,
+    difficulty,
+    image
+  }`;
+
+    return useSanityData<Recipe[]>(query);
+}
+

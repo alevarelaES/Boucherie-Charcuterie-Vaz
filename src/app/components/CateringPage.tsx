@@ -14,35 +14,12 @@ export function CateringPage() {
     const { data: sanityServices, loading } = useServices();
     const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
 
-    // Fallback hardcoded data if Sanity is empty/loading to avoid empty page during dev
-    // Once content is in Sanity, this can be removed or kept as strict fallback
-    const fallbackServices = [
-        {
-            title: 'Buffets Froids',
-            description: 'Une sélection de nos meilleures charcuteries artisanales, salades fraîches et terrines maison.',
-            price: 'Dès 25.- / pers.',
-            features: ['Planchettes de viande séchée', 'Pâtés croûte maison', 'Salades de saison']
-        },
-        {
-            title: 'Banquet & Mariage',
-            description: 'Un service complet pour vos événements les plus importants avec découpe sur place possible.',
-            price: 'Sur devis',
-            features: ['Viandes nobles au grill', 'Accompagnements variés', 'Service professionnel']
-        },
-        {
-            title: 'Aperitifs de Bureau',
-            description: 'Des mini-portions et mignardises salées prêtes à déguster pour vos réunions.',
-            price: 'Dès 15.- / pers.',
-            features: ['Mini-burgers', 'Verrines gourmandes', 'Canapés assortis']
-        }
-    ];
-
-    const displayServices = sanityServices?.length ? sanityServices.map(service => ({
+    const displayServices = sanityServices?.map(service => ({
         title: service.name[currentLang] || service.name.fr,
         description: service.shortDescription?.[currentLang] || service.shortDescription?.fr || "",
         price: service.price?.[currentLang] || service.price?.fr || "",
         features: service.features?.[currentLang] || service.features?.fr || []
-    })) : fallbackServices;
+    })) || [];
 
     return (
         <motion.div

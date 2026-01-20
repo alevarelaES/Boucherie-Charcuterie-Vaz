@@ -44,11 +44,11 @@ export const ContactSection = memo(function ContactSection() {
   const instagramUrl = siteSettings?.socialMedia?.instagram || settings.info.instagram;
 
   const getCurrentStatus = () => {
-    if (!openingHours) return { isOpen: false, currentDay: 0 };
-
     const now = new Date();
     const day = now.getDay();
     const currentTime = now.getHours() * 100 + now.getMinutes();
+
+    if (!openingHours) return { isOpen: false, currentDay: day };
 
     const dayKeys: (keyof OpeningHours)[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const todayKey = dayKeys[day] as keyof OpeningHours;

@@ -172,7 +172,7 @@ export function Header() {
                     {/* Logo Section */}
                     <a
                         href={`/${i18n.language}#accueil`}
-                        className="flex items-center gap-2 md:gap-4 group transition-transform active:scale-95"
+                        className="flex items-center group transition-transform active:scale-95"
                         onClick={(e) => {
                             const targetPath = `/${i18n.language}`;
                             if (location.pathname === targetPath || location.pathname === `${targetPath}/`) {
@@ -186,14 +186,6 @@ export function Header() {
                         }}
                     >
                         <Logo isTransparent={isTransparent} logoUrl={logoUrl} />
-                        <div className="flex flex-col">
-                            <span className={`font-serif text-base md:text-2xl font-black leading-none tracking-tight ${!isTransparent ? 'text-primary' : 'text-white'}`}>
-                                {siteName}
-                            </span>
-                            <span className={`text-[8px] md:text-xs uppercase tracking-[0.2em] font-sans font-bold ${!isTransparent ? 'text-primary/80' : 'text-white/80'}`}>
-                                {siteCity}
-                            </span>
-                        </div>
                     </a>
 
                     {/* Desktop Navigation */}
