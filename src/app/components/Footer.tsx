@@ -3,25 +3,54 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { OptimizedImage } from './OptimizedImage';
-import settings from '../../settings.json';
+import defaultSettings from '../../settings.json';
+import { useSiteSettings, useOpeningHours, type OpeningHours, type DaySchedule } from '../../hooks/useSanity';
+import { urlFor } from '../../lib/sanity/image';
 
 /**
- * Footer - Performance Optimized
+ * Footer - Performance Optimized + Sanity CMS
  * 
  * Key optimizations:
  * - No Framer Motion (pure CSS transitions)
  * - Memoized component
  * - CSS-only hover effects
+ * - Dynamic data from Sanity
  */
 export const Footer = memo(function Footer() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { data: sanitySettings } = useSiteSettings();
+  const { data: openingHours } = useOpeningHours();
   const currentYear = new Date().getFullYear();
+  const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
+
+  // Fallback to local settings if Sanity data is not yet available
+  const facebookUrl = sanitySettings?.socialMedia?.facebook || defaultSettings.info.facebook;
+  const instagramUrl = sanitySettings?.socialMedia?.instagram || defaultSettings.info.instagram;
+  const email = sanitySettings?.contact?.email || defaultSettings.info.email;
+  const phone = sanitySettings?.contact?.phone || defaultSettings.info.phone;
+  // Sanity phone might be formatted, strict raw for tel: link if needed, but usually phone field is string
+  const phoneRaw = phone.replace(/\s+/g, '');
+
+  const addressStreet = sanitySettings?.contact?.address?.street || defaultSettings.info.address.split(',')[0];
+  const addressCity = sanitySettings?.contact?.address?.city || defaultSettings.info.address.split(',')[1].trim().split(' ')[1];
+  const addressZip = sanitySettings?.contact?.address?.postalCode || defaultSettings.info.address.split(',')[1].trim().split(' ')[0];
+  const fullAddress = `${addressStreet}, ${addressZip} ${addressCity}`;
+
+  // Generate Maps link if not present
+  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress + ' Boucherie Vaz')}`;
+
+  const logoUrl = sanitySettings?.logo
+    ? urlFor(sanitySettings.logo).width(200).url()
+    : defaultSettings.images.logo;
+
+  const siteName = sanitySettings?.siteName?.[currentLang] || "Boucherie Vaz";
+  const footerText = sanitySettings?.footer?.text?.[currentLang] || t('footer.description');
 
   const socialLinks = [
-    { icon: Facebook, href: settings.info.facebook, label: 'Facebook' },
-    { icon: Instagram, href: settings.info.instagram, label: 'Instagram' },
-    { icon: Mail, href: `mailto:${settings.info.email}`, label: 'Email' }
+    { icon: Facebook, href: facebookUrl, label: 'Facebook' },
+    { icon: Instagram, href: instagramUrl, label: 'Instagram' },
+    { icon: Mail, href: `mailto:${email}`, label: 'Email' }
   ];
 
   const quickLinks = [
@@ -31,13 +60,32 @@ export const Footer = memo(function Footer() {
     { label: t('nav.contact'), href: '#contact' }
   ];
 
-  const hours = [
-    { jour: t('days.monTue'), heures: '07:00-12:00 | 13:30-18:00' },
-    { jour: t('days.wednesday'), heures: '07:00-12:00' },
-    { jour: t('days.thursday'), heures: '08:00-12:00 | 13:30-18:00' },
-    { jour: t('days.friday'), heures: '07:00-12:00 | 13:30-18:00' },
-    { jour: t('days.saturday'), heures: '07:00-13:00' },
-    { jour: t('days.sunday'), heures: t('closed'), closed: true },
+  const formatFooterHours = (schedule?: DaySchedule) => {
+    if (!schedule || schedule.closed) return { text: t('closed'), closed: true };
+    const morning = schedule.morning ? schedule.morning.replace(' - ', '-') : '';
+    const afternoon = schedule.afternoon ? schedule.afternoon.replace(' - ', '-') : '';
+
+    if (morning && afternoon) return { text: `${morning} | ${afternoon}`, closed: false };
+    if (morning) return { text: morning, closed: false };
+    if (afternoon) return { text: afternoon, closed: false };
+    return { text: t('closed'), closed: true };
+  };
+
+  const hours = openingHours ? [
+    { jour: t('contact.days.monday', 'Lundi'), ...formatFooterHours(openingHours.monday) },
+    { jour: t('contact.days.tuesday', 'Mardi'), ...formatFooterHours(openingHours.tuesday) },
+    { jour: t('contact.days.wednesday', 'Mercredi'), ...formatFooterHours(openingHours.wednesday) },
+    { jour: t('contact.days.thursday', 'Jeudi'), ...formatFooterHours(openingHours.thursday) },
+    { jour: t('contact.days.friday', 'Vendredi'), ...formatFooterHours(openingHours.friday) },
+    { jour: t('contact.days.saturday', 'Samedi'), ...formatFooterHours(openingHours.saturday) },
+    { jour: t('contact.days.sunday', 'Dimanche'), ...formatFooterHours(openingHours.sunday) }
+  ] : [
+    { jour: t('days.monTue'), text: '07:00-12:00 | 13:30-18:00', closed: false },
+    { jour: t('days.wednesday'), text: '07:00-12:00', closed: false },
+    { jour: t('days.thursday'), text: '08:00-12:00 | 13:30-18:00', closed: false },
+    { jour: t('days.friday'), text: '07:00-12:00 | 13:30-18:00', closed: false },
+    { jour: t('days.saturday'), text: '07:00-13:00', closed: false },
+    { jour: t('days.sunday'), text: t('closed'), closed: true },
   ];
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
@@ -69,15 +117,14 @@ export const Footer = memo(function Footer() {
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center border-4 border-[#C5A059] overflow-hidden transition-transform duration-700 hover:rotate-[360deg]">
                   <OptimizedImage
-                    src={settings.images.logo}
-                    alt="Boucherie Vaz"
+                    src={logoUrl}
+                    alt={siteName}
                     className="w-full h-full object-contain scale-105"
-                    priority
                   />
                 </div>
                 <div>
                   <p className="text-2xl md:text-3xl font-bold font-serif">
-                    Boucherie Vaz
+                    {siteName}
                   </p>
                   <p className="text-base md:text-lg text-background/75 font-medium">
                     {t('footer.tagline')}
@@ -85,7 +132,7 @@ export const Footer = memo(function Footer() {
                 </div>
               </div>
               <p className="text-base md:text-lg text-background/80 leading-relaxed mb-6 max-w-md font-normal">
-                {t('footer.description')}
+                {footerText}
               </p>
 
               {/* Social Links */}
@@ -136,32 +183,32 @@ export const Footer = memo(function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <a
-                    href={settings.info.addressMap}
+                    href={mapsLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base md:text-lg text-background/80 hover:text-primary transition-colors duration-200 font-medium"
                   >
-                    {settings.info.address.split(',')[0]}<br />
-                    {settings.info.address.split(',')[1]}
+                    {addressStreet}<br />
+                    {addressZip} {addressCity}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href={`tel:${settings.info.phoneRaw}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 font-medium">
-                    {settings.info.phone}
+                  <a href={`tel:${phoneRaw}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 font-medium">
+                    {phone}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-6 h-6 text-primary flex-shrink-0" />
-                  <a href={`mailto:${settings.info.email}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 break-all font-medium">
-                    {settings.info.email}
+                  <a href={`mailto:${email}`} className="text-base md:text-lg text-background/85 hover:text-primary transition-colors duration-200 break-all font-medium">
+                    {email}
                   </a>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Hours Section */}
+          {/* Hours Section (Static for now, could be dynamic from Sanity too) */}
           <div className="mb-12 pb-8 border-b border-background/10">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-6 h-6 text-primary" />
@@ -176,17 +223,17 @@ export const Footer = memo(function Footer() {
                   className={`${horaire.closed ? 'text-background/40 italic' : ''}`}
                 >
                   <span className="font-semibold text-background/80">{horaire.jour}</span>
-                  <span className="block text-background/60">{horaire.heures}</span>
+                  <span className="block text-background/60">{horaire.text}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 border-t border-background/10">
+          <div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base text-background/60 font-normal">
               <p>
-                © {currentYear} Boucherie Vaz. {t('footer.rights')}
+                © {currentYear} {siteName}. {t('footer.rights')}
               </p>
               <div className="flex gap-6">
                 <Link

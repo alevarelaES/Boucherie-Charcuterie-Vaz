@@ -5,7 +5,7 @@
     <!-- Homepage (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr"/>
@@ -17,7 +17,7 @@
     <!-- Homepage (EN) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/en</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr"/>
@@ -29,7 +29,7 @@
     <!-- Homepage (DE) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/de</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr"/>
@@ -41,7 +41,7 @@
     <!-- Homepage (IT) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/it</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr"/>
@@ -53,7 +53,7 @@
     <!-- Catering Service (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr/traiteur</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
@@ -65,7 +65,7 @@
     <!-- Catering Service (EN) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/en/traiteur</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
@@ -77,7 +77,7 @@
     <!-- Catering Service (DE) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/de/traiteur</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
@@ -89,7 +89,7 @@
     <!-- Catering Service (IT) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/it/traiteur</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="fr" href="https://boucherie-charcuterie-vaz.ch/fr/traiteur"/>
@@ -101,7 +101,7 @@
     <!-- Recipes & Tips (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr/recettes</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -109,7 +109,7 @@
     <!-- Recipes & Tips (EN) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/en/recettes</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -117,7 +117,7 @@
     <!-- Recipes & Tips (DE) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/de/recettes</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -125,7 +125,7 @@
     <!-- Recipes & Tips (IT) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/it/recettes</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -133,7 +133,7 @@
     <!-- Legal Notice (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr/mentions-legales</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -141,7 +141,7 @@
     <!-- Legal Notice (EN) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/en/mentions-legales</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -149,7 +149,7 @@
     <!-- Legal Notice (DE) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/de/mentions-legales</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -157,7 +157,7 @@
     <!-- Legal Notice (IT) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/it/mentions-legales</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -165,7 +165,7 @@
     <!-- Privacy Policy (FR) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/fr/politique-confidentialite</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -173,7 +173,7 @@
     <!-- Privacy Policy (EN) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/en/politique-confidentialite</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -181,7 +181,7 @@
     <!-- Privacy Policy (DE) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/de/politique-confidentialite</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -189,7 +189,7 @@
     <!-- Privacy Policy (IT) -->
     <url>
         <loc>https://boucherie-charcuterie-vaz.ch/it/politique-confidentialite</loc>
-        <lastmod>2026-01-18</lastmod>
+        <lastmod>2026-01-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>

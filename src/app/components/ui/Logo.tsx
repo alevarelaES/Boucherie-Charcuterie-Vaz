@@ -5,9 +5,12 @@ import settings from '../../../settings.json';
 interface LogoProps {
     isTransparent: boolean;
     className?: string;
+    logoUrl?: string;
 }
 
-export function Logo({ isTransparent, className = "" }: LogoProps) {
+export function Logo({ isTransparent, className = "", logoUrl }: LogoProps) {
+    const finalLogo = logoUrl || settings.images.logo;
+
     return (
         <motion.div
             className={`relative transition-all duration-500 ${!isTransparent ? 'scale-90' : 'scale-100'} ${className}`}
@@ -20,7 +23,7 @@ export function Logo({ isTransparent, className = "" }: LogoProps) {
                     }`}
             >
                 <OptimizedImage
-                    src={settings.images.logo}
+                    src={finalLogo}
                     alt="Logo Boucherie Vaz"
                     className="w-full h-full object-contain"
                     priority

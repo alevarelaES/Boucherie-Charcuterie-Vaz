@@ -16,26 +16,32 @@
     "products": [
         {
             "id": "chicken",
-            "image": "/images/Photos Boucherie/Produits/viande5.jpeg"
+            "name": "Entrecôte Maturée",
+            "image": "/images/Photos Boucherie/Produits/Entrecôte Maturée.jpg"
         },
         {
             "id": "heifer",
-            "image": "/images/Photos Boucherie/Produits/viande4.jpeg"
+            "name": "Fondue Chinoise",
+            "image": "/images/Photos Boucherie/Produits/Fondue Chinoise.jpg"
         },
         {
             "id": "horse",
-            "image": "/images/Photos Boucherie/Produits/viande2.jpeg"
+            "name": "Terrine du Chef",
+            "image": "/images/Photos Boucherie/Produits/Terrine du Chef.jpg"
         },
         {
             "id": "lamb",
-            "image": "/images/Photos Boucherie/Produits/viande3.jpeg"
+            "name": "Lard de Jambon",
+            "image": "/images/Photos Boucherie/Produits/Lard de Jambon.jpg"
         },
         {
             "id": "order",
-            "image": "/images/Photos Boucherie/Produits/vinade1.jpeg"
+            "name": "Terrine au Pruneaux",
+            "image": "/images/Photos Boucherie/Produits/Terrine au Pruneaux.jpg"
         },
         {
             "id": "pork",
+            "name": "Plat Charcuterie",
             "image": "/images/Photos Boucherie/Produits/Charcuterie.jpeg"
         }
     ]

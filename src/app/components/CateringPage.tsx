@@ -6,12 +6,17 @@ import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
 import { MetaSEO } from './MetaSEO';
 import { Breadcrumbs } from './ui/Breadcrumbs';
+import { useServices } from '../../hooks/useSanity';
 
 export function CateringPage() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const { data: sanityServices, loading } = useServices();
+    const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
 
-    const services = [
+    // Fallback hardcoded data if Sanity is empty/loading to avoid empty page during dev
+    // Once content is in Sanity, this can be removed or kept as strict fallback
+    const fallbackServices = [
         {
             title: 'Buffets Froids',
             description: 'Une sélection de nos meilleures charcuteries artisanales, salades fraîches et terrines maison.',
@@ -31,6 +36,13 @@ export function CateringPage() {
             features: ['Mini-burgers', 'Verrines gourmandes', 'Canapés assortis']
         }
     ];
+
+    const displayServices = sanityServices?.length ? sanityServices.map(service => ({
+        title: service.name[currentLang] || service.name.fr,
+        description: service.shortDescription?.[currentLang] || service.shortDescription?.fr || "",
+        price: service.price?.[currentLang] || service.price?.fr || "",
+        features: service.features?.[currentLang] || service.features?.fr || []
+    })) : fallbackServices;
 
     return (
         <motion.div
@@ -60,7 +72,7 @@ export function CateringPage() {
                     "hasOfferCatalog": {
                         "@type": "OfferCatalog",
                         "name": "Services Traiteur",
-                        "itemListElement": services.map((s, i) => ({
+                        "itemListElement": displayServices.map((s, i) => ({
                             "@type": "Offer",
                             "itemOffered": {
                                 "@type": "Service",
@@ -153,7 +165,7 @@ export function CateringPage() {
 
                     {/* Services Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {services.map((service, i) => (
+                        {displayServices.map((service, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ y: 20, opacity: 0 }}

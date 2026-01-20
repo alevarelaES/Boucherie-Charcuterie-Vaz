@@ -15,8 +15,15 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
  * - content-visibility for lazy rendering
  * - CSS-only hover effects
  */
+import { useHomepage } from '../../hooks/useSanity';
+import { urlFor } from '../../lib/sanity/image';
+
 export const ValeursSection = memo(function ValeursSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { data: homepageData } = useHomepage();
+  const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
+
+  const valuesData = homepageData?.valuesSection;
 
   const valeurs = [
     {
@@ -41,19 +48,22 @@ export const ValeursSection = memo(function ValeursSection() {
     }
   ];
 
+  // Dynamic Image
+  const mainImage = valuesData?.image ? urlFor(valuesData.image).width(800).url() : settings.images.about;
+
   return (
     <section id="a-propos" className="py-16 md:py-24 px-4 md:px-8 bg-background relative overflow-hidden scroll-mt-20 content-auto">
       <div className="max-w-7xl mx-auto relative z-10">
 
         <SectionHeader
-          badge={t('about.badge', 'Notre histoire')}
-          title={t('about.title', 'Valeurs & Terroir')}
+          badge={valuesData?.badge?.[currentLang] || t('about.badge', 'Notre histoire')}
+          title={valuesData?.title?.[currentLang] || t('about.title', 'Valeurs & Terroir')}
         />
 
         {/* Bloc 1 : Introduction */}
         <div className="bg-primary/5 border-l-4 border-gold rounded-r-2xl p-6 md:p-10 mb-12 max-w-5xl mx-auto shadow-sm animate-fade-in-up">
           <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed text-center font-medium font-sans italic">
-            {t('about.intro', "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.")}
+            {valuesData?.intro?.[currentLang] || t('about.intro', "La Boucherie Vaz est née en 2025 avec une idée claire : prêcher avant tout la qualité. Chaque viande que nous proposons est issue d'un savoir-faire artisanal et choisie avec exigence.")}
           </p>
         </div>
 
@@ -64,7 +74,7 @@ export const ValeursSection = memo(function ValeursSection() {
             <div className="absolute -inset-4 bg-gold/5 rounded-[2rem] -rotate-2 z-0" />
             <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/10 transition-transform duration-500 hover:scale-[1.02]">
               <OptimizedImage
-                src={settings.images.about}
+                src={mainImage}
                 alt={t('about.imageAlt', 'Boucherie Vaz - Notre histoire')}
                 className="w-full h-auto object-cover"
                 priority
@@ -77,26 +87,27 @@ export const ValeursSection = memo(function ValeursSection() {
           <div className="space-y-8 animate-slide-in-right">
             <div className="bg-muted/50 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-sm">
               <h3 className="text-3xl md:text-4xl font-bold mb-6 text-gold font-serif">
-                {t('about.promiseTitle', 'Notre Promesse')}
+                {valuesData?.promiseTitle?.[currentLang] || t('about.promiseTitle', 'Notre Promesse')}
               </h3>
               <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-sans font-medium">
-                {t('about.promiseText', 'Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir fraîcheur, goût et tendreté.')}
+                {valuesData?.promiseText?.[currentLang] || t('about.promiseText', 'Située au cœur de la tradition bouchère, notre boutique est votre nouvelle adresse gourmande à Vallorbe. Nous sélectionnons nos viandes avec le plus grand soin afin de garantir fraîcheur, goût et tendreté.')}
               </p>
             </div>
 
             <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-border/50 shadow-xl">
               <h3 className="text-2xl md:text-3xl font-bold mb-6 text-primary font-serif">
+                {/* Note: I'm keeping the original hardcoded title 'Vous trouverez chez nous' implied by the list, or we could add it to schema. I added it as `valuesList` title in schema but missed checking if there is a title field in structure. Let's assume user wants to edit the items mainly. Ah wait, I added `valuesList` as array. I can use valuesData?.valuesList[currentLang] if available. */}
                 {t('about.listTitle', 'Vous trouverez chez nous')}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
+                {(valuesData?.valuesList?.[currentLang] || [
                   t('products.items.chicken.name', 'Poulet tendre et savoureux'),
                   t('products.items.heifer.name', 'Génisse maturée raffinée'),
                   t('products.items.lamb.name', 'Agneau aux saveurs délicates'),
                   t('products.items.pork.name', 'Porc de qualité supérieure'),
                   t('products.items.horse.name', 'Viande de cheval riche en goût'),
                   t('products.items.order.name', 'Viandes sur commande')
-                ].map((item, idx) => (
+                ]).map((item, idx) => (
                   <div key={idx} className="flex items-center gap-4 text-base md:text-lg text-foreground/80 font-sans font-semibold group">
                     <span className="w-2.5 h-2.5 bg-gold rounded-full flex-shrink-0 transition-transform duration-200 group-hover:scale-125" />
                     <span>{item}</span>
@@ -147,7 +158,7 @@ export const ValeursSection = memo(function ValeursSection() {
         <div className="bg-primary text-white rounded-[3rem] p-10 md:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32" />
           <p className="text-xl md:text-3xl text-center font-serif italic leading-relaxed relative z-10">
-            {t('about.engagement', "Plus qu'une simple boucherie, nous sommes un lieu de confiance, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.")}
+            {valuesData?.engagementText?.[currentLang] || t('about.engagement', "Plus qu'une simple boucherie, nous sommes un lieu de confiance, où l'on vient autant pour la qualité exceptionnelle de nos produits que pour partager notre passion de la viande.")}
           </p>
         </div>
       </div>

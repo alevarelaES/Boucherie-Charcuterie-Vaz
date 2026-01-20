@@ -3,6 +3,7 @@ import { useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 import { Badge } from './ui/badge';
+import { useHomepage, useSiteSettings, useOpeningHours, type OpeningHours, type DaySchedule } from '../../hooks/useSanity';
 
 /**
  * Contact Section - Performance Optimized
@@ -14,29 +15,59 @@ import { Badge } from './ui/badge';
  * - CSS-only hover effects
  */
 export const ContactSection = memo(function ContactSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const { data: homepageData } = useHomepage();
+  const { data: siteSettings } = useSiteSettings();
+  const { data: openingHours } = useOpeningHours();
+  const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
+
+  const contactData = homepageData?.contactSection;
+
+  // Dynamic Contact Info with fallback
+  const phone = siteSettings?.contact?.phone || settings.info.phone;
+  const phoneRaw = phone.replace(/\s+/g, '');
+  const email = siteSettings?.contact?.email || settings.info.email;
+
+  const addressStreet = siteSettings?.contact?.address?.street || settings.info.address.split(',')[0];
+  const addressCity = siteSettings?.contact?.address?.city || settings.info.address.split(',')[1]?.trim() || '';
+  const addressZip = siteSettings?.contact?.address?.postalCode || '';
+  const addressCountry = siteSettings?.contact?.address?.country || '';
+
+  const fullAddress = siteSettings?.contact?.address
+    ? `${addressStreet}, ${addressZip} ${addressCity}`
+    : settings.info.address;
+
+  const addressMap = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress + ' Boucherie Vaz')}`;
+
+  const facebookUrl = siteSettings?.socialMedia?.facebook || settings.info.facebook;
+  const instagramUrl = siteSettings?.socialMedia?.instagram || settings.info.instagram;
 
   const getCurrentStatus = () => {
+    if (!openingHours) return { isOpen: false, currentDay: 0 };
+
     const now = new Date();
     const day = now.getDay();
     const currentTime = now.getHours() * 100 + now.getMinutes();
 
-    const schedule: Record<number, { morning?: [number, number], afternoon?: [number, number] }> = {
-      1: { morning: [700, 1200], afternoon: [1330, 1800] },
-      2: { morning: [700, 1200], afternoon: [1330, 1800] },
-      3: { morning: [700, 1200] },
-      4: { morning: [800, 1200], afternoon: [1330, 1800] },
-      5: { morning: [700, 1200], afternoon: [1330, 1800] },
-      6: { morning: [700, 1300] },
-      0: {},
+    const dayKeys: (keyof OpeningHours)[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const todayKey = dayKeys[day] as keyof OpeningHours;
+    const todaySchedule = openingHours[todayKey] as DaySchedule;
+
+    if (!todaySchedule || todaySchedule.closed) return { isOpen: false, currentDay: day };
+
+    // Parse time strings 'HH:MM - HH:MM' to numbers HHMM
+    const parseTime = (timeStr?: string) => {
+      if (!timeStr) return null;
+      const [start, end] = timeStr.split('-').map(s => parseInt(s.trim().replace(':', '')));
+      return { start, end };
     };
 
-    const today = schedule[day];
-    if (!today) return { isOpen: false, currentDay: day };
+    const morning = parseTime(todaySchedule.morning);
+    const afternoon = parseTime(todaySchedule.afternoon);
 
-    const inMorning = today.morning && currentTime >= today.morning[0] && currentTime < today.morning[1];
-    const inAfternoon = today.afternoon && currentTime >= today.afternoon[0] && currentTime < today.afternoon[1];
+    const inMorning = morning ? (currentTime >= morning.start && currentTime < morning.end) : false;
+    const inAfternoon = afternoon ? (currentTime >= afternoon.start && currentTime < afternoon.end) : false;
 
     return {
       isOpen: inMorning || inAfternoon,
@@ -46,7 +77,25 @@ export const ContactSection = memo(function ContactSection() {
 
   const { currentDay } = getCurrentStatus();
 
-  const horaires = [
+  // Helper to get simple time string from Sanity format
+  const formatSchedule = (schedule?: DaySchedule) => {
+    if (!schedule) return { matin: null, apresMidi: null, isClosed: true };
+    return {
+      matin: schedule.morning || null,
+      apresMidi: schedule.afternoon || null,
+      isClosed: schedule.closed
+    };
+  };
+
+  const horaires = openingHours ? [
+    { id: 1, jour: t('contact.days.monday', 'Lundi'), ...formatSchedule(openingHours.monday) },
+    { id: 2, jour: t('contact.days.tuesday', 'Mardi'), ...formatSchedule(openingHours.tuesday) },
+    { id: 3, jour: t('contact.days.wednesday', 'Mercredi'), ...formatSchedule(openingHours.wednesday) },
+    { id: 4, jour: t('contact.days.thursday', 'Jeudi'), ...formatSchedule(openingHours.thursday) },
+    { id: 5, jour: t('contact.days.friday', 'Vendredi'), ...formatSchedule(openingHours.friday) },
+    { id: 6, jour: t('contact.days.saturday', 'Samedi'), ...formatSchedule(openingHours.saturday) },
+    { id: 0, jour: t('contact.days.sunday', 'Dimanche'), ...formatSchedule(openingHours.sunday) }
+  ] : [
     { id: 1, jour: t('contact.days.monday', 'Lundi'), matin: '07:00 - 12:00', apresMidi: '13:30 - 18:00', isClosed: false },
     { id: 2, jour: t('contact.days.tuesday', 'Mardi'), matin: '07:00 - 12:00', apresMidi: '13:30 - 18:00', isClosed: false },
     { id: 3, jour: t('contact.days.wednesday', 'Mercredi'), matin: '07:00 - 12:00', apresMidi: null, isClosed: false },
@@ -59,23 +108,23 @@ export const ContactSection = memo(function ContactSection() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = formData.name.trim();
-    const email = formData.email.trim();
+    const emailUser = formData.email.trim();
     const message = formData.message.trim();
 
-    if (!name || !email || !message) {
+    if (!name || !emailUser || !message) {
       alert(t('contact.alertFill', 'Merci de remplir tous les champs.'));
       return;
     }
 
     const subject = encodeURIComponent(`${t('contact.emailSubject', 'Message depuis le site')} - ${name}`);
-    const body = encodeURIComponent(`${t('contact.emailBody.name', 'Nom')}: ${name}\nEmail: ${email}\n\n${t('contact.emailBody.message', 'Message')}:\n${message}`);
-    window.location.href = `mailto:${settings.info.email}?subject=${subject}&body=${body}`;
+    const body = encodeURIComponent(`${t('contact.emailBody.name', 'Nom')}: ${name}\nEmail: ${emailUser}\n\n${t('contact.emailBody.message', 'Message')}:\n${message}`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
   };
 
   const contactCards = [
-    { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: settings.info.phone, href: `tel:${settings.info.phoneRaw}` },
-    { icon: Mail, label: t('contact.labels.email', 'Email'), value: settings.info.email, href: `mailto:${settings.info.email}` },
-    { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: settings.info.address, href: settings.info.addressMap },
+    { icon: Phone, label: t('contact.labels.phone', 'Téléphone'), value: phone, href: `tel:${phoneRaw}` },
+    { icon: Mail, label: t('contact.labels.email', 'Email'), value: email, href: `mailto:${email}` },
+    { icon: MapPin, label: t('contact.labels.address', 'Adresse'), value: fullAddress, href: addressMap },
   ];
 
   return (
@@ -85,10 +134,10 @@ export const ContactSection = memo(function ContactSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm md:text-base font-bold tracking-wider uppercase mb-3 font-sans">
-            {t('contact.subtitle', 'Parlons ensemble')}
+            {contactData?.subtitle?.[currentLang] || t('contact.subtitle', 'Parlons ensemble')}
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 font-bold font-serif">
-            {t('contact.title', 'Contactez-nous')}
+            {contactData?.title?.[currentLang] || t('contact.title', 'Contactez-nous')}
           </h2>
         </div>
 
@@ -159,7 +208,7 @@ export const ContactSection = memo(function ContactSection() {
               </p>
               <div className="flex justify-center gap-4">
                 <a
-                  href={settings.info.facebook}
+                  href={facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -168,7 +217,7 @@ export const ContactSection = memo(function ContactSection() {
                   <Facebook size={24} />
                 </a>
                 <a
-                  href={settings.info.instagram}
+                  href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-[#E4405F]/10 hover:bg-gradient-to-tr hover:from-[#405DE6] hover:via-[#E1306C] hover:to-[#FFDC80] text-[#E4405F] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -199,8 +248,8 @@ export const ContactSection = memo(function ContactSection() {
                   <div
                     key={horaire.id}
                     className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl transition-all duration-300 ${isToday
-                        ? 'bg-primary/5 border border-primary/20 shadow-inner'
-                        : 'bg-muted/30'
+                      ? 'bg-primary/5 border border-primary/20 shadow-inner'
+                      : 'bg-muted/30'
                       }`}
                   >
                     <div className="flex items-center gap-3">

@@ -3,7 +3,9 @@ import { motion } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
-import settings from '../../settings.json';
+import defaultSettings from '../../settings.json';
+import { useSiteSettings } from '../../hooks/useSanity';
+import { urlFor } from '../../lib/sanity/image';
 import { TopBar } from './header/TopBar';
 import { MobileMenu } from './header/MobileMenu';
 import { Logo } from './ui/Logo';
@@ -12,11 +14,46 @@ export function Header() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
+    const { data: sanitySettings } = useSiteSettings();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [showTopBar, setShowTopBar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [activeSection, setActiveSection] = useState('accueil');
+
+    const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
+
+    // Prepare data with fallbacks
+    const siteName = sanitySettings?.siteName?.[currentLang] || "Boucherie Vaz";
+    const siteCity = sanitySettings?.contact?.address?.city || "Vallorbe";
+
+    // Contact Info Preparation
+    const address = sanitySettings?.contact?.address
+        ? `${sanitySettings.contact.address.street}, ${sanitySettings.contact.address.postalCode} ${sanitySettings.contact.address.city}`
+        : defaultSettings.info.address;
+
+    // Generate map link if missing (simplified logic)
+    const addressMap = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address + ' Boucherie Vaz')}`;
+
+    const phone = sanitySettings?.contact?.phone || defaultSettings.info.phone;
+    const phoneRaw = phone.replace(/\s+/g, '');
+
+    const contactInfo = {
+        address,
+        addressMap,
+        phone,
+        phoneRaw
+    };
+
+    const socialLinks = {
+        facebook: sanitySettings?.socialMedia?.facebook || defaultSettings.info.facebook,
+        instagram: sanitySettings?.socialMedia?.instagram || defaultSettings.info.instagram
+    };
+
+    const logoUrl = sanitySettings?.logo
+        ? urlFor(sanitySettings.logo).width(200).url()
+        : defaultSettings.images.logo;
+
 
     // Scroll and Section Detection
     const lastScrollYRef = useRef(0);
@@ -119,6 +156,8 @@ export function Header() {
                 scrolled={scrolled}
                 currentLang={i18n.language}
                 onLanguageChange={changeLanguage}
+                contactInfo={contactInfo}
+                socialLinks={socialLinks}
             />
 
             <motion.header
@@ -146,13 +185,13 @@ export function Header() {
                             }
                         }}
                     >
-                        <Logo isTransparent={isTransparent} />
+                        <Logo isTransparent={isTransparent} logoUrl={logoUrl} />
                         <div className="flex flex-col">
                             <span className={`font-serif text-base md:text-2xl font-black leading-none tracking-tight ${!isTransparent ? 'text-primary' : 'text-white'}`}>
-                                Boucherie Vaz
+                                {siteName}
                             </span>
                             <span className={`text-[8px] md:text-xs uppercase tracking-[0.2em] font-sans font-bold ${!isTransparent ? 'text-primary/80' : 'text-white/80'}`}>
-                                Vallorbe
+                                {siteCity}
                             </span>
                         </div>
                     </a>
@@ -214,6 +253,7 @@ export function Header() {
                 activeSection={activeSection}
                 currentLang={i18n.language}
                 onLanguageChange={changeLanguage}
+                contactInfo={contactInfo}
             />
         </>
     );

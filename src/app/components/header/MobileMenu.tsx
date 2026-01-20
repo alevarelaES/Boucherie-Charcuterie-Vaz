@@ -2,7 +2,6 @@ import { X, Facebook, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import settings from '../../../settings.json';
 
 interface NavItem {
     id: string;
@@ -17,9 +16,14 @@ interface MobileMenuProps {
     activeSection: string;
     currentLang: string;
     onLanguageChange: (lang: string) => void;
+    contactInfo: {
+        address: string;
+        phone: string;
+        phoneRaw: string;
+    };
 }
 
-export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLang, onLanguageChange }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLang, onLanguageChange, contactInfo }: MobileMenuProps) {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -78,8 +82,8 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection, currentLa
                     </div>
                     <div className="p-8 space-y-6 bg-muted/20 border-t border-border/30">
                         <div className="text-center space-y-2">
-                            <p className="text-xs font-medium text-muted-foreground">{settings.info.address}</p>
-                            <a href={`tel:${settings.info.phoneRaw}`} className="text-primary font-black text-xl tracking-tighter block">{settings.info.phone}</a>
+                            <p className="text-xs font-medium text-muted-foreground">{contactInfo.address}</p>
+                            <a href={`tel:${contactInfo.phoneRaw}`} className="text-primary font-black text-xl tracking-tighter block">{contactInfo.phone}</a>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                             {['fr', 'en', 'de', 'it'].map((lang) => (

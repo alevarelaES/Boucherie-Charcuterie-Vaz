@@ -1,7 +1,6 @@
 import { MapPin, Phone, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import settings from '../../../settings.json';
 
 interface TopBarProps {
     show: boolean;
@@ -9,9 +8,19 @@ interface TopBarProps {
     scrolled: boolean;
     currentLang: string;
     onLanguageChange: (lang: string) => void;
+    contactInfo: {
+        address: string;
+        addressMap: string;
+        phone: string;
+        phoneRaw: string;
+    };
+    socialLinks: {
+        facebook: string;
+        instagram: string;
+    };
 }
 
-export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageChange }: TopBarProps) {
+export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageChange, contactInfo, socialLinks }: TopBarProps) {
     const { i18n } = useTranslation();
 
     return (
@@ -24,21 +33,21 @@ export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageC
         >
             <div className={`max-w-7xl mx-auto w-full px-8 h-full flex justify-between items-center text-xs font-sans font-medium text-white/90`}>
                 <div className="flex gap-6 items-center">
-                    <a href={settings.info.addressMap} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
+                    <a href={contactInfo.addressMap} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
                         <MapPin className="w-3 h-3 text-gold" />
-                        {settings.info.address}
+                        {contactInfo.address}
                     </a>
-                    <a href={`tel:${settings.info.phoneRaw}`} className="flex items-center gap-2 hover:text-gold transition-colors font-bold">
+                    <a href={`tel:${contactInfo.phoneRaw}`} className="flex items-center gap-2 hover:text-gold transition-colors font-bold">
                         <Phone className="w-3 h-3 text-gold" />
-                        {settings.info.phone}
+                        {contactInfo.phone}
                     </a>
                 </div>
                 <div className="flex gap-6 items-center">
                     <div className="flex gap-4">
-                        <a href={settings.info.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+                        <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                             <Facebook className="w-3.5 h-3.5" />
                         </a>
-                        <a href={settings.info.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+                        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                             <Instagram className="w-3.5 h-3.5" />
                         </a>
                     </div>
