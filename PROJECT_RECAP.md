@@ -21,8 +21,8 @@ Ce document regroupe toutes les informations essentielles pour la gestion et le 
 > Ces informations doivent rester uniquement dans vos fichiers `.env` (exclus de GitHub).
 
 ### Fichiers à sauvegarder hors-ligne :
-1. `.env` (à la racine) : Contient `VITE_SANITY_PROJECT_ID` et `VITE_SANITY_DATASET`.
-2. `boucherie-charcuterie-vaz/.env` : Contient les informations pour le déploiement du Studio.
+1. `.env` (à la racine) : Contient toutes les informations critiques (IDs et Tokens). C'est le seul fichier dont vous avez besoin pour faire fonctionner le site et les scripts sur un autre PC.
+*(Le dossier Sanity Studio utilise les IDs déjà configurés dans son code).*
 
 ### Autorisations CORS (Dans Sanity Manage) :
 Pour que le site puisse lire les données, ces origines doivent être autorisées (Credentials: Yes) :
