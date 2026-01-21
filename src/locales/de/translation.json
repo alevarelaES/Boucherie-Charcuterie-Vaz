@@ -170,29 +170,29 @@
         "description": "Entdecken Sie frisches und schmackhaftes Fleisch, das jeden Tag zubereitet wird, um Geschmack und Qualität zu garantieren.",
         "itemDesc": "Entdecken Sie unsere frische und schmackhafte Auswahl, die mit Sorgfalt zubereitet wird.",
         "items": {
-            "chicken": {
-                "name": "Zartes und schmackhaftes Hähnchen",
-                "desc": "Zartes und saftiges Fleisch, ideal für Ihre Grillabende oder Schmorgerichte."
+            "entrecote": {
+                "name": "Gereiftes Entrecôte",
+                "desc": "Drei Wochen am Knochen gereift."
             },
-            "heifer": {
-                "name": "Gereifte Färse für Liebhaber",
-                "desc": "Sorgfältig ausgewählt wegen seiner Zartheit und außergewöhnlichen Marmorierung."
+            "fondue": {
+                "name": "Chinesisches Fondue",
+                "desc": "Premium Rindfleisch-Fondue Chinoise."
             },
-            "horse": {
-                "name": "Geschmackvolles Pferdefleisch",
-                "desc": "Ein mageres und schmackhaftes Fleisch, geschätzt für seine ernährungsphysiologischen Qualitäten."
+            "terrine": {
+                "name": "Terrine des Chefs",
+                "desc": "Eine köstliche handwerkliche Kreation."
             },
-            "lamb": {
-                "name": "Lamm mit feinen Aromen",
-                "desc": "Ausgewählte Stücke wegen ihrer Finesse und ihres subtilen, duftenden Geschmacks."
+            "lard": {
+                "name": "Schinkenfett",
+                "desc": "Unser ausgewähltes Schinkenfett."
             },
-            "order": {
-                "name": "Fleisch auf Bestellung",
-                "desc": "Wurstplatten und spezifische Schnitte für alle Ihre Veranstaltungen."
+            "terrine_pruneaux": {
+                "name": "Pflaumen-Terrine",
+                "desc": "Eine herzhafte handwerkliche Kreation."
             },
-            "pork": {
-                "name": "Schweinefleisch in Premiumqualität",
-                "desc": "Einwandfreie Schweizer Qualität, perfekt für all Ihre Zubereitungen."
+            "charcuterie": {
+                "name": "Wurstwaren-Platte",
+                "desc": "Perfekt für Ihren Apéro."
             }
         },
         "tags": {

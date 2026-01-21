@@ -162,29 +162,29 @@
         "description": "Scoprite carni fresche e saporite, preparate ogni giorno per garantire gusto e qualità.",
         "itemDesc": "Scoprite le nostre selezioni fresche e saporite, preparate con cura.",
         "items": {
-            "chicken": {
-                "name": "Pollo tenero e saporito",
-                "desc": "Una carne tenera e succosa, ideale per le vostre grigliate o piatti in umido."
+            "entrecote": {
+                "name": "Entrecôte Stagionata",
+                "desc": "Stagionata tre settimane sull'osso."
             },
-            "heifer": {
-                "name": "Manza frollata per amatori",
-                "desc": "Selezionata con cura per la sua tenerezza e marezzatura eccezionale."
+            "fondue": {
+                "name": "Fondue Cinese",
+                "desc": "Fondue di manzo premium."
             },
-            "horse": {
-                "name": "Carne di cavallo ricca di gusto",
-                "desc": "Una carne magra e saporita, apprezzata per le sue qualità nutritive."
+            "terrine": {
+                "name": "Terrina dello Chef",
+                "desc": "Una deliziosa creazione artigianale."
             },
-            "lamb": {
-                "name": "Agnello dai sapori delicati",
-                "desc": "Pezzi scelti per la loro finezza e il loro gusto sottile e profumato."
+            "lard": {
+                "name": "Lardo di Prosciutto",
+                "desc": "Il nostro lardo di prosciutto selezionato."
             },
-            "order": {
-                "name": "Carni su ordinazione",
-                "desc": "Taglieri di salumi e tagli specifici per tutti i vostri eventi."
+            "terrine_pruneaux": {
+                "name": "Terrina alle Prugne",
+                "desc": "Una saporita creazione artigianale."
             },
-            "pork": {
-                "name": "Maiale di qualità superiore",
-                "desc": "Una qualità svizzera impeccabile, perfetta per tutte le vostre preparazioni."
+            "charcuterie": {
+                "name": "Piatto di Salumi",
+                "desc": "Perfetto per il vostro aperitivo."
             }
         },
         "tags": {

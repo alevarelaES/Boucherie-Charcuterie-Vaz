@@ -173,29 +173,29 @@
     "description": "Discover fresh and tasty meats, prepared every day to guarantee taste and quality.",
     "itemDesc": "Discover our fresh and tasty selections, prepared with care.",
     "items": {
-      "chicken": {
-        "name": "Aged Entrecôte",
-        "desc": "Aged three weeks on the bone."
+      "entrecote": {
+        "name": "Aged Ribeye Steak",
+        "desc": "Dry-aged three weeks on the bone."
       },
-      "heifer": {
-        "name": "Beef Fondue",
-        "desc": "Beef Fondue Chinoise."
+      "fondue": {
+        "name": "Chinese Fondue",
+        "desc": "Premium beef fondue chinoise."
       },
-      "horse": {
+      "terrine": {
         "name": "Chef's Terrine",
         "desc": "A delicious artisanal creation."
       },
-      "lamb": {
+      "lard": {
         "name": "Ham Lard",
         "desc": "Our selected ham lard."
       },
-      "order": {
-        "name": "Plum Terrine",
-        "desc": "Homemade."
+      "terrine_pruneaux": {
+        "name": "Prune Terrine",
+        "desc": "A savory artisanal creation."
       },
-      "pork": {
+      "charcuterie": {
         "name": "Charcuterie Platter",
-        "desc": "For your aperitifs."
+        "desc": "Perfect for your aperitif."
       }
     },
     "tags": {

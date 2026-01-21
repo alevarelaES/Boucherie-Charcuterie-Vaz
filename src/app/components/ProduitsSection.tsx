@@ -110,6 +110,8 @@ export const ProduitsSection = memo(function ProduitsSection() {
                     onHover={handleHover}
                     currentLang={currentLang}
                     getTagLabel={getTagLabel}
+                    t={t}
+                    rawLang={i18n.language}
                   />
                 </CarouselItem>
               ))}
@@ -126,8 +128,12 @@ export const ProduitsSection = memo(function ProduitsSection() {
   );
 });
 
+// Map product index to i18n translation key for EN/IT fallback
+const productKeyMapping = ['entrecote', 'fondue', 'terrine', 'lard', 'terrine_pruneaux', 'charcuterie'];
+
 /**
  * Memoized Product Card - Only re-renders when props change
+ * Supports FR/DE from Sanity, EN/IT from i18n translations
  */
 const ProductCard = memo(function ProductCard({
   product,
@@ -135,7 +141,9 @@ const ProductCard = memo(function ProductCard({
   isHovered,
   onHover,
   currentLang,
-  getTagLabel
+  getTagLabel,
+  t,
+  rawLang
 }: {
   product: { _id: string; name: { fr: string; de: string }; description: { fr: string; de: string }; tag: string; image: any };
   index: number;
@@ -143,9 +151,23 @@ const ProductCard = memo(function ProductCard({
   onHover: (index: number | null) => void;
   currentLang: 'fr' | 'de';
   getTagLabel: (tag: string) => string;
+  t: any;
+  rawLang: string;
 }) {
   // Générer l'URL de l'image Sanity
   const imageUrl = product.image ? urlFor(product.image).width(800).height(800).url() : '';
+
+  // For EN/IT, use i18n translations. For FR/DE, use Sanity data.
+  const isSanityLang = rawLang === 'fr' || rawLang === 'de';
+  const productKey = productKeyMapping[index] || 'chicken';
+
+  const productName = isSanityLang
+    ? product.name[currentLang]
+    : t(`products.items.${productKey}.name`, product.name['fr']);
+
+  const productDesc = isSanityLang
+    ? product.description[currentLang]
+    : t(`products.items.${productKey}.desc`, product.description['fr']);
 
   return (
     <div
@@ -163,7 +185,7 @@ const ProductCard = memo(function ProductCard({
             {imageUrl ? (
               <OptimizedImage
                 src={imageUrl}
-                alt={product.image.alt || product.name[currentLang]}
+                alt={product.image.alt || productName}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -189,10 +211,10 @@ const ProductCard = memo(function ProductCard({
         {/* Content */}
         <div className="p-4 md:p-6 flex flex-col flex-1">
           <h3 className="text-xl md:text-2xl font-['Playfair_Display'] font-bold text-foreground mb-2 md:mb-3">
-            {product.name[currentLang]}
+            {productName}
           </h3>
           <p className="text-sm md:text-base text-muted-foreground flex-1">
-            {product.description[currentLang]}
+            {productDesc}
           </p>
         </div>
       </div>

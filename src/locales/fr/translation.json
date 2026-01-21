@@ -173,27 +173,27 @@
     "description": "Découvrez des viandes fraîches et savoureuses, préparées chaque jour pour garantir goût et qualité.",
     "itemDesc": "Découvrez nos sélections fraîches et savoureuses, préparées avec soin.",
     "items": {
-      "chicken": {
+      "entrecote": {
         "name": "Entrecôte Maturée",
         "desc": "Maturé trois semaines sur l'os."
       },
-      "heifer": {
+      "fondue": {
         "name": "Fondue Chinoise",
         "desc": "Fondue chinoise de bœuf."
       },
-      "horse": {
+      "terrine": {
         "name": "Terrine du Chef",
         "desc": "Une création artisanale savoureuse."
       },
-      "lamb": {
+      "lard": {
         "name": "Lard de Jambon",
         "desc": "Notre lard de jambon sélectionné."
       },
-      "order": {
-        "name": "Terrine au Pruneaux",
+      "terrine_pruneaux": {
+        "name": "Terrine aux Pruneaux",
         "desc": "Une création artisanale savoureuse."
       },
-      "pork": {
+      "charcuterie": {
         "name": "Plat Charcuterie",
         "desc": "Pour votre apéro."
       }
