@@ -136,7 +136,12 @@ export function Header() {
         navigate(pathParts.join('/') + location.hash);
     };
 
-    const isTransparent = !scrolled && activeSection === 'accueil' && location.pathname.length <= 4;
+    // isTransparent should be true when:
+    // 1. Not scrolled (at the very top)
+    // 2. On the main page (not a subpage like /legal)
+    // Note: We no longer depend on activeSection for transparency, as IntersectionObserver can be unreliable during partial scrolls
+    const isMainPage = location.pathname.length <= 4 || location.pathname.endsWith('/fr') || location.pathname.endsWith('/de');
+    const isTransparent = !scrolled && isMainPage;
 
     // CLASSES LOGIC: More robust mobile header with hardware acceleration
     // Added 'transform-gpu' and 'top-0' explicit to fix Chrome Mobile disappearing issues
