@@ -10,9 +10,7 @@ export function useSanityData<T>(query: string, params: Record<string, any> = {}
         const fetchData = async () => {
             try {
                 setLoading(true);
-                console.log('Fetching from Sanity with query:', query);
                 const result = await client.fetch<T>(query, params);
-                console.log('Sanity result:', result);
                 setData(result);
             } catch (err) {
                 console.error('Sanity error:', err);

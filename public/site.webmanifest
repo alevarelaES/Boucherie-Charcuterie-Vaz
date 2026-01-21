@@ -3,12 +3,12 @@
   "short_name": "Boucherie Vaz",
   "icons": [
     {
-      "src": "/images/logo/favicon.png",
+      "src": "/images/logo/logo-no-bg.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/logo/favicon.png",
+      "src": "/images/logo/logo-no-bg.png",
       "sizes": "512x512",
       "type": "image/png"
     }
