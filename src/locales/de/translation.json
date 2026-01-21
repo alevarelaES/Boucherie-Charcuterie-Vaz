@@ -26,7 +26,7 @@
             }
         }
     },
-    "closed": "Ruhe",
+    "closed": "Geschlossen",
     "days": {
         "friday": "Freitag",
         "monThu": "Mon-Don",
@@ -116,6 +116,14 @@
             "name": "Ihr Name"
         },
         "submit": "Senden",
+        "status": {
+            "open": "Geöffnet",
+            "closed": "Geschlossen"
+        },
+        "today": "Heute",
+        "morning": "Vormittag",
+        "afternoon": "Nachmittag",
+        "subtitle": "Sprechen wir zusammen",
         "title": "Schreiben Sie uns"
     },
     "metiers": {

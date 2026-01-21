@@ -79,7 +79,7 @@ export function WelcomeMessage() {
                                 transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
                                 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tight mb-2 text-center"
                             >
-                                <span className="text-gold">Boucherie</span> Vaz
+                                <span className="text-gold">{t('welcome.title', 'Boucherie')}</span> Vaz
                             </motion.h1>
 
                             <motion.div
@@ -95,7 +95,7 @@ export function WelcomeMessage() {
                                 transition={{ delay: 0.6, duration: 0.5 }}
                                 className="text-white/80 font-sans font-medium tracking-[0.4em] uppercase text-xs md:text-sm"
                             >
-                                L'Art de la Viande
+                                {t('tagline', "L'Art de la Viande")}
                             </motion.p>
                         </div>
                     </div>
