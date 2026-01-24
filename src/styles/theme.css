@@ -176,6 +176,16 @@
     }
   }
 
+  @keyframes sheen {
+    0% {
+      transform: translateX(-200%);
+    }
+
+    100% {
+      transform: translateX(200%);
+    }
+  }
+
   --animate-subtle-zoom: subtle-zoom 10s ease-out forwards;
   --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
   --animate-fade-in: fade-in 1s ease-out forwards;
