@@ -102,7 +102,7 @@ export const ProduitsSection = memo(function ProduitsSection() {
         <div className="-mx-4 md:-mx-8">
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
               dragFree: true,
             }}
@@ -110,7 +110,7 @@ export const ProduitsSection = memo(function ProduitsSection() {
           >
             <CarouselContent className="-ml-3 md:-ml-6 items-stretch">
               {products.map((product, index) => (
-                <CarouselItem key={product._id} className="pl-3 md:pl-6 basis-[85%] md:basis-[45%] lg:basis-[32%]">
+                <CarouselItem key={product._id} className="pl-3 md:pl-6 basis-[88%] md:basis-[45%] lg:basis-[32%]">
                   <ProductCard
                     product={product}
                     index={index}
@@ -234,15 +234,14 @@ const ProductCard = memo(function ProductCard({
       onMouseLeave={() => onHover(null)}
       onClick={() => onClick(product, productName)}
     >
-      <div className="absolute inset-0 rounded-2xl overflow-hidden bg-muted transition-all duration-500 ease-out shadow-lg shadow-black/20 group-hover:shadow-2xl group-hover:shadow-black/30 border border-transparent group-hover:scale-[1.02] transform origin-center will-change-transform">
-
+      <div className="absolute inset-0 rounded-2xl overflow-hidden transition-all duration-500 ease-out shadow-lg shadow-black/20 group-hover:shadow-2xl group-hover:shadow-black/30 border border-transparent group-hover:scale-[1.02] transform origin-center will-change-transform">
         {/* Background Image - Absolute Cover */}
-        <div className="absolute inset-0 w-full h-full bg-black">
+        <div className="absolute inset-0 w-full h-full">
           {imageUrl ? (
             <OptimizedImage
               src={imageUrl}
               alt={product.image.alt || productName}
-              className="w-full h-full object-cover opacity-90 transition-opacity duration-700 ease-out"
+              className="w-full h-full object-cover transition-opacity duration-700 ease-out"
             />
           ) : (
             <div className="w-full h-full bg-muted flex items-center justify-center">

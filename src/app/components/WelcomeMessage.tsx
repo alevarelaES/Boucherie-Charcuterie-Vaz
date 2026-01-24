@@ -79,7 +79,7 @@ export function WelcomeMessage() {
                                 transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
                                 className="text-4xl md:text-6xl font-serif font-black text-white tracking-tight mb-2 text-center"
                             >
-                                <span className="text-gold">{t('welcome.title', 'Boucherie')}</span> Vaz
+                                <span className="text-gold">{t('welcome.title', 'Boucherie')}</span>
                             </motion.h1>
 
                             <motion.div
