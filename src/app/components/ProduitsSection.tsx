@@ -110,7 +110,7 @@ export const ProduitsSection = memo(function ProduitsSection() {
           >
             <CarouselContent className="-ml-3 md:-ml-6 items-stretch">
               {products.map((product, index) => (
-                <CarouselItem key={product._id} className="pl-3 md:pl-6 basis-[88%] md:basis-[45%] lg:basis-[32%]">
+                <CarouselItem key={product._id} className="pl-3 md:pl-6 basis-[88%] md:basis-[45%] lg:basis-[32%] select-none">
                   <ProductCard
                     product={product}
                     index={index}

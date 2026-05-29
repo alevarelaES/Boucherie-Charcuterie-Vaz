@@ -18,7 +18,6 @@ export function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [showTopBar, setShowTopBar] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
     const [activeSection, setActiveSection] = useState('accueil');
 
     const currentLang = (i18n.language as 'fr' | 'de') || 'fr';

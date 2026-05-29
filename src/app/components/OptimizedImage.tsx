@@ -10,6 +10,32 @@ interface OptimizedImageProps {
     quality?: number;
 }
 
+/**
+ * Derives a WebP source URL from the original image URL.
+ * - Sanity CDN: appends fm=webp (+ q param) to the query string
+ * - Local/static images: replaces jpg/jpeg/png extension with .webp
+ */
+function getWebpSrc(src: string, quality: number): string | null {
+    if (src.includes('cdn.sanity.io')) {
+        const separator = src.includes('?') ? '&' : '?';
+        return `${src}${separator}fm=webp&q=${quality}`;
+    }
+    const match = src.match(/\.(jpe?g|png)(\?.*)?$/i);
+    if (match) {
+        return src.replace(/\.(jpe?g|png)(\?.*)?$/i, `.webp${match[2] ?? ''}`);
+    }
+    return null;
+}
+
+/**
+ * Appends quality param to a Sanity CDN URL (no-op for other URLs).
+ */
+function applyQuality(src: string, quality: number): string {
+    if (!src.includes('cdn.sanity.io')) return src;
+    const separator = src.includes('?') ? '&' : '?';
+    return `${src}${separator}q=${quality}`;
+}
+
 export function OptimizedImage({
     src,
     alt,
@@ -34,7 +60,7 @@ export function OptimizedImage({
                 }
             },
             {
-                rootMargin: '50px', // Start loading 50px before entering viewport
+                rootMargin: '50px',
                 threshold: 0.01
             }
         );
@@ -44,20 +70,21 @@ export function OptimizedImage({
         return () => observer.disconnect();
     }, [priority]);
 
-    // Generate WebP alternative if available
-    const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-    const originalExt = src.match(/\.(jpg|jpeg|png)$/i)?.[1];
+    const resolvedSrc = isInView ? applyQuality(src, quality) : undefined;
+    const webpSrc = isInView ? getWebpSrc(src, quality) : null;
 
     return (
-        <picture ref={imgRef as any} className="flex items-center justify-center w-full h-full">
-            {/* WebP version for modern browsers */}
-
-
-            {/* Fallback to original format */}
+        <picture
+            ref={imgRef as any}
+            className="flex items-center justify-center w-full h-full"
+        >
+            {webpSrc && (
+                <source srcSet={webpSrc} type="image/webp" />
+            )}
             <img
-                src={isInView ? src : undefined}
+                src={resolvedSrc}
                 alt={alt}
-                className={className}
+                className={`${className} transition-opacity duration-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 width={width}
                 height={height}
                 loading={priority ? 'eager' : 'lazy'}

@@ -26,67 +26,18 @@
       }
     }
   },
+  "catering": {
+    "introTitle": "Butcher Quality, Exceptional Service",
+    "introParagraph": "Whether it's a birthday, wedding or corporate event, we put our expertise at the service of your palate.",
+    "statsLabel": "Successful Events",
+    "testimonialQuote": "The quality of the meats and the presentation of the buffets amazed all our guests.",
+    "ctaTitle": "Ready to delight your guests?",
+    "ctaParagraph": "Contact us for a personalized quote adapted to your budget and wishes.",
+    "ctaButtonText": "Book a date"
+  },
   "closed": "Closed",
-  "days": {
-    "friday": "Friday",
-    "monTue": "Mon-Tue",
-    "monThu": "Mon-Thu",
-    "saturday": "Saturday",
-    "sunday": "Sunday",
-    "thursday": "Thursday",
-    "wednesday": "Wednesday"
-  },
-  "rights": "All rights reserved.",
-  "tagline": "The art of meat since 2025",
-  "footer": {
-    "tagline": "The art of meat since 2025",
-    "description": "An artisanal butcher shop in the heart of Vallorbe, where tradition and excellence meet to offer you the best of local gastronomy.",
-    "navigation": "Navigation",
-    "contact": "Contact",
-    "hours": "Hours",
-    "rights": "All rights reserved."
-  },
-  "terms": "Terms",
-  "cookie": {
-    "title": "Respect for your privacy",
-    "description": "We use cookies to optimize your experience and analyze our traffic. By continuing, you accept the use of cookies necessary for the proper functioning of the site.",
-    "accept": "Accept all",
-    "decline": "Decline",
-    "settings": "Settings"
-  },
-  "legalContent": {
-    "title": "Legal Notice",
-    "owner": "Site owner",
-    "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSwitzerland\nEmail: boucherievaz@gmail.com\nPhone: +41 21 843 11 09",
-    "hosting": "Hosting",
-    "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSwitzerland",
-    "termsTitle": "General Terms",
-    "termsText": "Since our products are perishable goods, returns are not accepted after sale, except in the case of a manifest quality defect found at the time of collection or delivery."
-  },
-  "privacyContent": {
-    "title": "Privacy & Data Protection Policy",
-    "dataTitle": "Data Protection",
-    "dataText": "In accordance with the nLPD (new Federal Data Protection Act in Switzerland), we are committed to protecting your personal data. Data collected via our contact form is only used to respond to your requests and is never transmitted to third parties.",
-    "cookiesTitle": "Cookies",
-    "cookiesText": "We only use technical cookies necessary for the proper functioning of the site (for example, to remember your choice of language or your consent to cookies). We do not use advertising or third-party tracking cookies.",
-    "rightsTitle": "Your rights",
-    "rightsText": "You have the right to request access to your data, its correction or deletion. If you have any questions, contact us at the email address indicated in the legal notice."
-  },
-  "back": "Back",
-  "hero": {
-    "badge": "Open today",
-    "cta": {
-      "contact": "Contact us now",
-      "products": "Discover our products"
-    },
-    "description": "Artisan excellence and exceptional meats in",
-    "imageAlt": "Boucherie Vaz - The art of meat",
-    "scroll": "Scroll",
-    "titleHighlight": "right near you",
-    "titleInitial": "The butcher shop"
-  },
-  "menu": {
-    "title": "Menu"
+  "common": {
+    "back": "Back"
   },
   "contact": {
     "alertFill": "Please fill in all fields.",
@@ -129,6 +80,57 @@
     "subtitle": "Let's talk",
     "title": "Contact us today"
   },
+  "cookie": {
+    "title": "Respect for your privacy",
+    "description": "We use cookies to optimize your experience and analyze our traffic. By continuing, you accept the use of cookies necessary for the proper functioning of the site.",
+    "accept": "Accept all",
+    "decline": "Decline",
+    "learnMore": "Learn more",
+    "settings": "Settings"
+  },
+  "days": {
+    "friday": "Friday",
+    "monTue": "Mon-Tue",
+    "monThu": "Mon-Thu",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "thursday": "Thursday",
+    "wednesday": "Wednesday"
+  },
+  "error": "Error loading products",
+  "footer": {
+    "tagline": "The art of meat since 2025",
+    "description": "An artisanal butcher shop in the heart of Vallorbe, where tradition and excellence meet to offer you the best of local gastronomy.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "hours": "Hours",
+    "rights": "All rights reserved."
+  },
+  "hero": {
+    "badge": "Open today",
+    "cta": {
+      "contact": "Contact us now",
+      "products": "Discover our products"
+    },
+    "description": "Artisan excellence and exceptional meats in",
+    "imageAlt": "Boucherie Vaz - The art of meat",
+    "scroll": "Scroll",
+    "titleHighlight": "right near you",
+    "titleInitial": "The butcher shop"
+  },
+  "legalContent": {
+    "title": "Legal Notice",
+    "owner": "Site owner",
+    "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSwitzerland\nEmail: boucherievaz@gmail.com\nPhone: +41 21 843 11 09",
+    "hosting": "Hosting",
+    "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSwitzerland",
+    "termsTitle": "General Terms",
+    "termsText": "Since our products are perishable goods, returns are not accepted after sale, except in the case of a manifest quality defect found at the time of collection or delivery."
+  },
+  "loading": "Loading...",
+  "menu": {
+    "title": "Menu"
+  },
   "metiers": {
     "badge": "Our Company",
     "boucherie": {
@@ -153,6 +155,9 @@
     "traiteur": {
       "desc": "Bespoke services",
       "detail": "Custom-made selections to enhance your moments of conviviality: expert advice, special preparations and flavors of the region for every occasion.",
+      "heroTitle": "Catering",
+      "heroTitleHighlight": "Service",
+      "heroSubtitle": "Elevate your events with the excellence of Boucherie Vaz.",
       "stats": {
         "label": "Happy Clients"
       },
@@ -168,10 +173,20 @@
     "scrollTop": "Back to top",
     "toggleMenu": "Open menu"
   },
+  "privacyContent": {
+    "title": "Privacy & Data Protection Policy",
+    "dataTitle": "Data Protection",
+    "dataText": "In accordance with the nLPD (new Federal Data Protection Act in Switzerland), we are committed to protecting your personal data. Data collected via our contact form is only used to respond to your requests and is never transmitted to third parties.",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "We only use technical cookies necessary for the proper functioning of the site (for example, to remember your choice of language or your consent to cookies). We do not use advertising or third-party tracking cookies.",
+    "rightsTitle": "Your rights",
+    "rightsText": "You have the right to request access to your data, its correction or deletion. If you have any questions, contact us at the email address indicated in the legal notice."
+  },
   "products": {
     "badge": "Our Selection",
     "description": "Discover fresh and tasty meats, prepared every day to guarantee taste and quality.",
     "itemDesc": "Discover our fresh and tasty selections, prepared with care.",
+    "modal_desc": "Find this fresh, homemade product at our butcher shop.",
     "items": {
       "entrecote": {
         "name": "Aged Ribeye Steak",
@@ -200,11 +215,33 @@
     },
     "tags": {
       "homemade": "Homemade",
+      "new": "New",
       "premium": "Premium",
       "specialty": "Specialty"
     },
     "title": "Our Best Products"
   },
+  "recipes": {
+    "breadcrumb": "Recipes",
+    "categories": {
+      "all": "All",
+      "beef": "Beef",
+      "lamb": "Lamb",
+      "pork": "Pork",
+      "poultry": "Poultry"
+    },
+    "meta": {
+      "description": "Discover the exclusive recipes of Boucherie Vaz: aged beef, rack of lamb and preparation tips for exceptional meals.",
+      "title": "Recipes & Tips"
+    },
+    "searchPlaceholder": "Search for a recipe...",
+    "title": "Recipes",
+    "titleHighlight": "Chef's Tips"
+  },
+  "rights": "All rights reserved.",
+  "back": "Back",
+  "tagline": "The art of meat since 2025",
+  "terms": "Terms",
   "welcome": {
     "title": "Boucherie-Charcuterie Vaz",
     "subtitle": "Excellence in every bite",

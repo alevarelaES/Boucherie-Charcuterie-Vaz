@@ -214,6 +214,34 @@ export function useOpeningHours() {
     return useSanityData<OpeningHours>(query);
 }
 
+// Hook pour récupérer le contenu de la page Traiteur
+export interface CateringPageContent {
+    _id: string;
+    introTitle: MultilingualText;
+    introParagraph: MultilingualText;
+    statsLabel: MultilingualText;
+    testimonialQuote: MultilingualText;
+    testimonialAuthor: string;
+    ctaTitle: MultilingualText;
+    ctaParagraph: MultilingualText;
+    ctaButtonText: MultilingualText;
+}
+
+export function useCateringPage() {
+    const query = `*[_type == "cateringPage"][0] {
+    _id,
+    introTitle,
+    introParagraph,
+    statsLabel,
+    testimonialQuote,
+    testimonialAuthor,
+    ctaTitle,
+    ctaParagraph,
+    ctaButtonText
+  }`;
+    return useSanityData<CateringPageContent>(query);
+}
+
 // Hook pour récupérer les recettes
 export interface Recipe {
     _id: string;

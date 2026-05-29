@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import { useTranslation } from 'react-i18next';
 
 interface SectionHeaderProps {
     badge: string;

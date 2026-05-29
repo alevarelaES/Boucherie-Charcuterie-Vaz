@@ -5,6 +5,7 @@ import { product } from './product'
 import { service } from './service'
 import { recipe } from './recipe'
 import { homepage } from './homepage'
+import { cateringPage } from './cateringPage'
 
 export const schemaTypes = [
     // Singletons (un seul document)
@@ -12,6 +13,7 @@ export const schemaTypes = [
     openingHours,
     hero,
     homepage,
+    cateringPage,
 
     // Collections (plusieurs documents possibles)
     product,

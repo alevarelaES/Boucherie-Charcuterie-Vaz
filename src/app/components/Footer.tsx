@@ -137,9 +137,9 @@ export const Footer = memo(function Footer() {
 
               {/* Social Links */}
               <div className="flex gap-3">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a
-                    key={index}
+                    key={social.label}
                     href={social.href}
                     aria-label={social.label}
                     className="w-10 h-10 bg-background/10 hover:bg-gold rounded-lg flex items-center justify-center transition-all duration-300 text-background hover:-translate-y-1"
@@ -156,9 +156,9 @@ export const Footer = memo(function Footer() {
                 {t('footer.navigation')}
               </h3>
               <ul className="space-y-3">
-                {quickLinks.map((link, index) => (
+                {quickLinks.map((link) => (
                   <li
-                    key={index}
+                    key={link.href}
                     className="transition-transform duration-300 hover:translate-x-1"
                   >
                     <a
@@ -217,9 +217,9 @@ export const Footer = memo(function Footer() {
               </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-sm md:text-base text-background/60">
-              {hours.map((horaire, index) => (
+              {hours.map((horaire) => (
                 <div
-                  key={index}
+                  key={horaire.jour}
                   className={`${horaire.closed ? 'text-background/40 italic' : ''}`}
                 >
                   <span className="font-semibold text-background/80">{horaire.jour}</span>

@@ -26,7 +26,27 @@
       }
     }
   },
+  "catering": {
+    "introTitle": "Qualité Bouchère, Service d'Exception",
+    "introParagraph": "Que ce soit pour un anniversaire, un mariage ou un événement d'entreprise, nous mettons notre savoir-faire au service de vos papilles.",
+    "statsLabel": "Événements réussis",
+    "testimonialQuote": "La qualité des viandes et la présentation des buffets ont bluffé tous nos invités.",
+    "ctaTitle": "Prêt à régaler vos convives ?",
+    "ctaParagraph": "Contactez-nous pour un devis personnalisé adapté à votre budget et vos envies.",
+    "ctaButtonText": "Réserver une date"
+  },
   "closed": "Fermé",
+  "common": {
+    "back": "Retour"
+  },
+  "cookie": {
+    "title": "Respect de votre vie privée",
+    "description": "Nous utilisons des cookies pour optimiser votre expérience et analyser notre trafic. En continuant, vous acceptez l'usage des cookies nécessaires au bon fonctionnement du site.",
+    "accept": "Tout accepter",
+    "decline": "Refuser",
+    "learnMore": "En savoir plus",
+    "settings": "Paramètres"
+  },
   "days": {
     "friday": "Vendredi",
     "monTue": "Lun-Mar",
@@ -36,8 +56,7 @@
     "thursday": "Jeudi",
     "wednesday": "Mercredi"
   },
-  "rights": "Tous droits réservés.",
-  "tagline": "L'art de la viande depuis 2025",
+  "error": "Erreur lors du chargement des produits",
   "footer": {
     "tagline": "L'art de la viande depuis 2025",
     "description": "Une boucherie-charcuterie artisanale au cœur de Vallorbe, où tradition et excellence se rencontrent pour vous offrir le meilleur de la gastronomie locale.",
@@ -46,33 +65,6 @@
     "hours": "Horaires",
     "rights": "Tous droits réservés."
   },
-  "terms": "CGV",
-  "cookie": {
-    "title": "Respect de votre vie privée",
-    "description": "Nous utilisons des cookies pour optimiser votre expérience et analyser notre trafic. En continuant, vous acceptez l'usage des cookies nécessaires au bon fonctionnement du site.",
-    "accept": "Tout accepter",
-    "decline": "Refuser",
-    "settings": "Paramètres"
-  },
-  "legalContent": {
-    "title": "Mentions Légales",
-    "owner": "Propriétaire du site",
-    "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSuisse\nEmail : boucherievaz@gmail.com\nTéléphone : +41 21 843 11 09",
-    "hosting": "Hébergement",
-    "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSuisse",
-    "termsTitle": "Conditions Générales",
-    "termsText": "Nos produits étant des denrées périssables, les retours ne sont pas acceptés après la vente, sauf en cas de défaut de qualité manifeste constaté au moment du retrait ou de la livraison."
-  },
-  "privacyContent": {
-    "title": "Politique de Confidentialité",
-    "dataTitle": "Protection des données",
-    "dataText": "Conformément à la nLPD (nouvelle Loi fédérale sur la Protection des Données en Suisse), nous nous engageons à protéger vos données personnelles. Les données collectées via notre formulaire de contact ne sont utilisées que pour répondre à vos demandes et ne sont jamais transmises à des tiers.",
-    "cookiesTitle": "Cookies",
-    "cookiesText": "Nous utilisons uniquement des cookies techniques nécessaires au bon fonctionnement du site (par exemple pour mémoriser votre choix de langue ou votre consentement aux cookies). Nous n'utilisons pas de cookies publicitaires ou de traçage tiers.",
-    "rightsTitle": "Vos droits",
-    "rightsText": "Vous avez le droit de demander l'accès à vos données, leur correction ou leur suppression. Pour toute question, contactez-nous à l'adresse email indiquée dans les mentions légales."
-  },
-  "back": "Retour",
   "hero": {
     "badge": "Ouvert aujourd'hui",
     "cta": {
@@ -85,8 +77,60 @@
     "titleHighlight": "proche de vous",
     "titleInitial": "La boucherie"
   },
+  "legalContent": {
+    "title": "Mentions Légales",
+    "owner": "Propriétaire du site",
+    "ownerText": "Boucherie Vaz\nRue du Faubourg 5\n1337 Vallorbe\nSuisse\nEmail : boucherievaz@gmail.com\nTéléphone : +41 21 843 11 09",
+    "hosting": "Hébergement",
+    "hostingText": "Hostpoint AG\nNeue Jonastrasse 60\n8640 Rapperswil-Jona\nSuisse",
+    "termsTitle": "Conditions Générales",
+    "termsText": "Nos produits étant des denrées périssables, les retours ne sont pas acceptés après la vente, sauf en cas de défaut de qualité manifeste constaté au moment du retrait ou de la livraison."
+  },
+  "loading": "Chargement...",
   "menu": {
     "title": "Menu"
+  },
+  "metiers": {
+    "badge": "Notre entreprise",
+    "boucherie": {
+      "desc": "Viandes sélectionnées",
+      "detail": "Une sélection rigoureuse de viandes fraîches et savoureuses, préparées avec soin chaque jour pour garantir goût et qualité exceptionnelle.",
+      "stats": {
+        "label": "Origine Suisse"
+      },
+      "title": "Boucherie"
+    },
+    "charcuterie": {
+      "desc": "Savoir-faire maison",
+      "detail": "Des recettes traditionnelles transmises de génération en génération, élaborées dans le respect de l'artisanat local et du terroir.",
+      "stats": {
+        "label": "Spécialités maison"
+      },
+      "title": "Charcuterie"
+    },
+    "more": "En savoir plus",
+    "subtitle": "Une sélection fraîche et savoureuse, préparée chaque jour avec exigence pour que tout vous « tombe dessus » sans effort : qualité, conseil et goût.",
+    "title": "Viandes, charcuterie, traiteur",
+    "traiteur": {
+      "desc": "Prestations sur mesure",
+      "detail": "Des sélections préparées sur mesure pour sublimer vos moments de convivialité : conseils d'expert, préparations spéciales, et saveurs du terroir pour chaque occasion.",
+      "heroTitle": "Service",
+      "heroTitleHighlight": "Traiteur",
+      "heroSubtitle": "Sublimez vos événements avec l'excellence de la Boucherie Vaz.",
+      "stats": {
+        "label": "Satisfaction"
+      },
+      "title": "Traiteur"
+    }
+  },
+  "nav": {
+    "about": "À propos",
+    "contact": "Contact",
+    "home": "Accueil",
+    "products": "Produits",
+    "reserve": "Réserver",
+    "scrollTop": "Retour en haut",
+    "toggleMenu": "Ouvrir le menu"
   },
   "contact": {
     "alertFill": "Merci de remplir tous les champs.",
@@ -129,49 +173,20 @@
     "subtitle": "Parlons ensemble",
     "title": "Contactez-nous"
   },
-  "metiers": {
-    "badge": "Notre entreprise",
-    "boucherie": {
-      "desc": "Viandes sélectionnées",
-      "detail": "Une sélection rigoureuse de viandes fraîches et savoureuses, préparées avec soin chaque jour pour garantir goût et qualité exceptionnelle.",
-      "stats": {
-        "label": "Origine Suisse"
-      },
-      "title": "Boucherie"
-    },
-    "charcuterie": {
-      "desc": "Savoir-faire maison",
-      "detail": "Des recettes traditionnelles transmises de génération en génération, élaborées dans le respect de l'artisanat local et du terroir.",
-      "stats": {
-        "label": "Spécialités maison"
-      },
-      "title": "Charcuterie"
-    },
-    "more": "En savoir plus",
-    "subtitle": "Une sélection fraîche et savoureuse, préparée chaque jour avec exigence pour que tout vous « tombe dessus » sans effort : qualité, conseil et goût.",
-    "title": "Viandes, charcuterie, traiteur",
-    "traiteur": {
-      "desc": "Prestations sur mesure",
-      "detail": "Des sélections préparées sur mesure pour sublimer vos moments de convivialité : conseils d'expert, préparations spéciales, et saveurs du terroir pour chaque occasion.",
-      "stats": {
-        "label": "Satisfaction"
-      },
-      "title": "Traiteur"
-    }
-  },
-  "nav": {
-    "about": "À propos",
-    "contact": "Contact",
-    "home": "Accueil",
-    "products": "Produits",
-    "reserve": "Réserver",
-    "scrollTop": "Retour en haut",
-    "toggleMenu": "Ouvrir le menu"
+  "privacyContent": {
+    "title": "Politique de Confidentialité",
+    "dataTitle": "Protection des données",
+    "dataText": "Conformément à la nLPD (nouvelle Loi fédérale sur la Protection des Données en Suisse), nous nous engageons à protéger vos données personnelles. Les données collectées via notre formulaire de contact ne sont utilisées que pour répondre à vos demandes et ne sont jamais transmises à des tiers.",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "Nous utilisons uniquement des cookies techniques nécessaires au bon fonctionnement du site (par exemple pour mémoriser votre choix de langue ou votre consentement aux cookies). Nous n'utilisons pas de cookies publicitaires ou de traçage tiers.",
+    "rightsTitle": "Vos droits",
+    "rightsText": "Vous avez le droit de demander l'accès à vos données, leur correction ou leur suppression. Pour toute question, contactez-nous à l'adresse email indiquée dans les mentions légales."
   },
   "products": {
     "badge": "Notre sélection",
     "description": "Découvrez des viandes fraîches et savoureuses, préparées chaque jour pour garantir goût et qualité.",
     "itemDesc": "Découvrez nos sélections fraîches et savoureuses, préparées avec soin.",
+    "modal_desc": "Retrouvez ce produit frais et préparé maison dans notre boucherie.",
     "items": {
       "entrecote": {
         "name": "Entrecôte Maturée",
@@ -200,11 +215,33 @@
     },
     "tags": {
       "homemade": "Fait Maison",
+      "new": "Nouveauté",
       "premium": "Premium",
       "specialty": "Spécialité"
     },
     "title": "Produits phares"
   },
+  "recipes": {
+    "breadcrumb": "Recettes",
+    "categories": {
+      "all": "Toutes",
+      "beef": "Bœuf",
+      "lamb": "Agneau",
+      "pork": "Porc",
+      "poultry": "Volaille"
+    },
+    "meta": {
+      "description": "Découvrez les recettes exclusives de la Boucherie Vaz : bœuf maturé, agneau en croûte et conseils de préparation pour des repas d'exception.",
+      "title": "Recettes & Astuces"
+    },
+    "searchPlaceholder": "Rechercher une recette...",
+    "title": "Recettes",
+    "titleHighlight": "Astuces de Chef"
+  },
+  "rights": "Tous droits réservés.",
+  "back": "Retour",
+  "tagline": "L'art de la viande depuis 2025",
+  "terms": "CGV",
   "welcome": {
     "title": "Boucherie-Charcuterie Vaz",
     "subtitle": "L'excellence au service du goût",

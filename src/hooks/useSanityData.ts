@@ -7,21 +7,30 @@ export function useSanityData<T>(query: string, params: Record<string, any> = {}
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
+        let cancelled = false;
+
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const result = await client.fetch<T>(query, params);
-                setData(result);
+                if (!cancelled) {
+                    setData(result);
+                    setLoading(false);
+                }
             } catch (err) {
-                console.error('Sanity error:', err);
-                setError(err instanceof Error ? err : new Error('Unknown error'));
-            } finally {
-                setLoading(false);
+                if (!cancelled) {
+                    console.error('Sanity error:', err);
+                    setError(err instanceof Error ? err : new Error('Unknown error'));
+                    setLoading(false);
+                }
             }
         };
 
         fetchData();
-    }, [query, JSON.stringify(params)]);
+        return () => { cancelled = true; };
+    // params est toujours un objet statique dans ce projet — query suffit comme dep
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [query]);
 
     return { data, loading, error };
 }

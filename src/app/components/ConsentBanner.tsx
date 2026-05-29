@@ -83,7 +83,7 @@ export function ConsentBanner() {
                                     className="text-[10px] uppercase tracking-widest font-bold text-primary/60 hover:text-primary transition-colors"
                                     onClick={() => setIsVisible(false)}
                                 >
-                                    En savoir plus
+                                    {t('cookie.learnMore', 'En savoir plus')}
                                 </Link>
                             </div>
                         </div>

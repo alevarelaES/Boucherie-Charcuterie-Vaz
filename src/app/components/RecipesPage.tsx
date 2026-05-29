@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, Clock, Users, Utensils, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -10,16 +10,6 @@ import { Breadcrumbs } from './ui/Breadcrumbs';
 import { useRecipes } from '../../hooks/useSanity';
 import { urlFor } from '../../lib/sanity/image';
 
-interface Recipe {
-    id: string;
-    title: string;
-    category: string;
-    time: string;
-    servings: string;
-    difficulty: string;
-    image: string;
-}
-
 export function RecipesPage() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
@@ -27,29 +17,14 @@ export function RecipesPage() {
     const [activeCategory, setActiveCategory] = useState('all');
 
     const categories = [
-        { id: 'all', label: 'Toutes' },
-        { id: 'beef', label: 'Bœuf' },
-        { id: 'poultry', label: 'Volaille' },
-        { id: 'pork', label: 'Porc' },
-        { id: 'lamb', label: 'Agneau' }
+        { id: 'all', label: t('recipes.categories.all', 'Toutes') },
+        { id: 'beef', label: t('recipes.categories.beef', 'Bœuf') },
+        { id: 'poultry', label: t('recipes.categories.poultry', 'Volaille') },
+        { id: 'pork', label: t('recipes.categories.pork', 'Porc') },
+        { id: 'lamb', label: t('recipes.categories.lamb', 'Agneau') }
     ];
 
-    // Mock data for demo
     const { data: sanityRecipes, loading } = useRecipes();
-
-    // Mock data for demo (Fallback)
-    const fallbackRecipes: Recipe[] = [
-        {
-            id: '1',
-            title: 'Côte de Bœuf Maturée aux Herbes',
-            category: 'beef',
-            time: '45 min',
-            servings: '2-4 pers.',
-            difficulty: 'Moyen',
-            image: '/images/products/beef.png?v=2'
-        },
-        // ... (truncated for brevity, keeping only one for fallback example if needed, or remove all if confident)
-    ];
 
     const displayRecipes = sanityRecipes?.map(r => ({
         id: r._id,
@@ -59,7 +34,7 @@ export function RecipesPage() {
         servings: r.servings,
         difficulty: r.difficulty === 'Medium' ? 'Moyen' : r.difficulty === 'Advanced' ? 'Avancé' : 'Facile',
         image: r.image ? urlFor(r.image).width(600).url() : '/images/placeholder-recipe.jpg'
-    })) || []; // fallbackRecipes if we wanted to keep them
+    })) || [];
 
     const filteredRecipes = displayRecipes.filter(recipe => {
         const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -75,8 +50,8 @@ export function RecipesPage() {
             className="min-h-screen bg-background pt-32"
         >
             <MetaSEO
-                title="Recettes & Astuces"
-                description="Découvrez les recettes exclusives de la Boucherie Vaz : bœuf maturé, agneau en croûte et conseils de préparation pour des repas d'exception."
+                title={t('recipes.meta.title', 'Recettes & Astuces')}
+                description={t('recipes.meta.description', 'Découvrez les recettes exclusives de la Boucherie Vaz : bœuf maturé, agneau en croûte et conseils de préparation pour des repas d\'exception.')}
                 schema={{
                     "@context": "https://schema.org",
                     "@type": "ItemList",
@@ -103,17 +78,17 @@ export function RecipesPage() {
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div className="flex-grow">
-                        <Breadcrumbs items={[{ label: 'Recettes' }]} />
+                        <Breadcrumbs items={[{ label: t('recipes.breadcrumb', 'Recettes') }]} />
                         <button
                             onClick={() => navigate(-1)}
                             className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all mb-8 group"
                         >
                             <ChevronLeft className="w-5 h-5" />
-                            Retour
+                            {t('common.back', 'Retour')}
                         </button>
                         <h1 className="text-5xl md:text-8xl font-serif font-bold leading-none">
-                            Recettes & <br />
-                            <span className="text-gold italic">Astuces de Chef</span>
+                            {t('recipes.title', 'Recettes')} & <br />
+                            <span className="text-gold italic">{t('recipes.titleHighlight', 'Astuces de Chef')}</span>
                         </h1>
                     </div>
 
@@ -121,7 +96,7 @@ export function RecipesPage() {
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                         <input
                             type="text"
-                            placeholder="Rechercher une recette..."
+                            placeholder={t('recipes.searchPlaceholder', 'Rechercher une recette...')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-border shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-sans font-medium"

@@ -89,19 +89,6 @@ export const Hero = memo(function Hero() {
             </a>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-30 flex flex-col items-center gap-3 group animate-fade-in animation-delay-1000"
-          onClick={scrollToContent}
-        >
-          <span className="text-xs uppercase tracking-[0.2em] text-white/70 font-bold group-hover:text-white transition-colors">
-            {scrollText}
-          </span>
-          <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center p-1 relative overflow-hidden group-hover:border-white/60 transition-colors">
-            <div className="w-1.5 h-3 bg-white rounded-full animate-bounce-slow mt-1" />
-          </div>
-        </div>
       </div>
     </section>
   );

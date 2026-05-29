@@ -1,5 +1,6 @@
 import { MapPin, Phone, Facebook, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface TopBarProps {
@@ -20,7 +21,7 @@ interface TopBarProps {
     };
 }
 
-export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageChange, contactInfo, socialLinks }: TopBarProps) {
+export const TopBar = memo(function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageChange, contactInfo, socialLinks }: TopBarProps) {
     const { i18n } = useTranslation();
 
     return (
@@ -69,4 +70,4 @@ export function TopBar({ show, isTransparent, scrolled, currentLang, onLanguageC
             </div>
         </motion.div>
     );
-}
+});

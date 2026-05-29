@@ -6,12 +6,13 @@ import { OptimizedImage } from './OptimizedImage';
 import { Footer } from './Footer';
 import { MetaSEO } from './MetaSEO';
 import { Breadcrumbs } from './ui/Breadcrumbs';
-import { useServices } from '../../hooks/useSanity';
+import { useServices, useCateringPage } from '../../hooks/useSanity';
 
 export function CateringPage() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { data: sanityServices, loading } = useServices();
+    const { data: cateringContent } = useCateringPage();
     const currentLang = (i18n.language as 'fr' | 'de') || 'fr';
 
     const displayServices = sanityServices?.map(service => ({
@@ -81,10 +82,10 @@ export function CateringPage() {
                         transition={{ delay: 0.2 }}
                     >
                         <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-6">
-                            Service <span className="text-gold italic">Traiteur</span>
+                            {t('metiers.traiteur.heroTitle', 'Service')} <span className="text-gold italic">{t('metiers.traiteur.heroTitleHighlight', 'Traiteur')}</span>
                         </h1>
                         <p className="text-white/80 text-lg md:text-2xl max-w-2xl font-sans font-medium">
-                            Sublimez vos événements avec l'excellence de la Boucherie Vaz.
+                            {t('metiers.traiteur.heroSubtitle', "Sublimez vos événements avec l'excellence de la Boucherie Vaz.")}
                         </p>
                     </motion.div>
                 </div>
@@ -99,18 +100,17 @@ export function CateringPage() {
                         className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all mb-12 group"
                     >
                         <ChevronLeft className="w-5 h-5" />
-                        Retour
+                        {t('common.back', 'Retour')}
                     </button>
 
                     {/* Intro Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
                         <div>
                             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-foreground">
-                                Qualité Bouchère, <br />
-                                <span className="text-primary">Service d'Exception</span>
+                                {cateringContent?.introTitle?.[currentLang] || t('catering.introTitle', "Qualité Bouchère, Service d'Exception")}
                             </h2>
                             <p className="text-xl leading-relaxed text-muted-foreground font-sans mb-8">
-                                Que ce soit pour un anniversaire, un mariage ou un événement d'entreprise, nous mettons notre savoir-faire au service de vos papilles. Chaque événement est unique, c'est pourquoi nous proposons des solutions personnalisées.
+                                {cateringContent?.introParagraph?.[currentLang] || t('catering.introParagraph', "Que ce soit pour un anniversaire, un mariage ou un événement d'entreprise, nous mettons notre savoir-faire au service de vos papilles.")}
                             </p>
                             <div className="flex gap-4">
                                 <div className="flex -space-x-2">
@@ -125,17 +125,19 @@ export function CateringPage() {
                                         <Star className="w-4 h-4 fill-current" />
                                         <Star className="w-4 h-4 fill-current" />
                                     </div>
-                                    <span className="text-xs font-bold text-muted-foreground tracking-wider uppercase">Événements réussis</span>
+                                    <span className="text-xs font-bold text-muted-foreground tracking-wider uppercase">
+                                        {cateringContent?.statsLabel?.[currentLang] || t('catering.statsLabel', 'Événements réussis')}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div className="bg-muted/30 rounded-3xl p-8 border border-border/50 flex flex-col justify-center">
                             <Quote className="w-12 h-12 text-primary/20 mb-6" />
                             <p className="text-2xl font-serif italic text-foreground leading-relaxed mb-6">
-                                "La qualité des viandes et la présentation des buffets ont bluffé tous nos invités. Un service impeccable de A à Z !"
+                                "{cateringContent?.testimonialQuote?.[currentLang] || t('catering.testimonialQuote', "La qualité des viandes et la présentation des buffets ont bluffé tous nos invités.")}"
                             </p>
                             <div className="text-sm font-bold uppercase tracking-widest text-primary">
-                                — Marie & Jean, Mariage Juillet 2025
+                                {cateringContent?.testimonialAuthor || '— Marie & Jean, Mariage Juillet 2025'}
                             </div>
                         </div>
                     </div>
@@ -176,13 +178,15 @@ export function CateringPage() {
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 5, repeat: Infinity }}
                         />
-                        <h3 className="text-3xl md:text-5xl font-serif font-bold mb-6">Prêt à régaler vos convives ?</h3>
+                        <h3 className="text-3xl md:text-5xl font-serif font-bold mb-6">
+                            {cateringContent?.ctaTitle?.[currentLang] || t('catering.ctaTitle', 'Prêt à régaler vos convives ?')}
+                        </h3>
                         <p className="text-white/80 text-xl mb-10 max-w-xl mx-auto">
-                            Contactez-nous pour un devis personnalisé adapté à votre budget et vos envies.
+                            {cateringContent?.ctaParagraph?.[currentLang] || t('catering.ctaParagraph', 'Contactez-nous pour un devis personnalisé adapté à votre budget et vos envies.')}
                         </p>
                         <button className="px-10 py-5 bg-gold hover:bg-gold/90 text-white rounded-2xl font-bold text-xl transition-all shadow-xl hover:-translate-y-1 flex items-center gap-3 mx-auto">
                             <Calendar className="w-6 h-6" />
-                            Réserver une date
+                            {cateringContent?.ctaButtonText?.[currentLang] || t('catering.ctaButtonText', 'Réserver une date')}
                         </button>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ import { ContactSection } from '../app/components/ContactSection';
 import { ProduitsSection } from '../app/components/ProduitsSection';
 import { ValeursSection } from '../app/components/ValeursSection';
 import { LegalPage } from '../app/components/LegalPage';
-import { CookieBanner } from '../app/components/CookieBanner';
+import { ConsentBanner } from '../app/components/ConsentBanner';
 import { ScrollToTop } from '../app/components/ScrollToTop';
 import { OptimizedImage } from '../app/components/OptimizedImage';
 
@@ -101,13 +101,13 @@ describe('LegalPage Component', () => {
     });
 });
 
-describe('CookieBanner Component', () => {
+describe('ConsentBanner Component', () => {
     beforeEach(() => {
         localStorage.clear();
     });
 
-    it('should render cookie banner', () => {
-        render(<CookieBanner />, { wrapper: TestWrapper });
+    it('should render consent banner', () => {
+        render(<ConsentBanner />, { wrapper: TestWrapper });
         expect(document.body).toBeInTheDocument();
     });
 });

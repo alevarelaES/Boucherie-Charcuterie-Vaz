@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
-import { useState, memo } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import settings from '../../settings.json';
 import { Badge } from './ui/badge';
@@ -105,6 +105,11 @@ export const ContactSection = memo(function ContactSection() {
     { id: 0, jour: t('contact.days.sunday', 'Dimanche'), matin: null, apresMidi: null, isClosed: true }
   ];
 
+  const handleFieldChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = formData.name.trim();
@@ -143,14 +148,13 @@ export const ContactSection = memo(function ContactSection() {
 
         {/* Contact Info Grid - CSS-only animations */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {contactCards.map((contact, index) => (
+          {contactCards.map((contact) => (
             <a
-              key={index}
+              key={contact.href}
               href={contact.href}
               target={contact.icon === MapPin ? '_blank' : undefined}
               rel={contact.icon === MapPin ? 'noopener noreferrer' : undefined}
               className="bg-card p-6 rounded-2xl shadow-xl flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="w-12 h-12 flex-shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <contact.icon size={24} />
@@ -172,26 +176,29 @@ export const ContactSection = memo(function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
+                name="name"
                 placeholder={t('contact.placeholders.name', 'Votre nom')}
                 className="w-full px-4 py-3 bg-muted/50 rounded-xl border-0 focus:ring-2 focus:ring-primary/20 transition-all font-sans text-base font-medium"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={handleFieldChange}
                 required
               />
               <input
                 type="email"
+                name="email"
                 placeholder={t('contact.placeholders.email', 'Votre email')}
                 className="w-full px-4 py-3 bg-muted/50 rounded-xl border-0 focus:ring-2 focus:ring-primary/20 transition-all font-sans text-base font-medium"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={handleFieldChange}
                 required
               />
               <textarea
+                name="message"
                 placeholder={t('contact.placeholders.message', 'Votre message')}
                 rows={3}
                 className="w-full px-4 py-3 bg-muted/50 rounded-xl border-0 focus:ring-2 focus:ring-primary/20 transition-all resize-none font-sans text-base font-medium"
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={handleFieldChange}
                 required
               />
               <button
