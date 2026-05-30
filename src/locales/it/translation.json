@@ -26,6 +26,11 @@
       }
     }
   },
+  "grillade": {
+    "badge": "Fatto in casa",
+    "title": "Assortimento Grigliata",
+    "description": "I nostri tagli marinati e preparati in casa, pronti per la griglia."
+  },
   "catering": {
     "introTitle": "Qualità Macellaia, Servizio d'Eccezione",
     "introParagraph": "Che si tratti di un compleanno, un matrimonio o un evento aziendale, mettiamo il nostro saper fare al servizio del vostro palato.",

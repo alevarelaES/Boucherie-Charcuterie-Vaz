@@ -137,7 +137,7 @@ export const ProduitsSection = memo(function ProduitsSection() {
       {/* Image Preview Modal - Simple White Card */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[10000] flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedProduct(null)}
         >
           {/* Simple dark overlay */}

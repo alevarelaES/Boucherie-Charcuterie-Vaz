@@ -26,6 +26,11 @@
       }
     }
   },
+  "grillade": {
+    "badge": "Hausgemacht",
+    "title": "Grillassortiment",
+    "description": "Unsere marinierten und hausgemachten Stücke, grillfähig und sofort servierbereit."
+  },
   "catering": {
     "introTitle": "Metzgerqualität, außergewöhnlicher Service",
     "introParagraph": "Ob Geburtstag, Hochzeit oder Firmenveranstaltung – wir stellen unser Know-how in den Dienst Ihrer Gaumen.",

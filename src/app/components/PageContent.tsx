@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { Hero } from './Hero';
 import { ValeursSection } from './ValeursSection';
 import { ProduitsSection } from './ProduitsSection';
+import { GrilladesGallery } from './GrilladesGallery';
 import { ContactSection } from './ContactSection';
 import { Footer } from './Footer';
 import { MetaSEO } from './MetaSEO';
@@ -57,6 +58,7 @@ export function PageContent() {
                 <Hero />
                 <ValeursSection />
                 <ProduitsSection />
+                <GrilladesGallery />
                 <ContactSection />
             </main>
             <Footer />

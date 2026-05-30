@@ -26,6 +26,11 @@
       }
     }
   },
+  "grillade": {
+    "badge": "Fait Maison",
+    "title": "Assortiment Grillade",
+    "description": "Nos pièces marinées et préparées maison, prêtes à saisir sur le grill."
+  },
   "catering": {
     "introTitle": "Qualité Bouchère, Service d'Exception",
     "introParagraph": "Que ce soit pour un anniversaire, un mariage ou un événement d'entreprise, nous mettons notre savoir-faire au service de vos papilles.",

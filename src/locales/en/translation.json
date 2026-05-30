@@ -26,6 +26,11 @@
       }
     }
   },
+  "grillade": {
+    "badge": "Homemade",
+    "title": "Grill Selection",
+    "description": "Our marinated, homemade cuts — ready to throw on the grill."
+  },
   "catering": {
     "introTitle": "Butcher Quality, Exceptional Service",
     "introParagraph": "Whether it's a birthday, wedding or corporate event, we put our expertise at the service of your palate.",
